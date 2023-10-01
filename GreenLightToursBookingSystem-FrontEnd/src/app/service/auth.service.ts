@@ -9,7 +9,7 @@ import { User } from '../shared/user';
 })
 export class AuthService {
 
-  apiUrl = 'https://localhost:7162/api/'
+  apiUrl = 'https://inf370database20231001133617.azurewebsites.net/api/'
   private userPayload:any;
 
   constructor(private http: HttpClient, private route: Router) {

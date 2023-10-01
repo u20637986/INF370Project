@@ -16,7 +16,7 @@ import { VehiclePrice } from '../shared/vehiclePrice';
 })
 export class DataService {
 
-  apiUrl = 'https://localhost:7162/api/'
+  apiUrl = 'https://inf370database20231001133617.azurewebsites.net/api/'
 
 
   httpOptions ={
