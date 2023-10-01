@@ -2,6 +2,8 @@ import { Component , OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Discount } from '../shared/discount';
 import { DataService } from '../service/GLBSdataservice';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBarRef, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-discount',
@@ -9,14 +11,23 @@ import { DataService } from '../service/GLBSdataservice';
   styleUrls: ['./discount.component.scss']
 })
 export class DiscountComponent implements OnInit {
+
+  dataSource = new MatTableDataSource<Discount>();
+  //dataSource = new MatTableDataSource<Discount>
   Discount:Discount[] = []
+  searchedDiscounts:Discount[]=[]
+  discounts:Discount[]=[]
+  
+
+  searchString: string = "";
 
   
-  constructor(private GLBSdataservice:DataService, private router:Router) { }
+  constructor(private GLBSdataservice:DataService, private router:Router, private snackBar:MatSnackBar) { }
 
   
   ngOnInit(): void {
-    this.GetAllDiscounts()
+    this.GetAllDiscounts();
+    
   }
 
   GetAllDiscounts(){
@@ -39,11 +50,36 @@ export class DiscountComponent implements OnInit {
       }
       else
       {
-        //alert(response.message)
-        alert("The discount has been deleted.")
+      const snackBarRef: MatSnackBarRef<any> = this.snackBar.open('The discount has been deleted. ', 'X', { duration: 3000 , verticalPosition: 'top' });
+      snackBarRef.afterDismissed().subscribe(() => {
+      location.reload();
+    });
         this.GetAllDiscounts();
       }
     })
   }
+
+  SearchDiscounts(){
+
+    this.GLBSdataservice.GetAllDiscounts().subscribe(res => {
+      this.Discount = res as Discount[];
+
+      this.searchedDiscounts = this.Discount;
+
+      this.searchedDiscounts = this.Discount.filter((discount) => 
+  
+      discount.amount == Number(this.searchString)
+      || discount.date.includes(this.searchString)
+      
+      );
+  
+      this.Discount = this.searchedDiscounts;
+  
+      console.log("It works")
+  });
+
+  }
+
+  
 
 }

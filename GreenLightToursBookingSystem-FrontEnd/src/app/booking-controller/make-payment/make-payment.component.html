@@ -1,19 +1,34 @@
 <mat-toolbar class=" text-white" style="background-color: #004e04" >
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
+   
     <span class="example-spacer"></span>
    Make Payment 
     <span class="example-spacer"></span>
   
 </mat-toolbar>
 
+<nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/client-help'">Help</a>
+    </li>
+    &nbsp;
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/about'">About</a>
+    </li>
+    &nbsp;
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/booking-controller'">Services</a>
+    </li>
+  </ul>
+</nav>
+<br>
+
 <div class="container">
     <div class="row">
       <div class="col-md-4">
         <div style="text-align: center;" >
         <div style="display: inline-block;"> <br>
-            <label class="form-label">Departure Date: </label> &nbsp; <label style="color:darkgreen;">{{departureDate}}</label><br />
+            <!-- <label class="form-label">Departure Date: </label> &nbsp; <label style="color:darkgreen;">{{departureDate}}</label><br /> -->
             <label class="form-label">Total Due :     </label>  &nbsp; <label style="color:darkgreen;"> R {{booking.totalPrice}}</label> <br />
             <label class="form-label">Number of Passengers added : </label> &nbsp; <label style="color:darkgreen;"> {{totalPassengers}}</label>
         </div>
@@ -23,7 +38,7 @@
         <label> Choose discount to be applied : </label> &nbsp;
             <select class="dropdown" id="DiscountDropdown" [(ngModel)]="DiscountAmount">
             <option disabled selected value="">Select an option</option>
-            <option *ngFor="let discount of discounts" [value]="discount.amount" >{{ discount.amount }}</option>
+            <option *ngFor="let discount of discounts" [value]="discount.amount" > R {{ discount.amount }}.00 OFF</option>
             </select> 
             <div style=" justify-content: center;align-items: center; height: 100vh;">
                 <button style="padding: 10px 20px;" class="btn btn-primary m-3" type="button" (click)="ApplyDiscount()">Apply Discount</button>

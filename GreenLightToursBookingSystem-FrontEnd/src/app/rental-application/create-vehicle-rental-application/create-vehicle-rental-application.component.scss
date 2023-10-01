@@ -1,18 +1,27 @@
 .logo-image{
-    width: 700px;
-    height: 500px;
-   display: flex;
-    margin-left: 100px;
-  }
-  
-  span {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-  }
-  
-  .content
-  {
-    margin-left: 100px;
-  }
-  
+  width: 700px;
+  height: 500px;
+ display: flex;
+  margin-left: 100px;
+}
+
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.content
+{
+  margin-left: 100px;
+}
+.responsive-stepper {
+  width: 100%; 
+  max-width: 400px; 
+  margin: 0 auto; 
+}
+
+
+.mat-stepper-horizontal .mat-stepper-actions {
+  margin-top: 20px;
+}

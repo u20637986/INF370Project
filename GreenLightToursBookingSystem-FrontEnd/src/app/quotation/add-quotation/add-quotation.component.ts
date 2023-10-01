@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
 import { Quotation } from 'src/app/shared/Quotation';
@@ -24,11 +24,11 @@ export class AddQuotationComponent implements OnInit {
   QuotationForm = new FormGroup(
     {
 
-        name: new FormControl(''),
-        description: new FormControl(''),
-        date: new FormControl(''),
-        amount: new FormControl(''),
-        quantity: new FormControl('')
+        name: new FormControl('',  [Validators.required]),
+        description: new FormControl('',  [Validators.required]),
+        date: new FormControl('',  [Validators.required]),
+        amount: new FormControl(0,  [Validators.required]),
+        quantity: new FormControl(0,  [Validators.required])
 
     })
 
@@ -39,6 +39,33 @@ export class AddQuotationComponent implements OnInit {
 
     cancel(){
       this.router.navigate(['/quotation'])
+    }
+   
+
+    getErrorMessage(controlName: string) {
+      const control = this.QuotationForm.get(controlName);
+  
+      if (!control) {
+        return ''; // Return an empty string if the control is not found
+      }
+  
+      if (control.hasError('required')) {
+        return 'This field is required';
+      }
+  
+      if (controlName === 'amount') {
+        if (control.hasError('pattern')) {
+          return 'Enter a valid amount';
+        }
+      }
+  
+      if (controlName === 'quantity') {
+        if (control.hasError('pattern')) {
+          return 'Enter a valid quantity';
+        }
+      }
+  
+      return '';
     }
 
     AddQuotation(){

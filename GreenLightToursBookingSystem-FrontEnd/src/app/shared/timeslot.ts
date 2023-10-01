@@ -1,8 +1,8 @@
-import { Time } from "@angular/common";
 
-export interface TimeSlot {
-  timeslotID    :Number;
-  departureDate :String;
-  departureTime :String;
-  locationID    :Number;
+
+export class TimeSlot {
+  timeslotID !   :Number;
+  departureDate! :string;
+  departureTime! :string;
+  locationID!    :Number;
 }

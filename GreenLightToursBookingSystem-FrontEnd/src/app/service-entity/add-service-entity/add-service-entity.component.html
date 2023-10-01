@@ -5,7 +5,9 @@
   <div class="form-group" >
   <label for="servicename" class="form-label"> Service Name:</label>
   <input type="text" class="form-control" id="name" name="servicename" formControlName="name" [(ngModel)]="service.name" ><br>
-  </div>
+  <div class="error-message">{{ getErrorMessage('name') }}</div>  
+  
+</div>
 
 
   <div class="form-group">

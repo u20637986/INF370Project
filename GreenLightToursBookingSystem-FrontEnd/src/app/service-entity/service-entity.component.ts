@@ -28,6 +28,12 @@ export class ServiceEntityComponent implements OnInit {
     })
   }
 
+  EditService(serviceID:Number)
+  {
+    this.dataService.setSelectedService(serviceID);
+    this.router.navigate(['/edit-service-entity']);
+  }
+
   DeleteService(ServiceID: Number){
     this.dataService.DeleteService(ServiceID).subscribe(result => {
       window.location.reload();

@@ -6,6 +6,7 @@ import { VehicleStatus } from '../shared/VehicleStatus';
 import { VehicleType } from '../shared/VehicleType';
 import { forkJoin } from 'rxjs';
 import { VehiclePrice } from '../shared/vehiclePrice';
+import { ModalService } from '../service/modal.service';
 
 @Component({
   selector: 'app-vehicle',
@@ -15,7 +16,7 @@ import { VehiclePrice } from '../shared/vehiclePrice';
 export class VehicleComponent implements OnInit{
 
   vehicle: Vehicle[] = [];
-  constructor(private dataService: DataService ){}
+  constructor(private dataService: DataService , private modalService:ModalService){}
 
   ngOnInit(): void {
     this.getVehicles()
@@ -66,11 +67,37 @@ export class VehicleComponent implements OnInit{
     })
   }
 
-  DeleteVehicle(VehicleID: Number){
-    this.dataService.DeleteVehicle(VehicleID).subscribe(result => {
-      window.location.reload();
-      });
-    }
-
+  DeleteVehicle(VehicleID: number){
+    this.dataService.hasActiveRentalApplicationsForVehicle(VehicleID).subscribe(
+      (hasActiveRentalApplications: boolean) => {
+        if (hasActiveRentalApplications) {
+          // Alert the user that the trailer cannot be deleted due to active rental applications
+          alert('This vehicle cannot be deleted because there are active rental applications.');
+          this.modalService.openErrorModal('This vehicle cannot be deleted because it has active rental applications.');
+        } else {
+          // Confirm with the user before proceeding with the deletion
+          if (confirm('Are you sure you want to delete this vehicle?')) {
+            // If the user confirms, delete the vehicle
+            this.dataService.DeleteVehicle(VehicleID).subscribe(
+              (result) => {
+                // Optionally, you can handle the deletion success, e.g., show a success message.
+                console.log('Vehicle deleted successfully.');
+                window.location.reload();
+                this.getVehicles();
+              },
+              (error) => {
+                // Handle the deletion error, e.g., show an error message.
+                console.error('Error deleting vehicle:', error);
+              }
+            );
+          }
+        }
+      },
+      (error) => {
+        // Handle the error when checking for active rental applications
+        console.error('Error checking for active rental applications:', error);
+      }
+    );
+  }
 }
 

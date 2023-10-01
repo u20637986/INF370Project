@@ -18,15 +18,14 @@
    <thead>
        <tr>
            <th scope="col">Name</th>
-           <th scope="col-6" style="size: 0.2%;"></th>
-           <th scope="col-6"></th>
-
+           <th scope="col-10" style="size: 0.2%;"></th>
+           <th scope="col-10"></th>
        </tr>
    </thead>
    <tbody>
      <tr *ngFor="let service of services">
           <td>{{service.name}}</td>
-           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/service-entity', service.serviceID]" >Edit</button></td>
+          <td><button type="button" class="btn btn-primary" (click)="EditService(service.serviceID)" >Update</button></td>
          <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteService(service.serviceID)" >Delete</button></td>
      </tr>
    </tbody>

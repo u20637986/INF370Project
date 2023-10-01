@@ -1,5 +1,5 @@
 <mat-toolbar class=" text-white" style="background-color: #004e04" >
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="goBack()" >
          <mat-icon>arrow_back</mat-icon>
        </button>
        <span class="example-spacer"></span>
@@ -7,7 +7,21 @@
        <span class="example-spacer"></span>
 
      </mat-toolbar>
-
+     <nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/client-help'">Help</a>
+        </li>
+        &nbsp;
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/about'">About</a>
+        </li>
+        &nbsp;
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/booking-controller'">Services</a>
+        </li>
+      </ul>
+  </nav>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,49 +30,93 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<body>
-
-  <div class="container" style="size: 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-     <!--Code below is for displaying a card with trailer details-->
-
-    <div class="card" *ngFor="let trailer of trailers">
-
-      <div class="card-header" style="color:green"><strong>Trailer</strong></div>
-      <div class="card-body">
-        <img src="{{trailer.imageName}}" class="trailerImg">
-        <p [ngClass]="{ 'statusAvailable': trailer.trailerStatus === 'Available', 'statusUnavailable': trailer.trailerStatus === 'Unavailable' }">
-          <b>Status:</b> {{trailer.trailerStatus}}
-        </p>
-        <p><b>Trailer Registration Number:</b>{{trailer.registrationNumber}} </p>
-        <p><b>Trailer Size:</b> {{trailer.size}}</p>
-        <p><b>Floor Base:</b> {{trailer.floorBase}}</p>
-        <p><b>Panels:</b> {{trailer.panels}}</p>
-        <p><b>Rental Price:</b> {{trailer.rentalPrice}}</p>
-        <button (click)="rentNow(trailer)" type="button" class="btn btn-sm btn-primary">Rent Now</button>
+  <body>
+    <div class="container" style="display: flex; justify-content: space-between; size: 8%">
+      <!-- Code below is for displaying a card with trailer details -->
+      <div class="left-column">
+        <div
+          class="card card-lg"
+          *ngFor="
+            let trailer of trailers.slice(
+              (trailerPage - 1) * itemsPerPage,
+              trailerPage * itemsPerPage
+            )
+          "
+         style="margin-bottom: 20px;">
+          <div class="card-header" style="color:green"><strong>Trailer</strong></div>
+          <div class="card-body">
+            <img src="{{trailer.imageName}}" class="trailerImg">
+            <p [ngClass]="{ 'statusAvailable': trailer.trailerStatus === 'Available', 'statusUnavailable': trailer.trailerStatus === 'Unavailable' }">
+              <b>Status:</b> {{trailer.trailerStatus}}
+            </p>
+            <p><b>Trailer Registration Number:</b>{{trailer.registrationNumber}} </p>
+            <p><b>Trailer Size:</b> {{trailer.size}}</p>
+            <p><b>Floor Base:</b> {{trailer.floorBase}}</p>
+            <p><b>Panels:</b> {{trailer.panels}}</p>
+            <p><b>Rental Price:</b> {{trailer.rentalPrice | currency:'R'}}</p>
+            <button (click)="rentNow(trailer)" type="button" class="btn btn-sm btn-primary" [disabled]="trailer.trailerStatus === 'Unavailable'"> Rent Now</button>
+          </div>
+        </div>
+        <div class="pagination">
+          <button
+            class="btn btn-sm btn-primary"
+            [disabled]="trailerPage === 1"
+            (click)="trailerPage = trailerPage - 1"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-sm btn-primary"
+            [disabled]="trailerPage * itemsPerPage >= trailers.length"
+            (click)="trailerPage = trailerPage + 1"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+  
+      <!-- Code below is for displaying card with vehicle details -->
+      <div class="right-column">
+        <div
+          class="card card-lg"
+          *ngFor="
+            let vehicle of vehicles.slice(
+              (vehiclePage - 1) * itemsPerPage,
+              vehiclePage * itemsPerPage
+            )
+          "
+          style="margin-bottom: 20px;">
+          <div class="card-header" style="color:green"><strong>Vehicle</strong></div>
+          <div class="card-body">
+            <img src="data:image/png;base64,{{vehicle.image}}" class="trailerImg">
+            <p [ngClass]="{ 'statusAvailable': vehicle.vehicleStatus === 'Available', 'statusUnavailable': vehicle.vehicleStatus === 'Unavailable' }">
+              <b>Status:</b> {{vehicle.vehicleStatus}}
+            </p>
+            <p><b> Registration Number:</b>{{vehicle.registrationNumber}} </p>
+            <p><b>Type:</b> {{vehicle.vehicleType}}</p>
+            <p><b>Name:</b> {{vehicle.vehicleName}}</p>
+            <p><b>Rental Price:</b> {{vehicle.vehiclePriceID | currency:'R'}}</p>
+            <button (click)="rentCar(vehicle)" type="button" class="btn btn-sm btn-primary" [disabled]="vehicle.vehicleStatus === 'Unavailable'"> Rent Now </button>
+          </div>
+        </div>
+        <div class="pagination">
+          <button
+            class="btn btn-sm btn-primary"
+            [disabled]="vehiclePage === 1"
+            (click)="vehiclePage = vehiclePage - 1"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-sm btn-primary"
+            [disabled]="vehiclePage * itemsPerPage >= vehicles.length"
+            (click)="vehiclePage = vehiclePage + 1"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
-
-    <!-- Code below is for displaying card with vehicle details-->
-
-    <div class="card" *ngFor="let vehicle of vehicles">
-
-      <div class="card-header" style="color:green"><strong>Vehicle</strong></div>
-      <div class="card-body">
-        <img src="data:image/png;base64,{{vehicle.image}}" class="trailerImg">
-        <p>
-          <b>Status:</b> {{vehicle.vehicleStatus}}
-        </p>
-        <p><b> Registration Number:</b>{{vehicle.registrationNumber}} </p>
-        <p><b>Type:</b> {{vehicle.vehicleType}}</p>
-       
-        <p><b>Name:</b> {{vehicle.vehicleName}}</p>
-        <p><b>Rental Price:</b> {{vehicle.vehiclePriceID}}</p>
-
-        
-        <button   (click)="rentCar(vehicle)" type="button" class="btn btn-sm btn-primary">Rent Now</button>
-      </div>
-    </div>
-  </div>
-</body>
-
+  </body>
+  
 

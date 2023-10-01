@@ -6,8 +6,17 @@
    Payment notification
     <span class="example-spacer"></span>
 </mat-toolbar>
+
 <div  class="container" style="text-align: center;">
     <div style="display: inline-block;"> 
-        <p> <b>Payment action cancelled. Please try again if you wish to continue to make a booking </b></p>
-    </div>
+       <div class="alert" id="alertBox">
+    <span class="close-btn" onclick="this.parentElement.style.display='none';"></span>
+    Payment action cancelled. Please try again if you wish to continue to make a booking <br>
+    <button style="float: right;" class="ok-btn btn-primary m-3" (click)="redirectToMakeBooking()">OK</button>
+
+       </div>
+       
+   </div>
 </div>
+
+

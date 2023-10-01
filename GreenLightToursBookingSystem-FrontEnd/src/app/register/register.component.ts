@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedNavService } from '../service/shared-nav.service';
 
 @Component({
   selector: 'app-register',
@@ -12,10 +14,17 @@ export class RegisterComponent implements OnInit{
 
   signupForm!: FormGroup;
   isValidEmail!: boolean;
+  showToolbar:boolean=true
 
-  constructor(private formBuilder : FormBuilder, private authService: AuthService, private router: Router){}
+  constructor(private formBuilder : FormBuilder, private authService: AuthService, private router: Router, private snack:MatSnackBar,
+    public sharednavservice:SharedNavService){}
 
   ngOnInit(): void {
+
+    this.sharednavservice.hideSideNav = true;
+  this.sharednavservice.hideToolBar = true;
+
+  
     this.signupForm = this.formBuilder.group({
       name:['', Validators.required],
       surname:['', Validators.required],
@@ -26,46 +35,9 @@ export class RegisterComponent implements OnInit{
     })
   }
 
-  
-  /*onSubmit(){
-    if(this.signupForm.valid){
-      this.authService.register(this.signupForm.value)
-      .subscribe({
-       next:(res=>{
-        alert(res.message);
-        this.signupForm.reset();
-        this.router.navigate(['employee-type']); //navigate to home
-      })
-      ,error:(err=>{
-        alert(err?.error.message)
-      })
-    })
-    /*this.authService.register(this.signupForm.value).subscribe(() => {
-      this.router.navigate(['/employee-type'])
-    });*
-    } else {
-      this.validateFields(this.signupForm)
-    }
-  }*/
 
   onSubmit() {
     if (this.signupForm.valid) {
-      /*this.authService.register(this.signupForm.value)
-        .subscribe({
-          next: (res) => {
-            alert(res.message);
-            this.authService.user(res.surname);
-            this.signupForm.reset();
-            this.router.navigate(['employee-type']); //navigate to home
-          },
-          error: (err) => {
-            if (err && err.error && err.error.message) {
-              alert(err.error.message);
-            } else {
-              alert('An error occurred.');
-            }
-          }
-        });*/
 
         const register = {
           name: this.signupForm.value.name,

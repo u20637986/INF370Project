@@ -1,7 +1,10 @@
-export interface TravelPackage {
-    travelPackageID:Number;
-    name:String | null;
-    description:String | null;
-    price:Number | null;
-    date:String | null;
-  }
+export class TravelPackage {
+  travelPackageID!:number;
+  name!:String | null;
+  description!:String | null;
+  price!:number | null;
+  date!:String | null;
+  imageBase64!:string;
+  travelPackageStatusID!:number;
+
+}

@@ -1,8 +1,8 @@
-export interface Location{
-    locationID  : Number;
-    country      : String;
-    province    : String;
-    city        : String;
-    zipCode     : String;
-    bookingPriceId: number;
+export class Location{
+    locationID ! : Number;
+    country !     : String;
+    province !   : String;
+    city !       : string;
+    zipCode  !   : String;
+    bookingPriceId!: number;
 }

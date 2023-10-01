@@ -7,6 +7,7 @@ import { VehicleBase } from 'src/app/shared/vehicleBase';
 import { VehicleStatus } from 'src/app/shared/VehicleStatus';
 import { VehicleType } from 'src/app/shared/VehicleType';
 import { VehiclePrice } from 'src/app/shared/vehiclePrice';
+import { HelpParagraphService } from 'src/app/service/help-paragraph.service';
 
 @Component({
   selector: 'app-rental-products',
@@ -17,14 +18,21 @@ export class RentalProductsComponent  {
   files: File[] = [];
   trailers:Trailer[]=[];
   vehicles: Vehicle[]=[];
-  
-  constructor(private dataService: DataService, private router:Router){}
+  trailerPage = 1;
+  vehiclePage = 1;
+  itemsPerPage = 3;
+  constructor(private dataService: DataService, private router:Router, private helpService:HelpParagraphService){
+    helpService.showBooking = false;
+    helpService.showRental = true;
+    helpService.showTravel = false;
+  }
 
   ngOnInit(): void {
       this.getTrailers()
       console.log(this.trailers)
       this.getVehicles()
       console.log(this.vehicles)
+      
 
     }
 
@@ -48,7 +56,7 @@ export class RentalProductsComponent  {
           let motor: Vehicle = element
   
           vehicleList.forEach((motor) => {
-            //let img = motor.img;
+           
             motor.img = 'data:image/png;base64,' + motor.img
             
           })
@@ -85,18 +93,18 @@ export class RentalProductsComponent  {
       })
     }
 
-    //code below is for navigating to the rental application screen, and it passes through the details of the selected trailer/vehicle
-    rentNow(selectedTrailer: any) { 
+   
+  rentNow(selectedTrailer: any) { 
     
-    this.router.navigate(['/rental-application', selectedTrailer.trailerID, selectedTrailer.size, selectedTrailer.registrationNumber, selectedTrailer.rentalPrice]);
+    this.router.navigate(['/rental-application', selectedTrailer.trailerID, selectedTrailer.size, selectedTrailer.registrationNumber, selectedTrailer.rentalPrice, selectedTrailer.trailerType]);
   }
 
   rentCar(selectedVehicle: any) { 
     
-    this.router.navigate(['/rental-application', selectedVehicle.vehicleID, selectedVehicle.vehicleName, selectedVehicle.registrationNumber, selectedVehicle.vehiclePriceID, selectedVehicle.vehicleType]);
+    this.router.navigate(['/Vrental-application', selectedVehicle.vehicleID, selectedVehicle.vehicleName, selectedVehicle.registrationNumber, selectedVehicle.vehiclePriceID, selectedVehicle.vehicleType]);
   }
  
-
-
-
+  goBack() {
+    this.router.navigateByUrl('/');
+  } 
 }

@@ -1,20 +1,73 @@
-<div class="container">
-  <h2>Add Driver</h2>
-<form (ngSubmit)="AddDriver()" [formGroup]="DriverForm">
+<mat-toolbar class="text-white" style="background-color: #004e04">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    [routerLink]="['/driver']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  Add Driver
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<br />
 
-  <div class="form-group" >
-  <label for="DriverLicenseCode" class="form-label"> License Code:</label>
-  <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="drivers.licenseCode" ><br>
+<h5 class="error-text" *ngIf="errorMessage != ''">{{ errorMessage }}</h5>
+<br />
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="idNumber" class="col-sm-1">Employee ID Number:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="idNumber"
+        placeholder="Enter Employee ID Number"
+        [(ngModel)]="searchIdNumber"
+      />
+      <button class="btn btn-primary" (click)="searchEmployee()">Search</button>
+    </div>
+    <div class="card" *ngIf="selectedEmployee">
+      <div class="card-body">
+        <h5 class="card-title">{{ selectedEmployee.name }} {{ selectedEmployee.surname }}</h5>
+        <p class="card-text">ID Number: {{ selectedEmployee.idNumber }}</p>
+        <p class="card-text">Cell Number: {{ selectedEmployee.cellNumber }}</p>
+        <button class="btn btn-primary" (click)="selectEmployee(selectedEmployee.employeeID)">
+          Select
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
 
-    <button type="submit" [disabled]="!DriverForm.valid"  class="btn btn-primary mr-1" >Add</button>
-    &nbsp;
-    &nbsp;
-    <button type="reset" class="btn btn-info mr-1">Clear</button>
-  </div>
+<div class="row">
+  <form [formGroup]="driverForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="licenseCode" class="col-sm-1"  class="form-label"> License Code:</label>
+      <select class="form-control" id="licenseCode" formControlName="licenseCodeID">
+        <option value="">Select License Code:</option>
+        <option *ngFor="let code of licenseCodes" [value]="code.licenseCodeID">
+          {{ code.name }}
+        </option>
+      </select>
+      <div *ngIf="
+      driverForm.get('licenseCode')?.invalid &&
+          (driverForm.get('licenseCode')?.dirty ||
+          driverForm.get('licenseCode')?.touched)
+        ">
+        <div class="text-danger">License Code is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+
+      <button type="submit" [disabled]="!driverForm.valid" class="btn btn-primary mr-1" (click)="AddDriver()">Add</button>
+      &nbsp;
+      &nbsp;
+      <button type="reset" class="btn btn-info mr-1" >Clear</button>
+      <button type="button" class="btn btn-warning" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
 
 
-</form>
+  </form>
 </div>

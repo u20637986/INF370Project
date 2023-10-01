@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { TravelPackage } from '../shared/travelPackage';
+import { TravelPackage } from '../shared/TravelPackage';
 import { DataService } from '../service/GLBSdataservice';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { TravelPackageStatus } from '../shared/travelPackageStatus';
+import { VMtravelPackage } from '../shared/VMtravelpackage';
+import { HelpParagraphService } from '../service/help-paragraph.service';
 
 @Component({
   selector: 'app-travelpackage',
@@ -12,10 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class TravelPackageComponent {
   display = "none";
 
-  travelPackages:TravelPackage[] =[]
+  travelPackages:VMtravelPackage[] =[]
+  travelPackageStatuses:TravelPackageStatus[]=[]
 
-  constructor(private dataService: DataService, private router: Router, private dialogRef:MatDialog) { }
-
+  constructor(private dataService: DataService, private router: Router, private dialogRef:MatDialog) { 
+    
+  }
 
   ngOnInit(): void {
    
@@ -25,18 +30,26 @@ export class TravelPackageComponent {
    openModal() {
     this.display = "block";
   }
-  onCloseHandled() {
-    this.display = "none";
-  }
-
+ 
   GetAllTravelPackage()
   {
     this.dataService.GetAllTravelPackage().subscribe(result => {
       let travelPackageList:any[] = result
       travelPackageList.forEach((element) => {
-        this.travelPackages.push(element)
+      element.imageBase64 = 'data:image/jpeg;base64,' + element.imageBase64
+
+        this.dataService.GetAllTravelPackageStatus().subscribe(result => {
+          let travelPackageStatusList:any[] = result
+          travelPackageStatusList.forEach((element) => {
+            this.travelPackageStatuses.push(element)
+          });
+          
+          element.travelPackageStatus = travelPackageStatusList.find(x => x.travelPackageStatusID == element.travelPackageStatusID);
+          this.travelPackages.push(element)
+        })
       });
     })
+
   }
 
   DeleteTravelPackage(travelPackageID: Number){
@@ -45,5 +58,11 @@ export class TravelPackageComponent {
       window.location.reload();
       });
     }
+
+    EditTravelPackage(travelPackageID:Number)
+  {
+    this.dataService.setSelectedTravelPackage(travelPackageID);
+    this.router.navigate(['/edit-travelpackage']);
+  }
 
 }

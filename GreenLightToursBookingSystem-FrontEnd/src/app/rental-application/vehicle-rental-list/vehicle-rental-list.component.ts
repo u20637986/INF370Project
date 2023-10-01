@@ -7,6 +7,8 @@ import { Vehicle } from 'src/app/shared/vehicle';
 import { VehicleBase } from 'src/app/shared/vehicleBase';
 import { forkJoin } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { Router } from '@angular/router';
+
 
 
 
@@ -22,7 +24,7 @@ export class VehicleRentalListComponent implements OnInit {
   data= this.rental;
   fileName: string = 'vehicle-rental-report-list';
 
-  constructor(private dataService:DataService) {}
+  constructor(private dataService:DataService, private router:Router) {}
 
   ngOnInit(): void {
     this.getVehicleRentalList()
@@ -63,49 +65,66 @@ export class VehicleRentalListComponent implements OnInit {
   }
  
   exportToExcel() {
-    
-    const workbook: XLSX.WorkBook = XLSX.utils.book_new();
-    const formattedData = this.rental.map((item) => ({
-      'Rental ID': item.rentalID,
-      'Vehicle Name': item.vehicle,
-      'Vehicle Type': item.vehicleType,
-      'License Plate': item.vehicleRegistration,
-      'Rental Start Date': item.startDate,
-      'Rental End Date': item.endDate
+    // Define a type for pivotData
+    type PivotData = { [key: string]: number };
+  
+    // Initialize pivotData as an empty object of the defined type
+    const pivotData: PivotData = {};
+  
+    // Step 1: Prepare data for the pivot table
+    this.rental.forEach((item) => {
+      const vehicleType = item.vehicleType;
+      if (!pivotData[vehicleType]) {
+        pivotData[vehicleType] = 0;
+      }
+      pivotData[vehicleType]++;
+    });
+  
+    // Step 2: Create the pivot table as an array of objects
+    const pivotTable = Object.keys(pivotData).map((vehicleType) => ({
+      'Vehicle Type': vehicleType,
+      'Total Rentals': pivotData[vehicleType],
     }));
   
-    const dataWorksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(formattedData);
-   const header = [['Rental ID', 'Vehicle Name', 'Vehicle Type', 'License Plate', 'Rental Start Date', 'Rental End Date']];
+    // Calculate the Grand Total
+    const grandTotal = pivotTable.reduce((total, row) => total + row['Total Rentals'], 0);
+    pivotTable.push({ 'Vehicle Type': 'Grand Total', 'Total Rentals': grandTotal });
+  
+    // Step 3: Export the pivot table to Excel
+    const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    const dataWorksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(pivotTable);
+  
+    // Customize formatting as needed (e.g., headers, date, etc.)
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString().replace(/\//g, "-"); 
-    const fileName = `VehicleRentalListReport_${formattedDate}.xlsx`;
+    const formattedDate = currentDate.toLocaleDateString().replace(/\//g, '-');
     const formattedTime = currentDate.toLocaleTimeString();
-
-   // const generateLabel = [['Generate at:', formattedDate, 'at', formattedTime]];
+    const fileName = `VehicleRentalPivotTable_${formattedDate}_${formattedTime}.xlsx`;
   
-    dataWorksheet['A1'].t = 's'; 
-    dataWorksheet['A1'].v = 'Vehicle Rental List'; 
-    dataWorksheet['A1'].s = { alignment: { horizontal: 'center' } };
-    dataWorksheet['A2'].t = 's'; 
-    dataWorksheet['A2'].v = ''; 
-    dataWorksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 1, c: header[0].length - 1 } }];
-    
-    dataWorksheet['A3'] = { t: 's', v: 'Generate at:', s: { alignment: { horizontal: 'center' } } };
-   //dataWorksheet['!merges'].push({ s: { r: 2, c: 0 }, e: { r: 2, c: header[0].length - 1 } });
-    dataWorksheet['B3'] = { t: 's', v: `${formattedDate} at ${formattedTime}`, s: { alignment: { horizontal: 'center' } } };
-    dataWorksheet['!merges'].push({ s: { r: 2, c: 1 }, e: { r: 2, c: header[0].length - 1 } });
-    const colWidths = header[0].map(() => ({ wch: 15 })); 
+    // Set the width of column A to 20 and column B to 20
+    const colWidths = [{ wch: 20 }, { wch: 20 }];
     dataWorksheet['!cols'] = colWidths;
-
-    XLSX.utils.sheet_add_aoa(dataWorksheet, header, { origin: 'A4' });
-    XLSX.utils.sheet_add_json(dataWorksheet, formattedData, { origin: 'A4' });
-   XLSX.utils.book_append_sheet(workbook, dataWorksheet, 'VehicleRentalList');
   
+    // Add headers and data to the worksheet, starting from cell A1
+    XLSX.utils.sheet_add_json(dataWorksheet, pivotTable, { origin: 'A2' }); // Start from row 2
   
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    // Add the header in row 1
+    dataWorksheet['A1'] = { v: 'Total rentals per vehicle type', t: 's' }; // 's' stands for string
+    dataWorksheet['B1'] = {}; // Empty cell to align with 'Total Rentals' column
+  
+    XLSX.utils.book_append_sheet(workbook, dataWorksheet, 'VehicleRentalPivotTable');
+  
+    // Apply bold and light green formatting to cells A1 and B1
+    dataWorksheet['A1'].s = { font: { bold: true }, fill: { fgColor: { rgb: '00FF00' } } };
+    dataWorksheet['B1'].s = { font: { bold: true }, fill: { fgColor: { rgb: '00FF00' } } };
+  
+    // Step 4: Export the workbook to a downloadable Excel file
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
   
     const blob = new Blob([excelBuffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
     const blobUrl = URL.createObjectURL(blob);
   
@@ -115,11 +134,12 @@ export class VehicleRentalListComponent implements OnInit {
     link.style.display = 'none';
     document.body.appendChild(link);
   
-    
     link.click();
   
- 
     document.body.removeChild(link);
-  
   }
+  
+  goBack() {
+    this.router.navigateByUrl('/');
+  } 
 }

@@ -19,6 +19,7 @@
        <tr>
            <th scope="col">Time</th>
            <th scope="col">Date</th>
+           <th scope="col">Location</th>
            <th scope="col-6" style="size: 0.2%;"></th>
            <th scope="col-6"></th>
 
@@ -28,12 +29,13 @@
      <tr *ngFor="let timeslot of timeslots">
           <td>{{timeslot.departureTime}}</td>
            <td>{{timeslot.departureDate}}</td>
-           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/timeslot', timeslot.timeslotID]" >Edit</button></td>
-         <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteTimeSlot(timeslot.timeslotID)" >Delete</button></td>
+           <td>{{timeslot.city}}</td>
+           <td><button type="button" class="btn btn-warning" [routerLink]="['/timeslot', timeslot.timeslotID]" >Edit</button></td>
+         <td><button type="button" class="btn btn-danger"(click)="DeleteTimeSlot(timeslot.timeslotID)" >Delete</button></td>
      </tr>
    </tbody>
  </table>
  </div>
- <button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-timeslot">Add</button>
+ <button class="btn btn-primary" style="margin-left: 90%;" routerLink="/add-timeslot">Add</button>
 
  <router-outlet></router-outlet>

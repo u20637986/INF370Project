@@ -1,0 +1,105 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    Trailer Inspection
+    <span class="example-spacer"></span>
+ 
+  </mat-toolbar>
+<br>
+<p> Please select the items that are up to standard and "Pass" or "Fail" the trailer inspection</p>
+<br>
+<form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()" >
+<table  class="table table-striped table-hover ">
+    
+    <thead>
+        <th>Checklist</th>
+        <th></th>
+    </thead>
+
+    
+        <label class="col-sm-1" for="trailerStatus">Trailer Status:</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="trailerStatus" formControlName="trailerStatusID">
+            <option value="">Select Status</option>
+            <option *ngFor="let status of trailerStatuses" [value]="status.trailerStatusID">{{status.name}}</option>
+          </select>
+          <div *ngIf="inspectionForm.get('trailerStatus')?.invalid && (inspectionForm.get('trailerStatus')?.dirty || inspectionForm.get('trailerStatus')?.touched)">
+            <div class="text-danger">Trailer Status is required.</div>
+          </div>
+        </div>
+    
+
+    <label><input type="radio" formControlName="checkInOut" value="Check-in"> Check-in</label>
+    <label><input type="radio" formControlName="checkInOut" value="Check-out"> Check-out</label>
+
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin" formControlName="paint">Paint<br>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="tyres">Tyres<br>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="hitch">Hitch<br>
+
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="brakes">Brakes<br>
+
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="lights">Lights<br>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="liscensePlate">Liscense plate<br>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="interiorFloor">Interior floor<br>
+        </td>
+        <td>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+        </td>
+        <td>
+            <input type="checkbox" class="example-margin"  formControlName="testDrive">Test Drive
+                </td>
+        
+    </tr>
+ </table> 
+ </form> 
+
+ <br>
+ <div class="button-container">
+ <button class="buttonFail" (click)="setFail()">Fail</button>
+
+ <button class="buttonPass" (click)="setPass()">Pass</button>
+ </div>

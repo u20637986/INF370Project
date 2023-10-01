@@ -7,20 +7,25 @@
     <span class="example-spacer"></span>
 </mat-toolbar>
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-6 offset-2">
-            <form class="form-group" [formGroup]="DiscountForm" (ngSubmit)="addDiscount()">
+            <form class="form-group " [formGroup]="DiscountForm" (ngSubmit)="addDiscount()">
                 <div class="mb-3">
                     <label class="form-label">Discount Amount</label>
-                    <input type="number" class="form-control" placeholder="Enter discount amount off" name="amount" formControlName="amount">
+                    <input type="number" class="form-control" id="validationCustom03" placeholder="Enter discount amount off" name="amount" formControlName="amount">
+                    <div class="invalid-feedback">
+                        Please provide a discount amount 
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Discount Expiry Date</label>
                     <input type="text" class="form-control" placeholder="Enter expiry date" name="date" formControlName="date">
                 </div>
                 
-                <button type="submit" class="btn btn-primary" [disabled]="!DiscountForm.valid">Submit</button>
+                <button type="submit" class="btn btn-primary" >Submit</button>
                 <button type="button" class="btn btn-warning" style="margin-left: 2px;" routerLink="/discount">Cancel</button>
             </form>
         </div>

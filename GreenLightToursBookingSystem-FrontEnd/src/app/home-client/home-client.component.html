@@ -1,0 +1,57 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans Cypriot' rel='stylesheet'>
+    
+    </head>
+    
+    <div id="Section1">
+    <br>
+    <b><p style="font-size: 30px; text-align: center;"> Welcome to GreenLightTours !</p></b>
+    
+    <br>
+    <br>
+    
+    <p class="home-description"><b style="color: green; font-size: 15px;">GreenLightTours</b> is a travel and transportation company based in <br>
+         Pretoria and was established in 2018.<br>
+        We offer various services from daily shuttles(bookings), vehicle or trrailer rentals, to travel packages! <br>
+        </div>
+    <p class="home-description">Want to reach us? Contact us here</p>
+    
+    <br>
+    <br>
+    <div class="button-container">
+    
+        <button class="buttonLogin" [routerLink]="['/login']" style="vertical-align:middle"><span>Login </span></button>
+    
+        <button class="buttonRegister" [routerLink]="['/register']" style="vertical-align:middle"><span>Register </span></button>
+    
+    </div>
+    <br>
+       <div class="Section2">
+    
+        <div class="container">
+          <div class="row mx-auto">
+            <div class="col-6 mx-auto">
+              <img src='assets/img/img1.jpg'>
+              <img src='assets/img/img2.jpg'>
+              <img src='assets/img/img3.jpg'>
+              <img src='assets/img/img7.jpg'>
+              <img src='assets/img/img9.jpg'>
+              
+              <!--<carousel>
+                <slide *ngFor="let image of carouselImages; let i = index">
+                  <img [src]="image" alt="Slide {{i}}" class="d-block w-100 carousel-img">
+                </slide>
+              </carousel>-->
+            </div>
+          </div>
+        </div>
+       </div>
+     <br>
+     <br>
+       <div class="about">
+       <h2> Read more about our company by clicking <b><a [routerLink]="['/about']">Here</a></b></h2>
+    
+       </div>
+    
+    
+    

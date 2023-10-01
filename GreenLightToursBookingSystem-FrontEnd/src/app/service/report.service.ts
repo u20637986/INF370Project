@@ -7,7 +7,7 @@ import { map, Observable, Subject } from 'rxjs';
 })
 export class RentalReportService {
 
-  apiUrl = 'https://localhost:7162/api/'
+  apiUrl = 'https://inf370database20231001133617.azurewebsites.net/api/'
 
 
   httpOptions ={

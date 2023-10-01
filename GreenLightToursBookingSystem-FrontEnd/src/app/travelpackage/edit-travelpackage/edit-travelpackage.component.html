@@ -1,49 +1,74 @@
-<!--<style>
-    tr:nth-child(even) {
-     background: lightgreen;
-    }
-   </style>
-   <mat-toolbar class=" text-white" style="background-color: #004e04" >
-     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="cancel()">
-       <mat-icon >arrow_back</mat-icon>
-     </button>
-     <span class="example-spacer"></span>
-     Update travel package
-     <span class="example-spacer"></span>
-  
-   </mat-toolbar>
+<style>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style>
+ <mat-toolbar class=" text-white" style="background-color: #004e04" >
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="cancel()">
+     <mat-icon >arrow_back</mat-icon>
+   </button>
+   <span class="example-spacer"></span>
+   Update travel package
+   <span class="example-spacer"></span>
 
-
-   <div class="container">
-
-  <form (ngSubmit)="onSubmit()" [formGroup]="TravelPackageForm">
-  
-    <div class="form-group" >
-    <label for="travelPackageName"class="form-label"> Location:</label>
-    <input type="text" class="form-control" id="name" name="travelPackageName" formControlName="name" [(ngModel)]="travelPackage.name" ><br>
-    </div>
-
-    <div class="form-group">
-    <label for="description" class="form-label">Description:</label>
-    <input type="text-area" class="form-control" id="description" name="description"formControlName="description" [(ngModel)]="travelPackage.description"><br>
-    </div>
-
-    <div class="form-group">
-        <label for="price" class="form-label">Cost:</label>
-        <input type="text-area" class="form-control" id="price" name="price"formControlName="price" [(ngModel)]="travelPackage.price"><br>
-        </div>
-
-        <div class="form-group">
-            <label for="date" class="form-label">Date:</label>
-            <input type="text-area" class="form-control" id="date" name="date" formControlName="date" [(ngModel)]="travelPackage.date"><br>
+ </mat-toolbar>
+ 
+<div class="container">
+  <div class="row">
+      <div class="col-6 offset-2">
+       
+          <form class="form-group" [formGroup] ="updateTravelPackageForm" (ngSubmit)="UpdateTravelPackages()">
+             
+            <div>
+              <label for="travelPackageName" class="form-label"> Location:</label>
+              <input type="text" class="form-control" id="name" name="travelPackageName" formControlName="name">
+              <div class="error-message">{{ getErrorMessage('name') }}</div>
             </div>
-    <div class="form-group">
+        
+            <div>
+              <label for="description" class="form-label">Description:</label>
+              <input type="text-area" class="form-control" id="description" name="description" formControlName="description">
+              <div class="error-message">{{ getErrorMessage('description') }}</div>
+            </div>
+        
+            <div>
+              <label for="price" class="form-label">Cost:</label>
+              <input type="text" class="form-control" id="price" name="price" formControlName="price">
+              <div class="error-message" *ngIf="updateTravelPackageForm.get('price')?.hasError('negativeValue') ?? false">
+                Please enter a non-negative value.
+              </div>
+            </div>
+            
+            <div class="error-message">{{ getErrorMessage('price') }}</div>
+            <div class="form-group">
+              <label for="date" class="form-label">Date:</label>
+              <input type="date" class="form-control" id="date" name="date" formControlName="date" [(ngModel)]="travelPackage.date">
+              <div class="error-message">{{ getErrorMessage('date') }}</div>
+            </div>
+
+            <div >
+              <label>Statuses</label>
+              <select  class="form-control" formControlName="travelPackageStatusID">
+                  <option selected=""> </option>
+                  <option *ngFor="let status of travelPackageStatuses" [value]=status.travelPackageStatusID>{{status.description}}</option>
+              </select>
+          </div>
+            &nbsp;
+
+            <div>
+              <input type="file" (change)="onFileSelected($event)" class="custom-file-input" id="customFile" accept=".jpg, .jpeg">
+              <label class="custom-file-label" for="customFile"> Choose image </label>
+              <div class="error-message">{{ getErrorMessage('file') }}</div>
+            </div>
+
+              <button type="submit" [disabled]="!updateTravelPackageForm.valid" class="btn btn-primary" > Update </button>
+                &nbsp;
+                &nbsp;
+              <button type="reset" class="btn btn-info mr-1">Clear</button>
+          </form>
+      </div>
+  </div>
+</div>
+
   
-      <button type="submit" [disabled]="!TravelPackageForm.valid"  class="btn btn-primary mr-1" >Update</button>
-      &nbsp;
-      &nbsp;
-      <button type="reset" class="btn btn-info mr-1">Clear</button>
-    </div>
-  
-  </form>
-  </div>-->
+

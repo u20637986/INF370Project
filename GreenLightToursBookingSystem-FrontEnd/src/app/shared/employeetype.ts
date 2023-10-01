@@ -1,5 +1,5 @@
 export interface EmployeeType {
-  employeeTypeID: Number;
-  name:String;
-  description:String;
+  employeeTypeID?: Number;
+  name:string;
+  description:string;
 }

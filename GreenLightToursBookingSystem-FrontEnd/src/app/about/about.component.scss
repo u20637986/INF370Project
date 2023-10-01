@@ -1,0 +1,42 @@
+/* Set the background image for the top section */
+.top-section {
+    background-image: url('../../assets/img/V-Class-Top-Banner_2500x900.webp');
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+    background-position: center top; /* Center the background image vertically at the top */
+    height: 50vh; /* Adjust the height as needed */
+    background-color: #8da197; /* Vibrant Green background */
+  }
+
+  .page-wrapper {
+    background: linear-gradient(to bottom, white, #8a8989);
+  }
+  
+  .container,
+  .about-container {
+    text-align: center;
+    margin: 20px;
+    color: #000000; /* Black text */
+    
+  }
+  
+  .about-heading {
+    font-size: 48px;
+    color: #44f1a1; /* Vibrant Green heading */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .about-description {
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  /* Add a hover effect for interactivity */
+  .about-description:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease-in-out;
+  }
+  

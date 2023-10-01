@@ -15,11 +15,11 @@ export class AddRefundComponent {
 
 
   refund: Refund = {
-
-    RefundID:0,
-    name:'',
-    amount:0,
-    date:''
+    RefundID: 0,
+    name: '',
+    amount: 0,
+    date: '',
+    refundStatusID: 0
   }
 
   RefundForm = new FormGroup(

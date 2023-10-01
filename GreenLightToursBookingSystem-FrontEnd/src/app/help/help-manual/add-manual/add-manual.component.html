@@ -1,0 +1,72 @@
+<mat-toolbar class="text-white" style="background-color: #004e04">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    [routerLink]="['/help-manual']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  Add Help
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<br />
+
+<h5 class="error-text" *ngIf="errorMessage != ''">{{ errorMessage }}</h5>
+<br />
+
+<div class="row">
+  <form [formGroup]="helpForm" class="form-horizontal" *ngIf="categories.length>0">
+      <div class="form-group">
+          <label class="col-sm-1" for="question">Question:</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="question" placeholder="Enter question" formControlName="question" />
+            <div class="error-message">{{ getErrorMessage('question') }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1" for="category">Help Category:</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="category" formControlName="categoryID">
+              <option value="">Select Category</option>
+              <option *ngFor="let category of categories" [value]="category.categoryID">
+                {{ category.name }}
+              </option>
+            </select>
+            <div class="error-message">{{ getErrorMessage('categoryID') }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-6">
+            <label  class="custom-file-upload">
+              Add Manual video
+            </label>
+            <input id="file-upload" type="file" accept="video/mp4" class="form-control"
+              (change)="selectVideo($event)" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-6">
+            <label  class="custom-file-upload">
+              Upload Manual File
+            </label>
+            <input id="manual-upload" type="file" accept=".pdf" class="form-control"
+              (change)="selectFile($event)" />
+          </div>
+          </div>
+    
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-6">
+            <button style="margin-right: 1em" type="submit" class="btn btn-primary" (click)="onSubmit()">
+              Submit
+            </button>
+            <button type="button" class="btn btn-warning" (click)="cancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+
+
+  </form>
+</div>
+

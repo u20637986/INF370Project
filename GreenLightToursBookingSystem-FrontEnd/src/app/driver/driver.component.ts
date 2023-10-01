@@ -34,5 +34,6 @@ export class DriverComponent implements OnInit {
       window.location.reload();
       });
     }
+  
 }
 

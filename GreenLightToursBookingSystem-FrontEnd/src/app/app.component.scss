@@ -50,6 +50,18 @@ text-align: right;
 
 }
 
+.mat-sidenav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Optional: Firefox scrollbar */
+.mat-sidenav {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; /* Handle and Track colors */
+}
+
 mat-toolbar {
   background: #004a9f;
   color: white;
@@ -57,13 +69,14 @@ mat-toolbar {
 
 mat-sidenav {
   //margin: 16px;
-  width: 200px;
+  width: auto;
   border-right: none;
   background: #004e04;
   color: white;
   border-radius: 2px;
   padding: 16px;
   text-align: center;
+  overflow: hidden; 
 }
 mat-sidenav-container {
   height: calc(100vh);
@@ -75,4 +88,10 @@ mat-sidenav-container {
 .content
 {
   margin-left: 100px;
+}
+
+
+/* If needed, hide the scrollbar for the content inside the sidebar */
+mat-sidenav-content {
+  overflow: auto; /* Or use 'hidden' to completely hide the scrollbar */
 }

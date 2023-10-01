@@ -1,0 +1,25 @@
+<div class="date-filter">
+    <div *ngIf="selectedDates">
+      <p>Selected date range: {{ selectedDates.startDate | date }} - {{ selectedDates.endDate | date }}</p>
+    </div>
+      
+      <form (ngSubmit)="applyFilter()" style="display: flex; align-items: center;">
+        
+        <div class="form-group" *ngIf="!sharedDateFilter.hideStartDate">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate" class="form-control" required>
+        </div>
+        &nbsp; &nbsp;
+        <div class="form-group" *ngIf="!sharedDateFilter.hideEndDate">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate" class="form-control" required  [min]="minEndDate()" [disabled]="!startDate">
+        </div>
+        &nbsp;&nbsp;
+        <div >
+          <button type="submit" class="btn btn-primary" *ngIf="!sharedDateFilter.button">Apply Filter</button>
+        </div>
+       
+      </form>
+    
+    </div>
+    

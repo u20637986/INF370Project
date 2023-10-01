@@ -1,4 +1,4 @@
-export interface ServiceEntity {
-  serviceID: Number;
-  name:String;
+export class ServiceEntity {
+  serviceID!: Number;
+  name!:String;
 }

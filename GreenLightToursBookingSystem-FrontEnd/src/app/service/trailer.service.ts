@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, Subject } from 'rxjs';
+import { map, Observable, Subject , throwError} from 'rxjs';
 import { Trailer } from '../shared/trailer';
 import { FormGroup } from '@angular/forms';
 import { TrailerType } from '../shared/trailertype';
@@ -12,7 +12,7 @@ import { Inspection } from '../shared/trailerInspection';
 })
 export class DataService {
 
-  apiUrl='https://localhost:7162/api/'
+  apiUrl='https://inf370database20231001133617.azurewebsites.net/api/'
 
   httpOptions={
     headers:new HttpHeaders({
@@ -35,9 +35,18 @@ export class DataService {
   }
 
   addTrailer(trailer:any):Observable<any>
-  {
+  {  
+    const userId = localStorage.getItem('userID');
+      
+  if (!userId) {
+    console.error("UserID not found in localStorage");
+    return throwError("UserID not found in localStorage");
+  }
+ 
+  
+  const encodedUserId = encodeURIComponent(userId);
     
-    return this.httpClient.post<any>(`${this.apiUrl}Trailer/AddTrailer`, trailer)
+    return this.httpClient.post<any>(`${this.apiUrl}Trailer/AddTrailer?userId=${encodedUserId}`, trailer)
   }
 
  /* updateTrailer(trailerId: Number, trailer:any)
@@ -46,14 +55,32 @@ export class DataService {
   }*/
 
   updateTrailer(trailerID: number,trailer:any){
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+   
+    
+    const encodedUserId = encodeURIComponent(userId);
 
-    return this.httpClient.put<Trailer>(`${this.apiUrl}Trailer/EditTrailer/${trailerID}`, trailer, this.httpOptions);
+    return this.httpClient.put<Trailer>(`${this.apiUrl}Trailer/EditTrailer/${trailerID}?userId=${encodedUserId}`, trailer, this.httpOptions);
 
   }
 
   deleteTrailer(trailerId: Number)
   {
-    return this.httpClient.delete<string>(`${this.apiUrl}Trailer/DeleteTrailer`+ "/"+ trailerId)
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+   
+    
+    const encodedUserId = encodeURIComponent(userId);
+    return this.httpClient.delete<string>(`${this.apiUrl}Trailer/DeleteTrailer`+ "/"+ trailerId + "?userId" + encodedUserId)
   }
 
   getImages(): Observable<any>
@@ -90,17 +117,38 @@ export class DataService {
 
   addTrailerType(trailerType: TrailerType)
   {
-    return this.httpClient.post(`${this.apiUrl}Trailer/AddTrailerType`, trailerType, this.httpOptions)
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+    const encodedUserId = encodeURIComponent(userId);
+    return this.httpClient.post(`${this.apiUrl}Trailer/AddTrailerType?userId=${encodedUserId}`, trailerType, this.httpOptions)
   }
 
   deleteTrailerType(trailerTypeId: number)
   {
-    return this.httpClient.delete<string>(`${this.apiUrl}Trailer/DeleteTrailerType` + "/" + trailerTypeId, this.httpOptions)
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+    const encodedUserId = encodeURIComponent(userId);
+    return this.httpClient.delete<string>(`${this.apiUrl}Trailer/DeleteTrailerType` + "/" + trailerTypeId + "?userId=" + encodedUserId, this.httpOptions)
   }
 
   editTrailerType(trailerTypeId: number, trailerType: TrailerType)
   {
-    return this.httpClient.put(`${this.apiUrl}Trailer/EditTrailerType/${trailerTypeId}`,trailerType, this.httpOptions)
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+    const encodedUserId = encodeURIComponent(userId);
+    return this.httpClient.put(`${this.apiUrl}Trailer/EditTrailerType/${trailerTypeId}?userId=${encodedUserId}`,trailerType, this.httpOptions)
   }
 
 
@@ -109,12 +157,34 @@ export class DataService {
   }
 
   addInspection(trailerID:number,inspection:any):Observable<any>{
-    return this.httpClient.post<Inspection>(`${this.apiUrl}Trailer/AddTrailerInspection/${trailerID}`, inspection)
+    const userId = localStorage.getItem('userID');
+      
+    if (!userId) {
+      console.error("UserID not found in localStorage");
+      return throwError("UserID not found in localStorage");
+    }
+    const encodedUserId = encodeURIComponent(userId);
+    return this.httpClient.post<Inspection>(`${this.apiUrl}Trailer/AddTrailerInspection/${trailerID}?userId=${encodedUserId}`, inspection)
   }
 
   getEmployee(employeeID:number){
+    
     return this.httpClient.get(`${this.apiUrl}Admin/GetEmployee` + "/" +employeeID)
     .pipe(map(result=>result))
 
+}
+
+getUser(userID:number)
+{
+  return this.httpClient.get(`${this.apiUrl}User/GetUser` + "/" +userID)
+  .pipe(map(result=>result))
+ 
+}
+
+hasActiveRentalApplicationsForTrailer(trailerId: number) {
+  const url = `${this.apiUrl}Trailer/HasActiveRentalApplicationsForTrailer/${trailerId}`;
+  
+  // Send a GET request to the backend API
+  return this.httpClient.get<boolean>(url);
 }
 }

@@ -1,0 +1,51 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="goBack()">
+           <mat-icon>arrow_back</mat-icon>
+         </button>
+         <span class="example-spacer"></span>
+           <h2 style="color:white">Rental Products List</h2>
+         <span class="example-spacer"></span>
+  
+  </mat-toolbar>
+  
+  <div class="container">
+      <div>
+          <div style="text-align: center; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/img/logoa.png" alt="logo" style="max-width: 100px; max-height: 100px;">
+            <h2 style="margin-left: 10px;">Green Light Tours </h2>
+        </div>
+         <br>
+            <h2 class="text-center"> <b>Rental Products List</b> </h2>
+  
+            <h4> <b>Generated on: &nbsp;{{generatedDate | date}}</b></h4>
+      
+     
+      
+      <app-filter-report-by-date  (filterDates)="fetchReport($event.startDate, $event.endDate)"></app-filter-report-by-date>
+   
+      <div *ngIf="reportData">
+        <table class="table">
+          <thead>
+            <tr>
+          
+              <th>Rental Product Name</th>
+              <th>Number of times rented within specified time period</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of reportData.reportItems">
+            
+              <td>{{ item.itemName }}</td>
+              <td>{{ item.rentalCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reportData.reportItems.length === 0">
+          <p>No rental products were rented within the specified timeperiod</p>
+        </div>
+      </div>
+    
+      <button class="btn btn-primary m-3" (click)="print()" *ngIf="showButton">Print Report</button>
+      
+    </div>
+    

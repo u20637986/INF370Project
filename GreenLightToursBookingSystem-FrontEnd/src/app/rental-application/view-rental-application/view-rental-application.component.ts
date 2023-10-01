@@ -20,7 +20,8 @@ export class ViewRentalApplicationComponent {
   //rentalStatus: string;
   files: any[] = [];
   rental:RentalBase = new RentalBase;
-
+  status: any[]= [];
+  rentalProduct: any = {}
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private snackBar:MatSnackBar, private router:Router) {}
 
@@ -33,23 +34,57 @@ export class ViewRentalApplicationComponent {
       this.trailerId = +params['trailerId'];
       this.totalPrice = +params['totalPrice'];
 
-      // Code below is for getting the details of a single rental application including its files.
       this.dataService.getRentalApplication(this.rentalId).subscribe(
         (data) => {
-          this.rentalId = data.rentalApplication.rentalID;
-          this.startDate = data.rentalApplication.startDate;
-          this.endDate = data.rentalApplication.endDate;
-          this.trailerId = data.rentalApplication.trailerID;
-          this.totalPrice = data.rentalApplication.totalPrice;
-          this.files = data.files;
-          localStorage.setItem("Rental", JSON.stringify(data));
+          if (data && data.RentalApplication) {
+            this.rentalId = data.RentalApplication.RentalID;
+            this.startDate = data.RentalApplication.StartDate;
+            this.endDate = data.RentalApplication.EndDate;
+            this.trailerId = data.RentalApplication.TrailerID;
+            this.totalPrice = data.RentalApplication.TotalPrice;
+          }
+       
+          if (data && data.Files && data.Files.$values && Array.isArray(data.Files.$values)) {
+            this.files = data.Files.$values;
+          } else {
+            this.files = [];
+          }
+          
+      
+          if (data && data.Status && data.Status.$values && Array.isArray(data.Status.$values)) {
+            this.status = data.Status.$values;
+          } else {
+            this.status = [];
+          }
+      
+          localStorage.setItem('Rental', JSON.stringify(data));
+      
+          if (data && data.Details) {
+            if (data.Details.VehicleDetails) {
+              this.rentalProduct = {
+                name: data.Details.VehicleDetails.VehicleName,
+                type:data.Details.VehicleDetails.VehicleType.Name,
+                registrationNumber: data.Details.VehicleDetails.RegistrationNumber,
+              };
+            } else if (data.Details.TrailerDetails) {
+              this.rentalProduct = {
+                name: data.Details.TrailerDetails.Size,
+                type: data.Details.TrailerDetails.TrailerType.Name + "\n" + "trailer",
+                registrationNumber: data.Details.TrailerDetails.RegistrationNumber,
+              };
+            }
+          }
+          console.log(data)
         },
         (error) => {
           console.error('Error fetching Rental Application:', error);
+
         }
       );
     });
-  }
+ 
+
+  } 
 
   //code below is for cancelling the rental application.
   cancelRentalApplication(rentalID: number) {
@@ -97,4 +132,7 @@ export class ViewRentalApplicationComponent {
 
     return bytes.buffer;
   }
+  goBack() {
+    this.router.navigateByUrl('/');
+  } 
 }

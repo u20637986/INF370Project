@@ -34,19 +34,14 @@ export class UpdateEmployeeTypeComponent implements OnInit {
   cancel(){
     this.router.navigate(['/employee-type'])
   }
-  /*UpdateEmployeeType() {
-    this.dataService.UpdateEmployeeType(this.employeeType).subscribe({
-      next: (employeeType) => {
-        employeeType.name = this.EmployeeTypeForm.value.name;
-        employeeType.description = this.EmployeeTypeForm.value.description;
-
-        // Assuming 'employeeTypeId' is the identifier for the employee type being updated
-        this.router.navigate(['/employee-Type']);
-      }
-    });
-  }*/
+  UpdateEmployeeType() {
+    this.dataService.UpdateEmployeeType(this.employeeType.employeeTypeID, this.EmployeeTypeForm.value).subscribe((res) => {
+        this.router.navigate(['/employee-type']);
+      })
+    }
+  }
 
 
 
-}
+
 

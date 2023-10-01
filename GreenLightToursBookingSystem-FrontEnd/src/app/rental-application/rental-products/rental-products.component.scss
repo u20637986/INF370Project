@@ -1,30 +1,76 @@
-.logo-image{
-    width: 700px;
-    height: 500px;
-   display: flex;
-    margin-left: 100px;
-  }
 
-  span {
-    text-align: center;
-    display: inline-block;
+@media (max-width: 576px) {
+  .left-column, .right-column {
     width: 100%;
+    margin-right: 0;
+  }
+}
+
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .left-column, .right-column {
+    width: 50%;
+    margin-right: 0;
+  }
+}
+
+
+@media (min-width: 769px) {
+  .left-column {
+    width: 48%;
+    margin-right: 2%;
   }
 
-  .content
-  {
-    margin-left: 100px;
+  .right-column {
+    width: 50%;
   }
-  .trailerImg {
-    max-width: 80px; /* Adjust the maximum width as needed */
-    max-height: 80px; /* Adjust the maximum height as needed */
-    /* Add other CSS properties as needed for positioning or responsiveness */
-  }
+}
 
-  .statusAvailable {
-    color: green;
-  }
 
-  .statusUnavailable {
-    color: red;
-  }
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+.trailerImg {
+  //max-width: 100%;
+  //height: auto;
+  max-width: 15em;
+  max-height: 15em;
+  //margin: 0.75em;
+}
+.statusAvailable {
+  color: green;
+}
+
+.statusUnavailable {
+  color: red;
+}.logo-image{
+  width: 700px;
+  height: 500px;
+ display: flex;
+  margin-left: 100px;
+}
+
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.content
+{
+  margin-left: 100px;
+}

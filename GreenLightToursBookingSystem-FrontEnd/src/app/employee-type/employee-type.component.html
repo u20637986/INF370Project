@@ -13,7 +13,7 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <span class="example-spacer"></span>
- Employee Type
+ Employee
   <span class="example-spacer"></span>
 
 </mat-toolbar>
@@ -23,22 +23,35 @@
   <thead>
       <tr>
           <th scope="col">Name</th>
-          <th scope="col">Description</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Email</th>
+          <th scope="col">ID Number</th>
+          <th scope="col">Cell Number</th>
+          <th scope="col">Employee Type</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+
           <th scope="col-6" style="size: 0.2%;"></th>
           <th scope="col-6"></th>
 
       </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employeeType of employeeTypes">
-         <td>{{employeeType.name}}</td>
-          <td>{{employeeType.description}}</td>
-          <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/employee-type', employeeType.employeeTypeID]" >Edit</button></td>
-        <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteEmployeeType(employeeType.employeeTypeID)" >Delete</button></td>
+    <tr *ngFor="let employee of employees">
+         <td>{{employee.name}}</td>
+          <td>{{employee.surname}}</td>
+          <td>{{employee.email}}</td>
+          <td>{{employee.idNumber}}</td>
+          <td>{{employee.cellNumber}}</td>
+          <td >{{employee.employeeType.name}}</td>
+          <button type="button" class="btn btn-primary" (click)="EditEmployee(employee.employeeID)" >Update</button>
+        <td><button type="button" class="btn btn-danger" (click)="DeleteEmployee(employee.employeeID)" >Delete</button></td>
     </tr>
   </tbody>
 </table>
 </div>
-<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-employee-type">Add</button>
+<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-employee">Add</button>
 
 <router-outlet></router-outlet>
+
+

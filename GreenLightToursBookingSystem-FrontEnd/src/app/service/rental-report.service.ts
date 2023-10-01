@@ -10,7 +10,6 @@ import { Inspection } from '../shared/trailerInspection';
 })
 export class RentalReportService {
   apiUrl='https://inf370database20231001133617.azurewebsites.net/api/'
-
   httpOptions={
     headers:new HttpHeaders({
       ContentType:'application/json'

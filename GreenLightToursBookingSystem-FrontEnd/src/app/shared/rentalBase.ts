@@ -8,4 +8,5 @@ export class RentalBase {
     vehicleID!:number;
     fileID!:number;
     fileName!:string; 
+    userId!: number;
   }

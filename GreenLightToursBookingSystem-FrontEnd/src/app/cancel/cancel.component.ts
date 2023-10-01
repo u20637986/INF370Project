@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cancel',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./cancel.component.scss']
 })
 export class CancelComponent {
+
+  constructor(private router: Router) { }
+  
+  redirectToMakeBooking(): void {
+    window.location.href="./booking-controller";
+  
+  }
+
 
 }

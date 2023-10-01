@@ -6,8 +6,21 @@
    Payment notification
     <span class="example-spacer"></span>
 </mat-toolbar>
+
 <div  class="container" style="text-align: center;">
+    <div style="display: inline-block;"> 
+       <div class="alert" id="alertBox">
+    <span class="close-btn" onclick="this.parentElement.style.display='none';"></span>
+    Payment action succesful. Thank you for riding with us ! <br>
+    <button style="float: right;" class="ok-btn btn-primary m-3" (click)="redirectToMakeBooking()">OK</button>
+
+       </div>
+       
+   </div>
+</div>
+
+<!-- <div  class="container" style="text-align: center;">
     <div style="display: inline-block;"> 
         <p> <b>Payment action succesful. Thank you for riding with us !</b></p>
     </div>
-</div>
+</div> -->

@@ -5,6 +5,7 @@ import { Trailer } from '../shared/trailer';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalService } from '../service/modal.service';
 
 @Component({
   selector: 'app-trailer',
@@ -18,7 +19,7 @@ export class TrailerComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['Image', 'Status', 'Rental Price', 'Size', 'Registration Number', 'Trailer Type', 'Floor Base', 'Panels', 'Update', 'Delete', 'Inspect'];
   dataSource = new MatTableDataSource<Trailer>();
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router, private modalService:ModalService) { }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -56,7 +57,7 @@ export class TrailerComponent implements AfterViewInit, OnInit {
     })
   }
 
-  deleteTrailer(trailerId: Number) {
+  /*deleteTrailer(trailerId: Number) {
 
     if (confirm('Are you sure you want to delete this trailer?')) {
       this.dataService.deleteTrailer(trailerId).subscribe(result => {
@@ -65,7 +66,44 @@ export class TrailerComponent implements AfterViewInit, OnInit {
       })
     }
 
+  }*/
+
+  deleteTrailer(trailerId: number) {
+    // Check if there are active rental applications for the trailer
+    this.dataService.hasActiveRentalApplicationsForTrailer(trailerId).subscribe(
+      (hasActiveRentalApplications: boolean) => {
+        if (hasActiveRentalApplications) {
+          // Alert the user that the trailer cannot be deleted due to active rental applications
+          alert('This trailer cannot be deleted because there are active rental applications.');
+          this.modalService.openErrorModal('This trailer cannot be deleted because it has active rental applications.');
+  
+          // Optionally, you can redirect the user to a different page or take other actions.
+        } else {
+          // Confirm with the user before proceeding with the deletion
+          if (confirm('Are you sure you want to delete this trailer?')) {
+            // If the user confirms, delete the trailer
+            this.dataService.deleteTrailer(trailerId).subscribe(
+              (result) => {
+                // Optionally, you can handle the deletion success, e.g., show a success message.
+                console.log('Trailer deleted successfully.');
+                window.location.reload();
+                this.getTrailers();
+              },
+              (error) => {
+                // Handle the deletion error, e.g., show an error message.
+                console.error('Error deleting trailer:', error);
+              }
+            );
+          }
+        }
+      },
+      (error) => {
+        // Handle the error when checking for active rental applications
+        console.error('Error checking for active rental applications:', error);
+      }
+    );
   }
+  
 
 
   editTrailer(trailerId: Number) {

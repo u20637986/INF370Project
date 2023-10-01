@@ -41,7 +41,7 @@
     <div class="form-group">
       <label class="col-sm-1" for="price">Price:</label>
       <div class="col-sm-6">
-        <input class="form-control" id="price" placeholder="Enter price" [required]="true" formControlName="vehiclePrice">
+        <input class="form-control" id="price" placeholder="Enter price" [required]="true" formControlName="vehiclePriceID">
       </div>
   </div>
 
@@ -71,8 +71,8 @@
     
     <div class="form-group">
       <div class="col-sm-offset-1 col-sm-6">
-        <button style="margin-right:1em;" type="submit" [disabled]="!vehicleForm.valid" class="btn btn-sm btn-default">Submit</button>
-        <button type="button" class="btn btn-sm btn-warning" (click)="cancel()">Cancel</button>
+        <button style="margin-right:1em;" type="submit" [disabled]="!vehicleForm.valid" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="cancel()">Cancel</button>
       </div>
     </div>
   </form>

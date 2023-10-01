@@ -1,5 +1,5 @@
 export interface BookingType {
-  bookingTypeID: Number;
+  bookingTypeID?: Number;
   name:String;
   description:String;
 }

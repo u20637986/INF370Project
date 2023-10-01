@@ -4,7 +4,7 @@ export class Inspection{
     employeeID!:number;
     trailerStatusID!: number;
     trailerStatus?:string;
-    employeeName?:string;
+    conductedBy?:string;
     trailerRegistration?:string
     checkInOut!: string;
     passOrFail!: string;

@@ -46,6 +46,8 @@ export class MakePaymentComponent implements OnInit{
   // }
   
   ngOnInit(): void {
+    localStorage.setItem("Page",JSON.stringify("Payment") )
+
     this.booking = JSON.parse(localStorage.getItem("Booking")!)
     this.passengers = JSON.parse(localStorage.getItem("Passengers")!)
     this.departureDate = localStorage.getItem("DepartureDate")!

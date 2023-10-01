@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
+import { SharedNavService } from 'src/app/service/shared-nav.service';
 
 @Component({
   selector: 'app-admin-register',
@@ -12,10 +13,16 @@ export class AdminRegisterComponent {
 
   signupForm!: FormGroup;
   isValidEmail!: boolean;
+  showToolbar:boolean=true
 
-  constructor(private formBuilder : FormBuilder, private authService: AuthService, private router: Router){}
+  constructor(private formBuilder : FormBuilder, private authService: AuthService, private router: Router, public sharednavservice:SharedNavService){}
 
   ngOnInit(): void {
+
+    this.sharednavservice.hideSideNav = true;
+  this.sharednavservice.hideToolBar = true;
+
+
     this.signupForm = this.formBuilder.group({
       name:['', Validators.required],
       surname:['', Validators.required],

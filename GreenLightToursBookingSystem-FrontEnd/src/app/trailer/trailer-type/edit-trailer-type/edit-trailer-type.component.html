@@ -1,0 +1,44 @@
+<mat-toolbar class="text-white" style="background-color: #004e04">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      [routerLink]="['/trailer-type']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    Update Trailer Type
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <br />
+  <br />
+  <div class="row">
+    <h5 class="error-text" *ngIf="errorMessage != ''">{{ errorMessage }}</h5>
+    <br />
+
+    <form [formGroup]="trailerTypeForm" (ngSubmit)="onSubmit()" class="form-horizontal" >
+        <div class="form-group">
+          <label class="col-sm-1" for="name">Name:</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="name" placeholder="Enter name" formControlName="name" />
+            <div class="error-message">{{ getErrorMessage('name') }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-1" for="description">Description:</label>
+            <div class="col-sm-6">
+              <input class="form-control" id="description" placeholder="Enter description" formControlName="description" />
+              <div class="error-message">{{ getErrorMessage('description') }}</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-6">
+              <button style="margin-right: 1em" type="submit" class="btn btn-sm btn-default">
+                Submit
+              </button>
+              <button type="button" class="btn btn-sm btn-warning" (click)="cancel()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>

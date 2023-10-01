@@ -6,10 +6,16 @@
    Manage Discounts
     <span class="example-spacer"></span>
 </mat-toolbar>
+<br>
 
-<!-- <h3 style="align-items: center;"> Manage discounts </h3> &nbsp; -->
-&nbsp; <button type="submit"class="btn btn-primary" routerLink="/add-discount"> Add new discount</button> 
-<table class="table table-hover">
+
+    &nbsp; &nbsp; &nbsp; <input type="text" class="form-control" style="display: inline-block; width: 40%;" placeholder="Search by amount or date" [(ngModel)]="searchString"> &nbsp; 
+    <button class="btn btn-primary" style=" height:35px; display: inline-block;" (click)="SearchDiscounts()">Search</button>
+    <p>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; <i class="fa-regular fa-circle-info" style="color: orange"> The search is case sensentive, enter word exactly as they are!</i> </p>
+ 
+
+<br>
+<table class="table table-striped">
   <thead>
       <tr>
           <th>
@@ -18,6 +24,8 @@
           <th>
               Expiry Date
           </th>
+          <th scope="col-6" style="size: 0.2%;"></th>
+           <th scope="col-6"></th>
          
       </tr>
   </thead>
@@ -33,11 +41,13 @@
           <td>
 
               <button class="btn btn-info" (click)="EditDiscount(discount.discountID)">Edit </button> &nbsp;
-              <button class="btn btn-danger" style="margin-left: 2px;" (click)="DeleteDiscount(discount.discountID)">Delete</button>
+             
           </td>
+          <td> <button class="btn btn-danger" style="margin-left: 2px;" (click)="DeleteDiscount(discount.discountID)">Delete</button></td>
       </tr>
   </tbody>
 </table>
+<button type="submit"class="btn btn-primary" style="margin-left: 90%;" routerLink="/add-discount"> Add new discount</button> 
 
   
 

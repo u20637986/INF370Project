@@ -20,6 +20,7 @@ declare function payfast_do_onsite_payment(param1 : any, callback: any): any;
 export class PayfastCheckOutComponent implements OnInit {
 
   booking:Booking = new Booking
+  TravelPackagebooking:Booking = new Booking
 
  constructor(private httpComms : HttpClient, private Router : Router, private dataservices: DataService, private formBuilder: FormBuilder) {
     
@@ -40,6 +41,10 @@ export class PayfastCheckOutComponent implements OnInit {
   }
 
   async doOnSitePayment() {
+
+    if (JSON.parse(localStorage.getItem("Page")!) == "Payment")
+    {
+          
     let onSiteUserData = new Map<string, string>();
     onSiteUserData.set("merchant_id", "10026206")
     onSiteUserData.set("merchant_key", "wy3z2mq4jknd2")
@@ -79,6 +84,53 @@ export class PayfastCheckOutComponent implements OnInit {
         this.Router.navigate(['/cancel'])
       }
     });
+    }
+
+    if (JSON.parse(localStorage.getItem("Page")!) == "Travel Booking")
+    {
+
+      let onSiteUserData = new Map<string, string>();
+    onSiteUserData.set("merchant_id", "10026206")
+    onSiteUserData.set("merchant_key", "wy3z2mq4jknd2")
+
+    onSiteUserData.set('return_url', window.location.origin + '/success')
+    onSiteUserData.set('cancel_url', window.location.origin + '/cancel')
+
+    onSiteUserData.set("email_address", 'test@user.com');
+    this.TravelPackagebooking = JSON.parse(localStorage.getItem("Travel_Booking")!)
+    onSiteUserData.set("amount", this.TravelPackagebooking.totalPrice.toString());
+    onSiteUserData.set("item_name", "Travel_Booking");
+
+    onSiteUserData.set('passphrase', 'HelloWorldHello');
+
+    let signature = this.getSignature(onSiteUserData);
+    onSiteUserData.set('signature', signature);
+
+
+    let formData = new FormData();
+    onSiteUserData.forEach((val, key) => {
+      formData.append(key, val);
+    }); 
+    
+    let response = await fetch(environment.payfastOnsiteEndpoint, {
+      method: 'POST',
+      body: formData,
+      redirect: 'follow'
+    });
+    
+    let respJson = await response.json();
+    let uuid = respJson['uuid'];
+    payfast_do_onsite_payment({'uuid': uuid},  (res: any) => {
+      if (res == true) {
+        this.Router.navigate(['/success'])
+      }
+      else {
+        this.Router.navigate(['/cancel'])
+      }
+    });
+
+    }
+
   }
 
   doFormPayment() {

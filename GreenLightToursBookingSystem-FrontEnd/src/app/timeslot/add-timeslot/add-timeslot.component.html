@@ -1,1 +1,34 @@
-<p>add-timeslot works!</p>
+<div class="container">
+    <h2> Add Timeslot </h2>
+
+    <form (ngSubmit)="AddTimeSlot()" [formGroup]="TimeSlotForm">
+        <div class="form-group">
+            <label for="date" class="form-label"> Date: </label>
+            <input type="text" class="form-control" name="date" formControlName="departureDate" placeholder="10:00"><br>
+        </div>
+
+        <div class="form-group">
+            <label for="timw" class="form-label"> Time: </label>
+            <input type="text" class="form-control" name="time" formControlName="departureTime" placeholder="2023-04-12"><br>
+        </div>  
+        
+        <br>
+<mat-form-field appearance="fill">
+    <div class="form-group">
+        <mat-select placeholder="Select Location" formControlName="locationID">
+            <mat-option *ngFor="let v of location" [value]="v.locationID">
+                {{v.city}}
+            </mat-option>
+        </mat-select>
+    </div>
+</mat-form-field>
+    <br>
+
+        <div class="form-group">
+            <button type="submit" [disabled]="!TimeSlotForm.valid" class="btn btn-primary mr-1"> Add </button>
+            &nbsp;
+            <button type="reset" class="btn btn-info mr-1"> Clear </button>
+        </div>
+
+    </form>
+</div>

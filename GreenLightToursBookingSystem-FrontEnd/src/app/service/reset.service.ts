@@ -7,7 +7,7 @@ import { ResetPassword } from '../shared/resetPassword';
 })
 export class ResetService {
 
-  private apiUrl: string = 'https://localhost:7162/api/User/'
+  private apiUrl: string = 'https://inf370database20231001133617.azurewebsites.net/api/User/'
 
   constructor(private http: HttpClient) { }
 

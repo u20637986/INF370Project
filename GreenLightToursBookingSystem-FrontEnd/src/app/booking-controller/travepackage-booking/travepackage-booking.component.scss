@@ -1,0 +1,42 @@
+.logo-image{
+    width: 700px;
+    height: 500px;
+   display: flex;
+    margin-left: 100px;
+  }
+  
+  span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .content
+  {
+    margin-left: 100px;
+  }
+
+//   select {
+//     max-height: 150px; 
+//     appearance: none; 
+//     padding: 5px; 
+//     font-size: 16px; 
+//     border: 1px solid black; 
+//     background-color: white; 
+//     width: 100%; 
+//   }
+  
+//   select option {
+//     height: 30px; 
+//     line-height: 30px; 
+//     padding: 5px; 
+  //}
+  input {
+    max-height: 150px; 
+    appearance: none; 
+    padding: 5px; 
+    font-size: 16px; 
+    border: 1px solid black; 
+    background-color: white; 
+    width: 100%; 
+  }

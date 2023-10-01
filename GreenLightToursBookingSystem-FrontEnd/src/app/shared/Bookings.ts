@@ -9,4 +9,5 @@ export class Booking {
     totalPrice!:number;
     travelpackageId!:number;
     locationID!:number;
+    //email!:string;
   }

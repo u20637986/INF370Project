@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../shared/user';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -35,23 +36,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}Employees/Login`, loginObj)
   }
 
-  /*AdminLogin(loginObj: any) {
-    return this.http.post<any>(`${this.apiUrl}Employees/Login`, loginObj).pipe(
-      // Assuming the server response contains a 'role' property indicating the user's role (e.g., 'user' or 'employee')
-      map((response) => {
-        if (response && response.role === 'Admin') {
-          // Set user role in local storage or any other state management mechanism
-          localStorage.setItem('userRole', 'Admin');
-        } else {
-          localStorage.setItem('userRole', 'Admin');
-        }
-        return response;
-      })
-    );
-  }*/
-  
-  
+  verify2FAToken(userEmail:string, twoFactorToken:string): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}User/Verify2FAToken`, {userEmail, twoFactorToken})
+  }
 
+  
   logout(){
     localStorage.clear();
     this.route.navigate(['login'])
@@ -75,6 +64,19 @@ export class AuthService {
 
   isLoggedIn(): boolean{
     return localStorage.getItem('accessToken')!=null;
+  }
+
+  userID(storeID:any){
+    localStorage.setItem('userID', storeID)
+  }
+
+  getEmail(storeEmail:string)
+  { 
+    localStorage.setItem('email', storeEmail)
+  }
+
+  getUserID(){
+    return localStorage.getItem('userID')
   }
 
 }

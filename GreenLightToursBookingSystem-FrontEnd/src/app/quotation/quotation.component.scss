@@ -1,0 +1,81 @@
+ /* Make sure the path to the logo image is correct */
+ img.img-fluid {
+  src: url('../../assets/img/logoa.png');
+}
+
+.shift-left {
+  margin-right: -20px; /* Adjust the value as needed */
+}
+  
+/* Add this CSS code to your component's CSS file */
+
+/* Style for the whole page */
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+margin: 0;
+padding: 0;
+}
+
+/* Style for the quotation container */
+#pdfContent {
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+max-width: 600px;
+margin: 20px auto;
+padding: 20px;
+}
+
+/* Style for the table */
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+table, th, td {
+border: 1px solid #ddd;
+}
+
+th, td {
+padding: 10px;
+text-align: left;
+}
+
+th {
+background-color: #004e04;
+color: white;
+}
+
+/* Style for the Download PDF button */
+.btn-download-pdf {
+margin-left: 90%;
+margin-top: 20px;
+background-color: #004e04;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.btn-download-pdf:hover {
+background-color: #003300;
+}
+
+/* Style for the Add button */
+.btn-add {
+margin-right: 90%;
+margin-top: 20px;
+background-color: #004e04;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.btn-add:hover {
+background-color: #003300;
+}

@@ -10,10 +10,15 @@
    <span class="example-spacer"></span>
   User Types
    <span class="example-spacer"></span>
-
  </mat-toolbar>
- <br>
- <div style="margin-left: 20px;margin-top: 5%;">
+ <br> &nbsp;
+ 
+ &nbsp; &nbsp; &nbsp; <input type="text" class="form-control" style="display: inline-block; width: 40%;" placeholder="Search by name or description" [(ngModel)]="searchString"> &nbsp; 
+ <button class="btn btn-primary" style=" height:35px; display: inline-block;" (click)="SearchUserTypes()">Search</button>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; <i class="fa-regular fa-circle-info" style="color: orange"> The search is case sensentive, enter word exactly as they are!</i> </p>
+ 
+ 
+ <!-- <div style="margin-left: 20px;margin-top: 5%;"> -->
  <table class="table table-striped">
    <thead>
        <tr>
@@ -28,13 +33,12 @@
      <tr *ngFor="let userType of userTypes">
           <td>{{userType.name}}</td>
            <td>{{userType.description}}</td>
-           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/user-type', userType.userTypeID]" >Edit</button></td>
+           <td><button type="button" class="btn btn-info mr-1" (click)="EditUserType(userType.userTypeID)" >Edit</button></td>
          <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteUserType(userType.userTypeID)" >Delete</button></td>
      </tr>
    </tbody>
  </table>
- </div>
- <button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-user-type">Add</button>
-
+ <!-- </div> -->
+ <button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-user-type">Add new user role</button>
  <router-outlet></router-outlet>
 

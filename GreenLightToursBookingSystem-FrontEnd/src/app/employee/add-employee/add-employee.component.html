@@ -1,37 +1,70 @@
-<div class="container">
-  <h2>Add Employee</h2>
-<form (ngSubmit)="AddEmployee()" [formGroup]="EmployeeForm">
+<mat-toolbar class="text-white" style="background-color: #004e04">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    [routerLink]="['/trailer']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  Add Trailer
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<br />
+
+<h5 class="error-text" *ngIf="errorMessage != ''">{{ errorMessage }}</h5>
+<br />
+<div class="row">
+<form [formGroup]="employeeForm" class="form-horizontal" >
 
   <div class="form-group" >
   <label for="employeename" class="form-label"> Employee Name:</label>
-  <input type="text" class="form-control" id="name" name="employeename" formControlName="name" [(ngModel)]="employee.name" ><br>
-  </div>
+  <div class="input-container">
+  <input type="text" class="form-control" id="name" name="name" formControlName="name"><br>
+  <div class="error-message">{{ getErrorMessage('name') }}</div>
+</div>
+</div>
+
   <div class="form-group">
   <label for="surname" class="form-label">Surname:</label>
-  <input type="text-area" class="form-control" id="surname" name="surname"formControlName="name" [(ngModel)]="employee.surname"><br>
-  </div>
+  <input type="text-area" class="form-control" id="surname" name="surname"formControlName="surname"><br>
+  <div class="error-message">{{ getErrorMessage('surname') }}</div>  
+</div>
+
   <div class="form-group">
     <label for="email" class="form-label">Email:</label>
-    <input type="text-area" class="form-control" id="email" name="email"formControlName="name" [(ngModel)]="employee.email"><br>
-    </div>
+    <input type="text-area" class="form-control" id="email" name="email"formControlName="email"><br>
+    <div class="error-message">{{ getErrorMessage('email') }}</div>  
+  </div>
+
     <div class="form-group">
       <label for="cellNumber" class="form-label">Cell Number:</label>
-      <input type="text-area" class="form-control" id="cellNumber" name="cellNumber"formControlName="name" [(ngModel)]="employee.cellNumber"><br>
-      </div>
+      <input type="text-area" class="form-control" id="cellNumber" name="cellNumber"formControlName="cellNumber"><br>
+    <div class="error-message">{{ getErrorMessage('cellNumber') }}</div>  
+    </div>
+
       <div class="form-group">
-        <label for="iDnumber" class="form-label">ID Number:</label>
-        <input type="text-area" class="form-control" id="iDnumber" name="iDnumber"formControlName="name" [(ngModel)]="employee.iDnumber"><br>
+        <label for="idNumber" class="form-label">ID Number:</label>
+        <input type="text-area" class="form-control" id="idNumber" name="idNumber"formControlName="idNumber"><br>
+    <div class="error-message">{{ getErrorMessage('idNumber') }}</div>  
+      </div>
+
+        <div class="form-group">
+          <label for="employeeType" class="form-label">Employee Type:</label>
+          <select class="form-control" id="employeeType" name="employeeType" formControlName="employeeTypeID">
+            <option selected=""> </option>
+            <option *ngFor="let type of employeeTypes" [value]=type.employeeTypeID>{{ type.name }}</option>
+          </select>
         </div>
+
   <div class="form-group">
 
-    <button type="submit" [disabled]="!EmployeeForm.valid"  class="btn btn-primary mr-1" >Add</button>
+    <button type="submit" [disabled]="!employeeForm.valid"  class="btn btn-primary mr-1" (click)="AddEmployee()" >Add</button>
     &nbsp;
     &nbsp;
     <button type="reset" class="btn btn-info mr-1">Clear</button>
+    <button type="button" class="btn btn-warning" (click)="cancel()">
+      Cancel
+    </button>
   </div>
 
 
 </form>
 </div>
-
-

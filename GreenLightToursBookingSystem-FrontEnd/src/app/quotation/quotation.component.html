@@ -1,64 +1,78 @@
 <style>
-    tr:nth-child(even) {
-     background: lightgreen;
-    }
-   </style>
-   <mat-toolbar class=" text-white" style="background-color: #004e04" >
-     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
-       <mat-icon >arrow_back</mat-icon>
-     </button>
-     <span class="example-spacer"></span>
-    Quotation
-     <span class="example-spacer"></span>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style>
   
- </mat-toolbar>
-<div *ngFor=" let quotation of quotations" >
- <H1><b>Green light Tours</b></H1>
+ <mat-toolbar class=" text-white" style="background-color: #004e04" >
+   <span class="example-spacer"></span>
+  Quotation
+   <span class="example-spacer"></span>
 
- <h2>Travel more, worry Less</h2>
+</mat-toolbar>
+<div *ngFor=" let quotation of quotations ; let i = index;"  >
+<div  #pdfContent [id]="'pdfContent-' + i">
+  <div style="text-align: center; display: flex; align-items: center; justify-content: center;">
+    <img src="../../assets/img/logoa.jpeg" alt="logo" style="max-width: 100px; max-height: 100px;">
+    <h2 style="margin-left: 10px;">Green Light Tours </h2>
+</div>
+<h1><b>Quotation</b></h1>
 
- <h3><b>Address:</b></h3>
- <p>Mat Ave, Pretoriouspark <br>    
-    Pretoria, 0042 <br>
+  <h2>Travel more, worry Less</h2>
+
+  <p><b>Address:</b><br>
+    Mat Ave, Pretoriouspark<br>
+    Pretoria, 0042<br>
     South Africa
- </p> 
- <h3 ><b>Date :</b></h3>
- <p>{{quotation.date}}</p>
- <h3><b>Phone N.o :</b></h3>
- <p>068 259 2302</p>
+  </p>
+  <p><b>Date :</b> {{quotation.date}}</p>
+  <p><b>Phone N.o :</b> 068 259 2302</p>
 
- <h3><b>Quotation For:</b></h3>
- <p>The rental of an item </p>
-<div style="margin-left: 20px;margin-top: 5%;">
+<h3 class="shift-left"><b>Quotation For:</b></h3>
+<p>Renting an item </p>
+<div style="margin-top: 5%;">
 <table class="table table-striped">
-  <thead>
-      <tr>
-        <th scope="col" >Item</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Description</th>
-          <th scope="col">Amount</th>
-          <th scope="col-6" style="size: 0.2%;"></th>
-          <th scope="col-6"></th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr >
-        <td>{{quotation.name}}</td>
-         <td>{{quotation.quantity}}</td>
-          <td>{{quotation.description}}</td>
-          <td>{{quotation.amount}}</td>
+<thead>
+    <tr>
+      <th scope="col" >Item</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Description</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Total</th>
+        <th scope="col-6" style="size: 0.2%;"></th>
+        <th scope="col-6"></th>
     </tr>
-  </tbody>
+</thead>
+<tbody>
+  <tr >
+      <td>{{quotation.name}}</td>
+       <td>{{quotation.quantity}}</td>
+        <td>{{quotation.description}}</td>
+        <td>{{quotation.amount}}</td>
+        <td>{{ quotation?.quantity && quotation?.amount ? calculateTotal(quotation) : 0 }}</td> 
+  </tr>
+</tbody>
 </table>
 </div>
 <br>
 <br>
 <br>
-<p>If you have any question regarding this quotation please contact Mr Twala at 068 259 2302</p>
+<p>If you have any question regarding this quotation please contact 068 259 2302</p>
+
+</div>
+<button class="btn btn-success mr-1" style="margin-left: 90%;" (click)="downloadAsPDF(i)">Download PDF</button>
 
 </div>
 
-<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-quotation">Add</button>
+&nbsp;
+
+<button class="btn btn-success mr-1" style="margin-right: 90%;" routerLink="/add-quotation">Add</button>
 
 <router-outlet></router-outlet>
+
+
+
+
+
+
 

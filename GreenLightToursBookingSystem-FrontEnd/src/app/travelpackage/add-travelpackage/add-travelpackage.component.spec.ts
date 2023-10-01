@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTravelpackageComponent } from './add-travelpackage.component';
+import { AddTravelPackageComponent } from './add-travelpackage.component';
 
-describe('AddTravelpackageComponent', () => {
-  let component: AddTravelpackageComponent;
-  let fixture: ComponentFixture<AddTravelpackageComponent>;
+describe('AddTravelPackageComponent', () => {
+  let component: AddTravelPackageComponent;
+  let fixture: ComponentFixture<AddTravelPackageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTravelpackageComponent ]
+      declarations: [ AddTravelPackageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddTravelpackageComponent);
+    fixture = TestBed.createComponent(AddTravelPackageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

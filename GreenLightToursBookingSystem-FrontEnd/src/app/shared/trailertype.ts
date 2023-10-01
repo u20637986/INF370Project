@@ -1,6 +1,6 @@
 export class TrailerType
 {
-    trailerTypeID!: Number;
+    trailerTypeID?: Number;
     name!: String;
     description!: String;
 }

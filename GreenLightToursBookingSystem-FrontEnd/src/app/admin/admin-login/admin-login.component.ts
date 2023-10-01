@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { ResetService } from 'src/app/service/reset.service';
+import { SharedNavService } from 'src/app/service/shared-nav.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -14,13 +16,19 @@ export class AdminLoginComponent implements OnInit{
   loginForm!: FormGroup;
   public resetEmail!:string;
   public isValidEmail! : boolean;
+  showToolbar:boolean=true
 
   constructor(
     private formbuilder: FormBuilder, 
     private authService: AuthService, 
-    private router : Router, private resetService: ResetService){}
+    private router : Router, private resetService: ResetService, private snack:MatSnackBar, public sharednavservice:SharedNavService){}
 
   ngOnInit(): void {
+
+  this.sharednavservice.hideSideNav = false;
+  this.sharednavservice.hideToolBar = false;
+
+
     this.loginForm = this.formbuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -32,15 +40,18 @@ export class AdminLoginComponent implements OnInit{
     if (this.loginForm.valid) {
       this.authService.AdminLogin(this.loginForm.value).subscribe({
           next: (res) => {
-            alert(res.message);
             this.authService.user('Admin');
             this.router.navigate(['booking-type']); //navigate to home
           },
           error: (err) => {
             if (err && err.error && err.error.message) {
-              alert(err.error.message);
+              this.snack.open(err.error.message, 'Close', {
+                duration: 5000
+              })
             } else {
-              alert('An error occurred.');
+              this.snack.open('An error occurred', 'Close', {
+                duration: 5000
+              })
             }
           }
         });

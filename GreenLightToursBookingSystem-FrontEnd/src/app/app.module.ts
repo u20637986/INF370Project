@@ -5,7 +5,9 @@ import { MaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {CarouselModule} from 'ngx-bootstrap/carousel';
 import { EmployeeTypeComponent } from './employee-type/employee-type.component';
+
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AddEmployeeTypeComponent } from './employee-type/add-employee-type/add-employee-type.component';
 import { UpdateEmployeeTypeComponent } from './employee-type/update-employee-type/update-employee-type.component';
@@ -45,6 +47,7 @@ import { EditTrailerComponent } from './trailer/edit-trailer/edit-trailer.compon
 import { QuotationComponent } from './quotation/quotation.component';
 import { AddQuotationComponent } from './quotation/add-quotation/add-quotation.component';
 import { TravelPackageComponent } from './travelpackage/travelpackage.component';
+import { AddTravelPackageComponent } from './travelpackage/add-travelpackage/add-travelpackage.component';
 import { EditTravelComponent } from './travelpackage/edit-travelpackage/edit-travelpackage.component';
 import { RefundComponent } from './refund/refund.component';
 import { AddRefundComponent } from './refund/add-refund/add-refund.component';
@@ -83,11 +86,48 @@ import { CreateVehicleRentalApplicationComponent } from './rental-application/cr
 import { PayRentalApplicationComponent } from './rental-application/pay-rental-application/pay-rental-application.component';
 import { PaymentCompleteComponent } from './rental-application/payment-complete/payment-complete.component';
 import { VehicleRentalListComponent } from './rental-application/vehicle-rental-list/vehicle-rental-list.component';
-//import { RefundListComponent } from './report/refund-list/refund-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
-
+import { CalendarEventTimesChangedEvent, CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { TravepackageBookingComponent } from './booking-controller/travepackage-booking/travepackage-booking.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { DashboardComponent } from './reports/dashboard/dashboard.component';
+import { SalesGraphComponent } from './reports/sales-graph/sales-graph.component';
+import { NgChartsModule } from 'ng2-charts';
+import { GenerateTicketComponent } from './booking-controller/generate-ticket/generate-ticket.component';
+import { HelpComponent } from './help/help.component';
+import { HelpManualComponent } from './help/help-manual/help-manual.component';
+import { HelpCategoryComponent } from './help/help-category/help-category.component';
+import { AddManualComponent } from './help/help-manual/add-manual/add-manual.component';
+import { EditManualComponent } from './help/help-manual/edit-manual/edit-manual.component';
+import { AddCategoryComponent } from './help/help-category/add-category/add-category.component';
+import { EditCategoryComponent } from './help/help-category/edit-category/edit-category.component';
+import { ClientHelpComponent } from './client-help/client-help.component';
+//import { ScheduleComponent } from './schedule/schedule.component';
+import { FilterReportByDateComponent } from './rental-application/filter-report-by-date/filter-report-by-date.component';
+import { OwnerViewRentalApplicationComponent } from './rental-application/owner-view-rental-application/owner-view-rental-application.component';
+import { RentalProductsReportComponent } from './rental-application/rental-products-report/rental-products-report.component';
+import { ReviewApplicationComponent } from './rental-application/review-application/review-application.component';
+import { ViewOwnerSideComponent } from './rental-application/view-owner-side/view-owner-side.component';
+import { CheckPassengersComponent } from './driver/check-passengers/check-passengers.component';
+import { TrailerTypeComponent } from './trailer/trailer-type/trailer-type.component';
+import { TrailerInspectionComponent } from './trailer/trailer-inspection/trailer-inspection.component';
+import { AddTrailerInspectionComponent } from './trailer/trailer-inspection/add-trailer-inspection/add-trailer-inspection.component';
+import { AddTrailerTypeComponent } from './trailer/trailer-type/add-trailer-type/add-trailer-type.component';
+import { EditTrailerTypeComponent } from './trailer/trailer-type/edit-trailer-type/edit-trailer-type.component';
+import { LicenseCodeComponent } from './driver/license-code/license-code.component';
+import { AddLicenseCodeComponent } from './driver/license-code/add-license-code/add-license-code.component';
+import { EditLicenseCodeComponent } from './driver/license-code/edit-license-code/edit-license-code.component';
+import { HomeClientComponent } from './home-client/home-client.component';
+import { AboutComponent } from './about/about.component';
+import { AvailabilityCalendarComponent } from './rental-application/availability-calendar/availability-calendar.component';
+import { VehicleAvailabilityComponent } from './rental-application/vehicle-availability/vehicle-availability.component';
+import { AuditLogComponent } from './audit-log/audit-log.component';
+import { ChatSupportComponent } from './chat-support/chat-support.component';
+import { ErrorModalComponent } from './service/error-modal/error-modal.component';
+import { SuccessModalComponent } from './service/success-modal/success-modal.component';
+import { NavScreenComponent } from './rental-application/nav-screen/nav-screen.component';
 
 
 @NgModule({
@@ -131,7 +171,8 @@ import { VehicleRentalListComponent } from './rental-application/vehicle-rental-
     QuotationComponent,
     AddQuotationComponent,
     TravelPackageComponent,
-    TravelPackageComponent,
+    AddTravelPackageComponent,
+    EditTravelComponent,
     TravelPackageComponent,
     RefundComponent,
     AddRefundComponent,
@@ -153,7 +194,7 @@ import { VehicleRentalListComponent } from './rental-application/vehicle-rental-
     PayfastCheckOutComponent,
     SuccessComponent,
     CancelComponent,
-   // BookingReportsComponent,
+    BookingReportsComponent,
     ReportsComponent,
     BookingReportsComponent,
     PrintButtonComponent,
@@ -167,12 +208,50 @@ import { VehicleRentalListComponent } from './rental-application/vehicle-rental-
     PayRentalApplicationComponent,
     PaymentCompleteComponent,
     VehicleRentalListComponent,
+    TravepackageBookingComponent,
+    ScheduleComponent,
+    DashboardComponent,
+    SalesGraphComponent,
+    GenerateTicketComponent,
+    HelpComponent,
+    HelpManualComponent,
+    HelpCategoryComponent,
+    AddManualComponent,
+    EditManualComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
+    ScheduleComponent,
+    ClientHelpComponent,
+    FilterReportByDateComponent,
+    OwnerViewRentalApplicationComponent,
+    RentalProductsReportComponent,
+    ReviewApplicationComponent,
+    ViewOwnerSideComponent,
+    CheckPassengersComponent,
+    TrailerTypeComponent,
+    TrailerInspectionComponent,
+    AddTrailerInspectionComponent,
+    AddTrailerTypeComponent,
+    EditTrailerTypeComponent,
+    LicenseCodeComponent,
+    AddLicenseCodeComponent,
+    EditLicenseCodeComponent,
+    HomeClientComponent,
+    AboutComponent,
+    AvailabilityCalendarComponent,
+    VehicleAvailabilityComponent,
+    AuditLogComponent,
+    ChatSupportComponent,
+    ErrorModalComponent,
+    SuccessModalComponent,
+    NavScreenComponent
     //RefundListComponent
 
 
   ],
   imports: [
     BrowserModule,
+    //CarouselModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -182,7 +261,13 @@ import { VehicleRentalListComponent } from './rental-application/vehicle-rental-
     RouterModule,
     MatStepperModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgbModule,
+     CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+     NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

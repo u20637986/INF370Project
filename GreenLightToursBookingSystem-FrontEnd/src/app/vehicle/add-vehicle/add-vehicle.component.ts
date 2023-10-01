@@ -88,7 +88,7 @@ export class AddVehicleComponent implements OnInit{
       vehicleTypeID:[0, Validators.required],
       vehicleStatusID:[0, Validators.required],
       image: '',
-      vehiclePriceID: [0, Validators.required]
+      vehiclePriceID: [0, [Validators.required, Validators.min(0)]]
     })
 
     

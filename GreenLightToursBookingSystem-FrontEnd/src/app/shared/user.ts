@@ -1,5 +1,5 @@
 export class User{
-    userID !: number
+    userId !: number
     name !:string;
     surname !: string;
     userName!: string;
@@ -11,4 +11,5 @@ export class User{
     rTokenExpiry  !: Date;
     resetPasswordToken !: string;
     resetPasswordExpiry  !: Date;
+    emailAddress !: string;
 }

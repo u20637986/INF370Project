@@ -1,100 +1,55 @@
 <style>
-    tr:nth-child(even) {
-     background: lightgreen;
-    }
-   </style><style>
-    tr:nth-child(even) {
-     background: lightgreen;
-    }
-   </style>
-   <mat-toolbar class=" text-white" style="background-color: #004e04" >
-     
-     <span class="example-spacer"></span>
-    Refund recipients
-     <span class="example-spacer"></span>
-  
-   </mat-toolbar>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style><style>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style>
+ <mat-toolbar class=" text-white" style="background-color: #004e04" >
+   
+   <span class="example-spacer"></span>
+  Refund recipients
+   <span class="example-spacer"></span>
+ </mat-toolbar>
 
 <div style="margin-left: 20px;margin-top: 5%;">
- 
-  <div class="search-container">
-    <input type="text" [(ngModel)]="searchText" placeholder="Search by Name" class="form-control search-input">
-    <button class="btn btn-primary" (click)="applyFilter()">Search</button>
-  </div>
+
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" placeholder="Search by Name or Date" class="form-control search-input">
+  <button class="btn btn-primary" (click)="applyFilter()">Search</button>
+</div>
 
 <table class="table table-striped">
-  <thead>
-      <tr>
-        <th scope="col">Name</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Date</th>
-          <th scope="col-6" style="size: 0.2%;"></th>
-          <th scope="col-6"></th>
-
-      </tr>
-  </thead>
-  <tbody >
-    <tr *ngFor="let refund of filteredRefunds">
-        <td>{{refund.name}}</td>
-         <td>{{refund.amount}}</td>
-          <td>{{refund.date}}</td>
+<thead>
+    <tr>
+      <th scope="col">Username</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+        
+        <th scope="col-6"></th>
     </tr>
-  </tbody>
+</thead>
+<tbody >
+  <tr *ngFor="let refund of refunds">
+      <td>{{refund.name}}</td>
+       <td>R {{refund.amount}}</td>
+        <td>{{refund.date }}</td>
+        <td>{{refund.refundStatus.description}}</td>
+        <td><button class="btn btn-success mr-1" style="margin-left: 90%;" (click)="EditRefund(refund)">Paid</button></td>
+        
+        <td>
+        </td>
+  </tr>
+</tbody>
 </table>
+
+<button class="btn btn-danger ml-2" (click)="clearFilter()">Clear</button>
+
 </div>
-<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-refund">Add</button>
 
-<!--<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
-
-    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-         <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                     <div class="modal-header">
-                           <h4 class="modal-title">Model Title</h4>
-                           <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
-                         </div>
-                <div class="modal-body">
-                           <p>Model body text</p>
-                         </div>
-                     <div class="modal-footer">
-                           <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
-                         </div>
-            </div>
-             </div>
- </div>-->
 <router-outlet></router-outlet>
-<!-- 
-   <mat-toolbar class=" text-white" style="background-color: #004e04" >
-     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
-       <mat-icon>arrow_back</mat-icon>
-     </button>
-     <span class="example-spacer"></span>
-    Refund
-     <span class="example-spacer"></span>
-  
-   </mat-toolbar>
 
-<br>
-<div style="margin-left: 20px;margin-top: 5%;">
-<table class="table table-striped">
-  <thead>
-      <tr>
-        <th scope="col">Name</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Date</th>
-          <th scope="col-6" style="size: 0.2%;"></th>
-          <th scope="col-6"></th>
-
-      </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor=" let refund of refunds">
-        <td>{{refund.name}}</td>
-         <td>{{refund.amount}}</td>
-          <td>{{refund.date}}</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-refund">Add</button>
- -->

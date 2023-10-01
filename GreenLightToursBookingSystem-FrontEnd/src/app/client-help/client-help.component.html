@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+ tr:nth-child(even) {
+  background: lightgreen;
+ }
+</style>
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+ Help
+  <span class="example-spacer"></span>
+
+</mat-toolbar>
+<br>
+
+<div class="container">
+    <div class="row">
+      <div class="card" style="width:400px" *ngFor="let manual of manuals">
+        <video controls class="card-img-top" alt="Card image" style="width:100%" src={{manual.videoURL}} type="video/mp4">
+        </video>
+        <div class="card-body">
+          <h3>{{manual.category}}</h3>
+          <h2 class="card-title"><b>{{manual.question}}</b></h2>
+          <br>
+          <div class="btns">
+          <a href="{{manual.fileData}}" target="_blank" class="btn btnView">View Manual</a>
+    
+            <!-- Button to download the PDF -->
+            <a href="{{manual.fileData}}" download class="btn btnDownload">Download PDF</a>
+        
+        </div>
+      </div>
+      </div>
+      <br>
+    </div>
+
+    <div *ngIf="helpService.showRental">
+      <h2><b> Making a Rental </b></h2>
+      <h3><b>How to make a rental application</b></h3>
+      <p>1.	Go to the Services page and select "Rental Application." <br>
+        2.	On the second screen, click the "Create Rental Application" button. <br>
+        3.	Click the "Rent now" button for the trailer or vehicle you want to rent. <br>
+        4.	On the Rental Application page, use the availability calendar to view the availability of the vehicle or trailer and  select collection date and return date using the provided date-time pickers. Then, click the "Proceed" button. <br>
+        5.	In the second step of the Rental Application, upload all the required documents, including your ID copy, Bank Confirmation Letter, and Driver's License. Click on the "Proceed" button. <br>
+        6.	On the final page of the Rental Application, click the "Create Rental Application" button to complete the application. <br>
+        7.	You'll receive a notification confirming that your application has been successfully submitted. You will receive feedback after the application has been reviewed. <br>
+        </p>
+        &nbsp;
+        <h3><b>How to pay a rental</b></h3>
+        <p>1.	You will receive an email stating that the application has been successfully reviewed. <br>
+          2.	Go to the Services page and select "Rental Application." <br>
+          3.	On the second screen, click the "View my applications" button. <br>
+          4.	On the view application screen, click the “View details" link <br>
+          5.	If the application is approved, click on the “Proceed to Payment” button <br>
+          </p>
+
+    </div>
+    &nbsp;
+    &nbsp;
+    <div *ngIf="helpService.showBooking">
+      <h2><b> Making a Booking </b></h2>
+      <h3><b>How to make a booking</b></h3>
+      <p>Click the “Make shuttle booking” button on the “Service” page. The next section requires you to add some information about yourself. The smiley emoji indicates some parts that may be difficult to go through, for the “Select timeslot section” to select a timeslot you which depart on, click the blue button, the following will happen: <br>
+        •	A calendar will pop up with available dates in green and <br>
+        •	 unavailable dates in black. <br>
+        •	If a day has no seats, then they won’t have any slots. <br>
+        For passengers, one must add their own detail if they are travelling alone. For a group of passengers to add more passengers just click on the blue “Add Passenger” and to remove a passenger click on the red “Remove”. <br>
+        Errors to look out for: <br>
+        •	Invalid phone number error, to avoid this error make sure your phone correctly i.e., with 10 digits and must start with 0. <br>
+        If all the details are entered correctly the proceed to payment will be enable and will be of a dark blue colour. <br>
+        The next section after clicking the “Prooceed to payment” button will display some detail confirmations and a checkout button that leads to payfast. <br>
+        If the payment is succesfull, then a positive message will be displayed and an email that serves as booking confirmation will be send to you <br>
+        </p>
+
+    </div>
+    &nbsp;
+    &nbsp;
+    <div *ngIf="helpService.showTravel">
+      <h2><b> Travel Packages </b></h2>
+      <h3><b>How to make a travel package booking</b></h3>
+      <p>Click the “Make Travel Package booking” button on the “Service” page. The list of travel packages available will be displayed along with their offerings and prices. <br>
+        To make a booking for a certain travel package click the “Make Booking” button at the end of all the travel package details. After clicking the button, the next section for entering the customers details will be displayed. <br>
+        Errors to look out for: <br>
+        •	Invalid phone number error, to avoid this error make sure your phone correctly i.e., with 10 digits and must start with 0. <br>
+        If all the details are entered correctly the proceed to payment will be enable and will be of a dark blue colour. <br>
+        The next section after clicking the “Save my booking details” button will display some detail confirmations and a checkout button. <br>
+        The next section “Make payment” will show the following and a checkout button that leads to payfast. If the payment is succesfull, then a positive message will be displayed and an email that serves as booking confirmation will be send to you 
+        </p>
+
+    </div>
+</div>

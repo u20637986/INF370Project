@@ -1,6 +1,7 @@
 export class Refund {
-    RefundID!:number;
-    name!: String;
-    amount!: number;
-    date!:String;
-  }
+  RefundID!:number;
+  name!: String;
+  amount!: number;
+  date!:String;
+  refundStatusID!:number;
+}

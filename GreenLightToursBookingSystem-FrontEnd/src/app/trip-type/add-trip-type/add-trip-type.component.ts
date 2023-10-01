@@ -1,5 +1,5 @@
 import { Component , OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
 import { TripType } from 'src/app/shared/trip-type';
@@ -12,19 +12,14 @@ import { TripType } from 'src/app/shared/trip-type';
 })
 export class AddTripTypeComponent implements OnInit {
 
-  tripType: TripType = {
-    tripTypeID:0,
-    name: '',
-    description:''
-  };
+  TripTypeForm!: FormGroup;
 
-  TripTypeForm = new FormGroup(
-    {
-        name: new FormControl(''),
-        description: new FormControl('')
-    })
-
-    constructor(private dataService: DataService, private router: Router) { }
+    constructor(private dataService: DataService, private router: Router, public fbBuilder: FormBuilder){
+      this.TripTypeForm = fbBuilder.group({
+        name: ['', Validators.required],
+        description: ['', Validators.required]
+      })
+    }
 
     ngOnInit(): void {
     }
@@ -32,17 +27,18 @@ export class AddTripTypeComponent implements OnInit {
     cancel(){
       this.router.navigate(['/trip-type'])
     }
+
     AddTripType(){
-      this.dataService.AddTripType(this.tripType).subscribe({
-        next:(tripType) => {
+      if(this.TripTypeForm.valid){
+        const triptype = {
+          name: this.TripTypeForm.value.name,
+          description: this.TripTypeForm.value.description,
+        };
 
-          tripType.name = this.TripTypeForm.value.name;
-          tripType.description = this.TripTypeForm.value.description;
-
-         this.router.navigate(['/trip-type'])
-        }
-      })
+        this.dataService.AddTripType(triptype).subscribe(()=>{
+          this.router.navigate(['/trip-type'])
+        })
+      }
     }
-
 
   }

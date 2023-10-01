@@ -5,6 +5,9 @@ import { DataService } from 'src/app/service/rentalDataService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Rental_Status } from 'src/app/service/rentalStatus';
+import { forkJoin, map } from 'rxjs';
+import { catchError } from 'rxjs';
+
 
 @Component({
   selector: 'app-client-view-rental-application',
@@ -22,50 +25,49 @@ export class ClientViewRentalApplicationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.GetRentalApplications();
-    console.log(this.rentalApplication)
-    //console.log(this.rental)
+   this.GetRentalApplications();
+
   }
 
-  // code below is for fetching all existing rental applications
- /* GetRentalApplications() {
-    this.dataService.GetAllRentalApplications().subscribe(result => {
-        let rentalList: any[] = result;
-        rentalList.forEach((element)=>{
-          let rentalApplication:Rental = element
-          
-          this.dataService.GetRentalStatuses().subscribe(rentalStatus =>{
-            let status:Rental_Status[]= rentalStatus
-            let stat= status.find(stat => stat.ID === rentalApplication.rentalStatusID)
-            if (stat){
-              rentalApplication.rentalStatus = stat.Name
-            }
-          })
- 
-          })
-        })
-    
-      }*/
 
       GetRentalApplications() {
-       
-        this.dataService.GetAllRentalApplications().subscribe(result => {
-          let rentalList: any[] = result;
-          rentalList.forEach((element) => {
-            let rentalApplication: Rental = element;
-            this.dataService.GetRentalStatuses().subscribe(rentalStatus => {
-              let status: Rental_Status[] = rentalStatus;
-              let stat = status.find(stat => stat.rentalStatusID === rentalApplication.rentalStatusID);
-      
-              if (stat) {
+        this.dataService.GetUsersRentalApplications().subscribe(
+          (result: any) => {
+            if (Array.isArray(result)) {
               
-                rentalApplication.rentalStatus = stat.name;
-                console.log('Rental Application:', rentalApplication);
-                this.rentalApplication.push(rentalApplication)
-              }
-            });
-          });
-        });
+              this.rentalApplication = result;
+            } else if (result instanceof Object) {
+              
+              this.rentalApplication = [result];
+            } 
+       
+            this.GetStatusesForApplications();
+          },
+          error => {
+            console.error('Error getting rental applications:', error);
+          }
+        );
       }
-
+      
+      GetStatusesForApplications() {
+        this.dataService.GetRentalStatuses().subscribe(
+          (statuses: any[]) => {
+            if (statuses && statuses.length > 0) {
+              this.rentalApplication.forEach(application => {
+                const status = statuses.find(stat => stat.rentalStatusID === application.rentalStatusID);
+                if (status) {
+                  application.rentalStatus = status.name;
+                }
+              });
+            }
+          },
+          error => {
+            console.error('Error getting rental statuses:', error);
+          }
+        );
+      }
+ 
+      goBack() {
+        this.router.navigateByUrl('/');
+      }
     }

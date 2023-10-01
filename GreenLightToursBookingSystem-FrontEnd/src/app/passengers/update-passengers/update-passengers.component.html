@@ -32,12 +32,12 @@
             <mat-label style="color:green">Cell Phone Number</mat-label>
             <input matInput formControlName="phoneNumber" name="passengerCellphone" style="color:green">
   
-            <!--<mat-error *ngIf="UpdatePassengerForm.controls['phoneNumber'].invalid && UpdatePassengerForm.controls['phoneNumber'].touched">
+            <mat-error *ngIf="UpdatePassengerForm.controls['phoneNumber'].invalid && UpdatePassengerForm.controls['phoneNumber'].touched">
               Please enter a valid cell phone number starting with '0' and containing 10 digits.
-            </mat-error>-->
+            </mat-error>
           </mat-form-field>
         </div>
-        <button mat-stroked-button style="background-color:rgb(79, 192, 79); margin-left:35%" class="btn-block" >Update Passenger</button>
+        <button mat-stroked-button style="background-color:rgb(79, 192, 79); margin-left:35%" class="btn-block" [disabled]="!UpdatePassengerForm.valid" >Update Passenger</button>
     </div>
   </form>
   

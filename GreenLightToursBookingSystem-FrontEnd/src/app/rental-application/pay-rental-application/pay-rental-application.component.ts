@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, Input} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -18,6 +18,7 @@ declare function payfast_do_onsite_payment(param1 : any, callback: any): any;
   styleUrls: ['./pay-rental-application.component.scss']
 })
 export class PayRentalApplicationComponent {
+  @Input() disabled: boolean = false;
 
    rental:any;
    totalPrice!: number;

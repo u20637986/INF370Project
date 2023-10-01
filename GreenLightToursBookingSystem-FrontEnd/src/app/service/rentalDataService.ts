@@ -1,7 +1,7 @@
 import { Passenger } from '../shared/passenger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, Subject, switchMap, from} from 'rxjs';
+import { map, Observable, Subject, switchMap, from, throwError} from 'rxjs';
 import { Trailer } from '../shared/trailer';
 import { Rental } from '../shared/rental';
 import { Vehicle } from '../shared/vehicle';
@@ -35,6 +35,12 @@ export class DataService {
       return this.HttpClient.post(`${this.apiUrl}RentalApplication/RentVehicle`, file)
   }
 
+  userID = localStorage.getItem('userID');
+
+  GetUsersRentalApplications(): Observable<any>{
+    return this.HttpClient.get(`${this.apiUrl}RentalApplication/ViewApplications/${this.userID}`)
+    .pipe(map(result => result));
+  }
     GetAllRentalApplications(): Observable<any>{
       return this.HttpClient.get(`${this.apiUrl}RentalApplication/ViewApplications`)
       .pipe(map(result => result));
@@ -72,8 +78,52 @@ export class DataService {
       getVehiclePrices(vehiclePriceID:number): Observable<VehiclePrice> {
         return this.HttpClient.get<VehiclePrice>(`${this.apiUrl}Vehicle/GetVehiclePrice/${vehiclePriceID}`)
       }
+      GetUsers(): Observable<any>{
+        return this.HttpClient.get(`${this.apiUrl}RentalApplication/Users`)
+        .pipe(map(result => result));
+      }
+      /*ReviewRentalApplication(rentalId: number, approve: boolean, reason: string): Observable<any> {
+        const url = `${this.apiUrl}RentalApplication/ReviewApplication/${rentalId}?approve=${approve}&reason=${encodeURIComponent(reason)}`;
+        return this.HttpClient.post(url, null);
+      }*/
 
+      ReviewRentalApplication(rentalId: number, approve: boolean, reason: string): Observable<any> {
+        
+        const userId = localStorage.getItem('userID');
+      
+        if (!userId) {
+          console.error("UserID not found in localStorage");
+          return throwError("UserID not found in localStorage");
+        }
+      
+        const encodedReason = encodeURIComponent(reason);
+        const encodedUserId = encodeURIComponent(userId);
+        const url = `${this.apiUrl}RentalApplication/ReviewApplication/${rentalId}?approve=${approve}&reason=${encodedReason}&userId=${encodedUserId}`;
+      
+        return this.HttpClient.post(url, null);
+      }
+      
+      sendCollectionDetails(rentalId: number): Observable<any> {
+        const userId = localStorage.getItem('userID');
+      
+        if (!userId) {
+          console.error("UserID not found in localStorage");
+          return throwError("UserID not found in localStorage");
+        }
+        const encodedUserId = encodeURIComponent(userId);
+       return this.HttpClient.get(`${this.apiUrl}RentalApplication/SendCollectionDetails?rentalId=${rentalId}&userId=${encodedUserId}`);
+      }
 
+      getRentalReport(startDate: string, endDate: string): Observable<any> {
+        const userId = localStorage.getItem('userID');
+      
+        if (!userId) {
+          console.error("UserID not found in localStorage");
+          return throwError("UserID not found in localStorage");
+        }
+        const encodedUserId = encodeURIComponent(userId);
+        return this.HttpClient.get(`${this.apiUrl}RentalApplication/GenerateRentalReport?startDate=${startDate}&endDate=${endDate}&userId=${encodedUserId}`);
+      }
     GetRentalStatuses(): Observable<any>{
       return this.HttpClient.get(`${this.apiUrl}RentalApplication/RentalStatuses`)
       .pipe(map(result => result));
@@ -82,21 +132,36 @@ export class DataService {
       return this.HttpClient.get<Rental>(`${this.apiUrl}RentalApplication/ViewRentalApplication/${rentalID}`)
       .pipe(map(result => result))
     }
-
+    getUser(userID: number): Observable <any>{
+      return this.HttpClient.get<any>(`${this.apiUrl}RentalApplication/User/${userID}`)
+    }
 
     cancelRentalApplication(rentalID: number):Observable<any> {
       return this.HttpClient.delete<Rental>(`${this.apiUrl}RentalApplication/CancelRentalApplication/${rentalID}`)
       .pipe(map(result => result))
     }
 
-
-    updateRentalApplication(rentalID: number, rental: Rental): Observable<any> {
-      
-      return this.HttpClient.put<Rental>(`${this.apiUrl}RentalApplication/UpdateRentalApplication/${rentalID}`, rental);
-    }
-
     payRentalApplication(rentalID: number, amount: number): Observable<any> {
       return this.HttpClient.post(`${this.apiUrl}RentalApplication/PayRentalApplication/${rentalID}?amount=${amount}`, null);
     }
-   
+    checkVehicleRentalOverlap(vehicleId: number, startDate: string, endDate: string) {
+      const payload = { vehicleId, startDate, endDate };
+      return this.HttpClient.post<boolean>(`${this.apiUrl}RentalApplication/CheckVehicleRentalOverlap`, payload);
+    }
+    checkTrailerRentalOverlap(trailerId: number, startDate: string, endDate: string) {
+      const payload = { trailerId, startDate, endDate };
+      return this.HttpClient.post<boolean>(`${this.apiUrl}RentalApplication/CheckTrailerRentalOverlap`, payload);
+    }
+    GetUnavilableDatesPerTrailer(trailerId: number): Observable<any>{
+      return this.HttpClient.get(`${this.apiUrl}RentalApplication/GetUnavailableDatesPerTrailer/${trailerId}`)
+      .pipe(map(result => result));
+    }
+    GetUnavilableDatesPerVehicle(vehicleId: number): Observable<any>{
+      return this.HttpClient.get(`${this.apiUrl}RentalApplication/GetUnavailableDatesPerVehicle/${vehicleId}`)
+      .pipe(map(result => result));
+    }
+   GetAuditLogs() :Observable<any>
+   {
+     return this.HttpClient.get(`${this.apiUrl}AuditLog/GetAuditLogs`)
+   }
 }

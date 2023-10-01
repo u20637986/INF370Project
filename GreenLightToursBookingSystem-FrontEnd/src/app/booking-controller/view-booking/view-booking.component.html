@@ -7,6 +7,26 @@
     <span class="example-spacer"></span>
   
   </mat-toolbar>
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/client-help'">Help</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/about'">About</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/booking-controller'">Services</a>
+      </li>
+    </ul>
+</nav>
+  <br>
+  &nbsp; &nbsp; &nbsp; <input type="text" class="form-control" style="display: inline-block; width: 40%;" placeholder="Search by bookingID" [(ngModel)]="searchString"> &nbsp; 
+  <button class="btn btn-primary" style=" height:35px; display: inline-block;" (click)="SearchBookings()">Search</button>
+  <p>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; <i class="fa-regular fa-circle-info" style="color: orange"> Can only search by Booking ID e.g 1, please enter the booking ID in its exact format!</i> </p>
+  <br>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -31,7 +51,7 @@
                 {{b.bookingID}}
             </td>
             <td>
-                {{b.date }}
+                {{b.date | date }}
             </td>
             <td>
                 R {{b.totalPrice }}.00
@@ -46,5 +66,7 @@
         </tr>
     </tbody>
 </table>
+
+<button mat-stroked-button style="background-color: rgb(79, 192, 79); margin-top: 20%; width:50%; margin-left: 20%; color:white;" class="btn-block" (click)="ViewPassengers()">View Passengers</button>
 
 

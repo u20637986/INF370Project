@@ -1,4 +1,7 @@
 export interface Driver {
-  driverID: Number;
-  licenseCode:String;
+  driverID?: number;
+  employeeID?:number;
+  employee?:string;
+  licenseCodeID?:number;
+  licenseCode?:string;
 }

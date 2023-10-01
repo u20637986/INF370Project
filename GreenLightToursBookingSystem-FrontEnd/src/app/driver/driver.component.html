@@ -34,7 +34,7 @@
          <td>{{driver.driverID}}</td>
           <td>{{driver.licenseCode}}</td>
           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/driver', driver.driverID]" >Edit</button></td>
-        <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteDriver(driver.driverID)" >Delete</button></td>
+        <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteDriver(driver.driverID!)" >Delete</button></td>
     </tr>
   </tbody>
 </table>

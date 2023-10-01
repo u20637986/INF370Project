@@ -13,7 +13,7 @@
 
   <span class="example-spacer"></span>
 
-    <button mat-icon-button class="example-icon">
+    <button mat-icon-button class="example-icon" (click)="logout()">
       <mat-icon>input</mat-icon>
   </button>
 </span>
@@ -30,18 +30,27 @@
   <a mat-list-item [routerLink]="'/booking-type'"> Booking Types </a>
   <a mat-list-item [routerLink]="'/trailer'"> Trailer </a>
   <a mat-list-item [routerLink]="'/vehicle'"> Vehicle </a>
-  <a mat-list-item [routerLink]="'/refund'"> Refund </a>
+  <a mat-list-item [routerLink]="'/driver'"> Driver </a>
+  <a mat-list-item [routerLink]="'/check-passengers'"> Check passengers in </a>
+  <a mat-list-item [routerLink]="'/license-code'"> License Code </a>
+  <a mat-list-item [routerLink]="'/help-category'"> Help Categories </a>
+  <a mat-list-item [routerLink]="'/help-manual'"> Help Manuals </a>
+  <a mat-list-item [routerLink]="'/trailer-inspection'"> Trailer Inspections </a>
+  <a mat-list-item [routerLink]="'/trailer-type'"> Trailer Types </a>
+  <a mat-list-item [routerLink]="'/booking-type'"> Booking Types </a>
   <a mat-list-item [routerLink]="'/service-entity'"> Services </a>
   <a mat-list-item [routerLink]="'/timeslot'"> Timeslots </a>
   <a mat-list-item [routerLink]="'/user-type'"> User Types </a>
   <a mat-list-item [routerLink]="'/trip-type'"> Trip Types </a>
   <a mat-list-item [routerLink]="'/discount'"> Discounts </a>
-  <a mat-list-item [routerLink]="'/AddPassenger'"> Passenger </a><!--when I click on this item, send me to booking-type page -->
-  <a mat-list-item [routerLink]="'/rental-application/:trailerID/:size/:registrationNumber'"> Rental Application </a>
-  <a mat-list-item [routerLink]="'/rentalProducts'">View Rental Products </a>
-  <a mat-list-item [routerLink]="'/rental-applications'"> View Application </a>
+  
+  <a mat-list-item [routerLink]="'/owner-view'"> View Applications </a>
   <a mat-list-item [routerLink]="'/booking-controller'"> Bookings </a>
   <a mat-list-item [routerLink]="'/reports'">Reports</a>
+  <a mat-list-item [routerLink]="'/quotation'">Quotation</a>
+  <a mat-list-item [routerLink]="'/refund'">Refund</a>
+
+  <a mat-list-item [routerLink]="'/auditLog'">Audit Trail</a>
   
 </mat-nav-list>
 </mat-sidenav>
@@ -49,6 +58,7 @@
  <mat-sidenav-content>
 
 <router-outlet></router-outlet>
+<app-chat-support></app-chat-support>
 
 </mat-sidenav-content>
 </mat-sidenav-container>

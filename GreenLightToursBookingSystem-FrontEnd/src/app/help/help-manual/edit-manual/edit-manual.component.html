@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Edit Manual</h2>
+    <form [formGroup]="helpForm" (ngSubmit)="onSubmit()">
+  
+      <div class="form-group">
+        <label for="question">Question:</label>
+        <input type="text" class="form-control" id="question" formControlName="question">
+        <div *ngIf="helpForm.get('question')?.invalid && (helpForm.get('question')?.dirty || helpForm.get('question')?.touched)">
+          <div class="text-danger">The question is required.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" class="form-control" id="question" formControlName="categoryID">
+        <div *ngIf="helpForm.get('categoryID')?.invalid && (helpForm.get('categoryID')?.dirty || helpForm.get('categoryID')?.touched)">
+          <div class="text-danger">Category is required.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="video">Upload New Video:</label>
+        <input type="file" class="form-control-file" id="video" (change)="selectVideo($event)"/>
+        <small class="text-danger">{{ errorMessage }}</small>
+      </div>
+  
+      <!-- File Upload -->
+    <div class="form-group">
+      <label for="file">File Name:</label>
+      <input type="text" class="form-control" id="file" formControlName="fileName">
+    </div>
+    <div class="form-group">
+      <label for="file">Upload File:</label>
+      <input type="file" class="form-control-file" id="file" (change)="selectFile($event)" accept=".pdf,.docx">
+      <small class="text-danger">{{ errorMessage }}</small>
+    </div>
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>

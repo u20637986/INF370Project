@@ -1,10 +1,25 @@
 <mat-toolbar class=" text-white" style="background-color: #004e04" >
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
-    <mat-icon>arrow_back</mat-icon>
+    <mat-icon >arrow_back</mat-icon>
   </button>
   <span class="example-spacer"></span>
  Services 
   <span class="example-spacer"></span>
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/client-help'">Help</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/about'">About</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/booking-controller'">Services</a>
+      </li>
+    </ul>
+</nav>
 
 </mat-toolbar>
  <div class="card-container">
@@ -16,11 +31,11 @@
 
   <div class="card">
     <img src="./assets/img/rental.jpeg" style="width:420px; height: 150px;" alt="Card 2">
-    <button type="submit" [routerLink]="'/rentalProducts'">Make Rental Application </button>
+    <button type="submit" [routerLink]="'/rentalNavigation'">Rental Application </button>
   </div>
   <div class="card">
     <img src="./assets/img/travelp.jpeg" style="width:420px; height: 150px;" alt="Card 3">
-    <button type="submit" [routerLink]="'/travelpackage-booking'">Make Travel Package Booking</button>
+    <button type="submit" [routerLink]="'/travepackage-booking'">Make Travel Package Booking</button>
   </div>
 </div>
 

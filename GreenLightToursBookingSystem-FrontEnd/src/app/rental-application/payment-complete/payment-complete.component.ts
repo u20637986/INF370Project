@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/rentalDataService';
 
 @Component({
@@ -10,7 +11,7 @@ export class PaymentCompleteComponent implements OnInit {
   
   rental:any;
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService, private router:Router){}
 
   ngOnInit(): void {
     this.rental = JSON.parse(localStorage.getItem('Rental')!);
@@ -36,5 +37,8 @@ export class PaymentCompleteComponent implements OnInit {
       
     }
   }
+  goBack() {
+    this.router.navigateByUrl('/');
+  } 
 }
 

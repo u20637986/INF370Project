@@ -1,5 +1,5 @@
 <mat-toolbar class=" text-white" style="background-color: #004e04" >
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="goBack()" >
       <mat-icon >arrow_back</mat-icon>
     </button>
     <span class="example-spacer"></span>
@@ -8,8 +8,15 @@
 </mat-toolbar>
 <div  class="container" style="text-align: center;">
     <div style="display: inline-block;"> 
-        <p> <b>Payment action succesful. we will send collection details shortly!</b></p>
-    </div>
-</div>
+       <div class="alert" id="alertBox">
+    <span class="close-btn" onclick="this.parentElement.style.display='none';"></span>
+    Payment action succesful. We will send collection details shortly !<br>
+    <button style="float: right;" class="ok-btn btn-primary m-3" routerLink="/rental-applications">OK</button>
+
+       </div>
+       
+   </div>
+</div> 
+
 
 

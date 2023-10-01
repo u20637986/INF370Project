@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/service/trailer.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-edit-trailer',
@@ -16,11 +17,20 @@ export class EditTrailerComponent implements OnInit {
 	errorMessage: string = "";
 
 	trailerForm = new FormGroup({
-		size: new FormControl(''),
-		registrationNumber: new FormControl(''),
-		floorBase: new FormControl(''),
-		panels: new FormControl(''),
-		trailerRentalPrice: new FormControl(""),
+		size: new FormControl('', [
+			Validators.required,
+			Validators.pattern(/^[A-Z0-9 ]+$/), // Letters and numbers
+		]),
+		registrationNumber: new FormControl('', [
+			Validators.required,
+			Validators.pattern(/^[A-Z0-9 ]+$/), // Letters and numbers
+		]),
+		floorBase: new FormControl('', [
+			Validators.required,
+			Validators.pattern(/^[A-Z0-9 ]+$/), // Letters and numbers
+		]),
+		panels: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/),]),//Numbers only
+		trailerRentalPrice: new FormControl("", [Validators.required, Validators.pattern(/^[0-9 ]+$/),]),//Numbers only
 		imageUrl: new FormControl(''),
 		trailerTypeID: new FormControl(0),
 		trailerStatusID: new FormControl(0)
@@ -32,7 +42,8 @@ export class EditTrailerComponent implements OnInit {
 	constructor(
 		private dataService: DataService,
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private snackBar: MatSnackBar
 	) { }
 
 	async ngOnInit(): Promise<void> {
@@ -88,7 +99,7 @@ export class EditTrailerComponent implements OnInit {
 	onSubmit() {
 
 		if (this.trailerForm.invalid) {
-			this.errorMessage = "Please provide all requird fields";
+			this.errorMessage = "Please provide all required fields";
 			return;
 		}
 		if (this.imageUrl == '') {
@@ -122,15 +133,75 @@ export class EditTrailerComponent implements OnInit {
 			.subscribe((result: any) => {
 				if (result) {
 					this.errorMessage = "Trailer has been updated";
+					this.showSnackbar(`Trailer updated successfully`, 'success-snackbar');
 					this.router.navigate(['/trailer']);
 				}
+
+				else () => {
+					// Handle the error response here, if needed
+					console.error('Error updating trailer.');
+					this.showSnackbar(`Trailer could not be updated`, 'error-snackbar');
+					this.errorMessage = 'Error updating trailer. Please  check your connection and try again.';
+				}
 			})
-
-		// setTimeout(() => {
-
-		//   this.errorMessage = "";
-		// }, 5000)
 	}
+
+	getErrorMessage(controlName: string) {
+		const control = this.trailerForm.get(controlName);
+	
+		if (!control) {
+		  return ''; // Return an empty string if the control is not found
+		}
+	
+		if (control.hasError('required')) {
+		  return 'This field is required';
+		}
+	
+		if (controlName === 'size') {
+		  if (control.hasError('pattern') || control.hasError('required')) {
+			return 'Enter a valid size (e.g., 900KG)';
+		  }
+		  // Add additional error checks for price if needed
+		}
+  
+		if (controlName === 'registrationNumber') {
+		  if (control.hasError('pattern') || control.hasError('required')) {
+			return 'Enter a valid registration number (e.g., DH 73 MS GP or HGB 736 GP)';
+		  }
+		  // Add additional error checks for price if needed
+		}
+
+		if (controlName === 'floorBase') {
+			if (control.hasError('pattern') || control.hasError('required')) {
+			  return 'Enter a valid floor base (e.g., 90X90 or 70 X 80)';
+			}
+			// Add additional error checks for price if needed
+		  }
+
+		  if (controlName === 'panels') {
+			if (control.hasError('pattern') || control.hasError('required')) {
+			  return 'Enter panel number (e.g., 4)';
+			}
+			// Add additional error checks for price if needed
+		  }
+
+		  if (controlName === 'trailerRentalPrice') {
+			if (control.hasError('pattern') || control.hasError('required')) {
+			  return 'Enter a valid trailer rental price. (e.g., 400)';
+			}
+			// Add additional error checks for price if needed
+		  }
+	
+	
+		return '';
+	  }
+
+	showSnackbar(message: string, panelClass: string) {
+		this.snackBar.open(message, 'Close', {
+			duration: 6000,
+			panelClass: [panelClass],
+		});
+	};
 
 
 }

@@ -15,7 +15,12 @@ export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver , public sharednavservice: SharedNavService) {}
+  constructor(private observer: BreakpointObserver , public sharednavservice: SharedNavService,
+    private dataService:AuthService) {}
+
+    logout(){
+      this.dataService.logout()
+    }
 
   ngAfterViewInit() {
 
@@ -30,4 +35,5 @@ export class AppComponent {
   loggedIn:boolean=false;
   opened: boolean=false;
 }import { SharedNavService } from './service/shared-nav.service';
+import { AuthService } from './service/auth.service';
 

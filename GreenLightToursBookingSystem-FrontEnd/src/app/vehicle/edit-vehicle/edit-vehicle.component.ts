@@ -22,7 +22,7 @@ export class EditVehicleComponent implements OnInit{
     image: new FormControl(''),
     vehicleTypeID: new FormControl(0),
     vehicleStatusID: new FormControl(0),
-    vehiclePrice: new FormControl(0)
+    vehiclePriceID: new FormControl(0)
     //vehiclePrice: new FormControl(this.vehicle?.vehiclePrice?.amount || 0)
 
   })
@@ -45,7 +45,7 @@ export class EditVehicleComponent implements OnInit{
           vehicleTypeID: this.vehicle.vehicleTypeID,
           vehicleStatusID: this.vehicle.vehicleStatusID,
           image: this.vehicle.image,
-          vehiclePrice: this.vehicle.vehiclePrice
+          vehiclePriceID: this.vehicle.vehiclePriceID
           
           //vehiclePrice: this.vehicle.vehiclePrice?.amount
         })

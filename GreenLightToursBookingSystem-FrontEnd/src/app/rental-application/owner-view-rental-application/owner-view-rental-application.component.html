@@ -1,0 +1,46 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="goBack">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+    <h2 style="color:white">View Rental Applications</h2>
+  <span class="example-spacer"></span>
+
+</mat-toolbar>
+
+<div class="d-flex">
+  <input type="text" [(ngModel)]="searchInput" placeholder="Search" (input)="onSearchInputChange()" class="form-control search-input" style="width: 150px;"/>
+  &nbsp;
+  &nbsp;
+  <button class="btn btn-danger ml-2" (click)="clearSearch()">Clear</button>
+</div>
+
+
+<div class="container p-3">
+ 
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Applicant</th>
+        <th>Rental ID</th>
+        <th>Rental Status</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let rental of rentalApplication">
+        <td>{{ rental.userName }} {{rental.userSurname}}</td>
+        <td>{{rental.rentalID}}</td>
+        <td>{{ rental.rentalStatus }}</td>
+
+        <td>
+          <a [routerLink]="['/view', rental.rentalID]">View Details</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!--Code below is displayed when there are no existing applications-->
+<div *ngIf="rentalApplication?.length === 0">No rental applications found.</div>
+</div>

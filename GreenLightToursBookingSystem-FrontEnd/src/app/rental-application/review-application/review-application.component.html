@@ -1,0 +1,28 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="goBack()" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+      <h2 style="color:white">Review Rental Application</h2>
+    <span class="example-spacer"></span>
+  
+  </mat-toolbar>
+
+<div style="margin-top:5%; margin-left:10%">
+   
+    <label for="approvalStatus">Select Approval Status:</label>
+    <select id="approvalStatus" [(ngModel)]="selectedStatus">
+      <option value="true">Approved</option>
+      <option value="false">Rejected</option>
+    </select>
+    <br>
+    <br>
+  
+    <label for="reason">Reason:</label>
+    <br>
+    <textarea id="reason" [(ngModel)]="reason" rows="4"></textarea>
+    <br>
+    <br>
+  
+    <button  mat-stroked-button style="background-color: rgb(79, 192, 79); color:white" [disabled]="!selectedStatus || !reason" (click)="reviewApplication()">Submit Review</button>
+  </div>

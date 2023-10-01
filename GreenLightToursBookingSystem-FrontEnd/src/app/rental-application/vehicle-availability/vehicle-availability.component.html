@@ -1,0 +1,17 @@
+<table>
+    <tr>
+      <td>
+        <p> <b> View vehicle Availability : </b></p>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="View availability" [value]="selectedDate ? '' : null" [matDatepickerFilter]="dateFilter" (dateChange)="clearSelectedDate()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        
+        
+      </td>
+    </tr>
+  </table>

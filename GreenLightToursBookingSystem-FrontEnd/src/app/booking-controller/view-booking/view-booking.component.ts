@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { Booking } from 'src/app/shared/Bookings';
 import { DataService } from 'src/app/service/GLBSdataservice';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-view-booking',
@@ -9,8 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-booking.component.scss']
 })
 export class ViewBookingComponent implements OnInit{
+  dataSource = new MatTableDataSource<Booking>();
   booking:Booking[] = []
   booking1:Booking = new Booking
+  searchedBookings: Booking[]=[]
+  searchString = '';
 
 
   constructor(private dataService: DataService, private router:Router) { }
@@ -18,7 +22,7 @@ export class ViewBookingComponent implements OnInit{
   //   throw new Error('Method not implemented.');
   // }
 
-  BookingStatus = ['Cancelled','Cancelled, Awaiting refund','Refunded','Paid','UPaid']
+  BookingStatus = ['Cancelled','Cancelled, Awaiting refund','Refunded','Paid','UnPaid']
   ngOnInit(): void {
     this.GetBookingByUserId()
   }
@@ -55,7 +59,28 @@ export class ViewBookingComponent implements OnInit{
 
     
   }
+  SearchBookings(){
 
+    this.dataService.GetAllBookings().subscribe(res => {
+      this.booking = res as Booking[];
+
+      this.searchedBookings = this.booking;
+
+      this.searchedBookings = this.booking.filter((bookings) => 
+
+      bookings.bookingID == Number(this.searchString)
+      
+      );
+  
+      this.booking = this.searchedBookings;
+  
+      console.log("It works")
+  });
+
+  }
+  ViewPassengers(){
+    this.router.navigate(['/passengers'])
+  }
 
 }
 

@@ -1,6 +1,6 @@
 import { Time } from '@angular/common';
 import { Component , OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
 import { TimeSlot } from 'src/app/shared/timeslot';
@@ -12,37 +12,40 @@ import { TimeSlot } from 'src/app/shared/timeslot';
 })
 export class AddTimeslotComponent implements OnInit {
 
-  timeslot: TimeSlot = {
-    timeslotID:0,
-    departureTime:'',
-    departureDate: '',
-    locationID: 0,
-  };
+  TimeSlotForm!:FormGroup;
+  location!: any
 
-  TimeSlotForm = new FormGroup(
-    {
-        name: new FormControl(''),
-        description: new FormControl('')
-    })
 
-    constructor(private dataService: DataService, private router: Router) { }
+    constructor(private dataService: DataService, private router: Router, public formBuilder:FormBuilder) {
+      this.TimeSlotForm = formBuilder.group({
+        departureTime: ['', Validators.required],
+        departureDate: ['', Validators.required],
+        locationID: [0, Validators.required]
+      })
+
+      dataService.GetAllLocations().subscribe((res) => {
+        this.location = res
+      })
+     }
 
     ngOnInit(): void {
     }
 
     cancel(){
-      this.router.navigate(['/employee-type'])
+      this.router.navigate(['/timeslot'])
     }
     AddTimeSlot(){
-      this.dataService.AddTimeslot(this.timeslot).subscribe({
-        next:(timeslot) => {
+      if(this.TimeSlotForm.valid){
+        const timeslot = {
+          departureDate: this.TimeSlotForm.value.departureDate,
+          departureTime: this.TimeSlotForm.value.departureTime,
+          locationID: this.TimeSlotForm.value.locationID
+        };
 
-          timeslot.name = this.TimeSlotForm.value.name;
-          timeslot.description = this.TimeSlotForm.value.description;
-
-         this.router.navigate(['/timeslot'])
-        }
-      })
+        this.dataService.AddTimeslot(timeslot).subscribe(()=>{
+          this.router.navigate(['/timeslot'])
+        })
+      }
     }
 
 

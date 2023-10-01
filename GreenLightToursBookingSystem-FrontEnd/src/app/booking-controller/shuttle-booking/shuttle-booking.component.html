@@ -1,6 +1,6 @@
 <mat-toolbar class=" text-white" style="background-color: #004e04" >
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
-      <mat-icon (click)="GoBack('/booking-controller')">arrow_back</mat-icon>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [routerLink]="['/booking-controller']">
+      <mat-icon >arrow_back</mat-icon>
     </button>
     <span class="example-spacer"></span>
    Shuttle Booking 
@@ -8,41 +8,52 @@
   
   </mat-toolbar>
 
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/client-help'">Help</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/about'">About</a>
+      </li>
+      &nbsp;
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/booking-controller'">Services</a>
+      </li>
+    </ul>
+</nav>
+<br>
+
 <div class="container">
     <div class="row">
         <div class="col-6 offset-2"> 
             <br>
+            <from class="form-group " [formGroup]="ShuttleForm" (ngClick)="SaveBookingDetails()">
             <div class="mb-3">
                 <label class="form-label">Pick-Up and Drop-of Locations :</label> &nbsp; 
-                <select class="dropdown" id="locationDropdown" [(ngModel)]="LocationName" (change)="filterTimeSlots($event)">
+                <select class="dropdown" formControlName="Location" id="locationDropdown" [(ngModel)]="LocationName" (change)="filter($event)">
                     <option disabled selected value="">Select an option</option>
                     <option *ngFor="let location of Locations" [value]="location.locationID" >{{ location.city }}</option>
                   </select>
             </div> 
-                <div class="mb-3">
-                    <label class="form-label">Date of Depature :</label> &nbsp;
-                    <select class="dropdown" [(ngModel)]="DepatureDate" (change)="filterByDate($event)" >
-                        <option disabled selected value="">Select an option</option>
-                        <option *ngFor="let timeSlot of filteredTimeSlots" [value]="timeSlot.departureDate" >{{ timeSlot.departureDate }}</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Time of Depature :</label> &nbsp;
-                    <select class="dropdown" [(ngModel)]="DepartureTime">
-                        <option disabled selected value="">Select an option</option>
-                        <option *ngFor="let timeSlot of filteredByDate" [value]="timeSlot.timeslotID" >{{ timeSlot.departureTime }}</option>
-                    </select>
-                </div>
+
+            <!--Put drop down pick up and drop off here-->
+            <div class="mb-3">
+            <p><i class="fa-regular fa-circle-info" style="color: orange"> To select a departure time, please click the button below !</i> </p>
+            <label class="form-label">Select timeslot :  </label>  &nbsp;
+             <button type="button" id="btnTimeslot" style="background-color: #25a3fd"  (click)="openPopup()"> Select depature timeslot <i class='far fa-calendar-alt'  style='font-size:36px'></i></button>
+            </div>   
                 <div class="mb-3">
                     <label class="form-label">Who are you booking for : </label> &nbsp;
-                    <select class="dropdown" [(ngModel)]="BookingTypeName">
+                    <select class="dropdown" [(ngModel)]="BookingTypeName" formControlName="BookingType">
                         <option disabled selected value="">Select an option</option>
                         <option *ngFor="let bookingtype of bookingtyps" [value]="bookingtype.bookingTypeID" >{{ bookingtype.name }}</option>
                       </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">What is the size of your lagauge :</label> &nbsp;
-                    <select class="dropdown" [(ngModel)]="luggageSize">
+                    <select class="dropdown" [(ngModel)]="luggageSize" formControlName="luggage">
                         <option disabled selected value="">Select an option</option>
                         <option *ngFor="let luggage of Luggage" [value]="luggage" >{{ luggage }}</option>
                       </select>
@@ -52,23 +63,24 @@
             <div>
                 <div class="mb-3">
                     <label class="form-label">Passenger Name :</label>
-                    <input type="email" class="form-control" placeholder="Enter Name" name="name" [(ngModel)]="person.name">
+                    <input type="email" class="form-control" placeholder="Enter Name" name="name" [(ngModel)]="person.name" formControlName="PassengerName" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Passenger Surname</label>
-                    <input type="email" class="form-control" placeholder="Enter Surname" name="surname" [(ngModel)]="person.surname">
+                    <input type="email" class="form-control" placeholder="Enter Surname" name="surname" [(ngModel)]="person.surname" formControlName="PassengerSurname" required>
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label">Passenger Phone No</label>
-                    <input type="email" class="form-control" placeholder="Enter Telephone Number" name="phoneNumber" [(ngModel)]="person.phoneNumber">
+                    <input type="email" class="form-control" placeholder="Enter Telephone Number" name="phoneNumber" [(ngModel)]="person.phoneNumber" formControlName="PassengerNumber" required>
+                    <p><i class="fa-regular fa-circle-info" style="color: orange">Please enter a valid cell phone number starting with '0' and containing 10 digits.</i> </p>
                 </div>
                 <button style="display: inline-block;" class="btn btn-danger m-3" (click)="RemovePassenger(i)">Remove Passenger</button>
             </div>
             </div>
             
-            <p style="text-align: right;"><button style="float: right;" class="btn btn-primary m-3" (click)="SaveBookingDetails()">Proceed to Payment</button></p>
-            
+            <p style="text-align: right;"><button style="float: right;" class="btn btn-primary m-3" [disabled]="!ShuttleForm.valid" (click)="SaveBookingDetails()">Proceed to Payment</button></p>
+            </from>
             
         </div>
 
@@ -76,3 +88,78 @@
 
 </div> 
 
+<div
+class="modal"
+tabindex="-1"
+role="dialog"
+[ngStyle]="{'display':displayStyle}">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title"> Select suitable timeslot</h4>
+    </div>
+        <div class="container-fluid">
+            <div class="table-responsive" >
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-12" style="text-align: center;">
+        
+                                <h2>Timeslots
+                                </h2>
+                            </div>
+                                <br>   
+                                <br>                          
+                            <div class="col-12" style="text-align: center;">
+                            <div class="btn-group">
+                                <div
+                                class="btn btn-success"
+                                mwlCalendarPreviousView
+                                [view]="view"
+                                [(viewDate)]="viewDate"
+                                >
+                                Previous
+                                </div>
+                                <div
+                                class="btn btn-outline-secondary"
+                                mwlCalendarToday
+                                [(viewDate)]="viewDate"
+                                >
+                                Today
+                                </div>
+                                <div
+                                class="btn btn-success"
+                                mwlCalendarNextView
+                                [view]="view"
+                                [(viewDate)]="viewDate"
+                                >
+                                Next
+                                </div>
+                            </div>
+                            </div>
+                            <br>
+                            <br>
+                            <mwl-calendar-week-view
+                                [viewDate]="viewDate"
+                                [events]="events"
+                                [hourDuration]="60"
+                                [hourSegments]="2"
+                                [refresh]="refresh"
+                                (eventClicked)="eventClicked($event)"
+                             style="width: 100%;">
+                            </mwl-calendar-week-view>
+                </div>  
+            </div>   
+        </div>
+        <br>
+        <br>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopup()">
+        Close
+        </button>
+    </div>
+</div>
+</div> 
+</div>
