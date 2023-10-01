@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Add Driver</h2>
+<form (ngSubmit)="AddDriver()" [formGroup]="DriverForm">
+
+  <div class="form-group" >
+  <label for="DriverLicenseCode" class="form-label"> License Code:</label>
+  <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="drivers.licenseCode" ><br>
+  </div>
+
+  <div class="form-group">
+
+    <button type="submit" [disabled]="!DriverForm.valid"  class="btn btn-primary mr-1" >Add</button>
+    &nbsp;
+    &nbsp;
+    <button type="reset" class="btn btn-info mr-1">Clear</button>
+  </div>
+
+
+</form>
+</div>

@@ -1,0 +1,127 @@
+img {
+  max-width: 12em;
+  max-height: 12em;
+  margin: 0.75em;/* Adjust the maximum height as needed */
+    /* Add other CSS properties as needed for positioning or responsiveness */
+  }
+
+  .statusAvailable {
+    color: green;
+  }
+  
+  .statusUnavailable {
+    color: red;
+  }
+
+
+  span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .content
+  {
+    margin-left: 100px;
+  }
+
+  .row
+  {
+    margin-left:2%;
+    margin-right:2%;
+  }
+
+  mat-toolbar{
+   position:sticky;
+   top:0;
+   z-index: 1000;
+  }
+
+  table,td,th{
+    border: 1px solid white;
+  }
+
+  table{
+    border-radius: 5px;
+    border-collapse: collapse;
+    width: 100%; /* Apply rounded corners to the entire table */
+    //overflow: hidden;
+  }
+  tr:nth-child(even) {background-color: #dbfee0;}
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+th {
+  background-color:#004e04;
+  color: white;
+}
+
+  tr:hover {background-color: rgb(138, 234, 255);}
+
+
+  tr:nth-child(odd) {background-color: #f3fff5;}
+
+  th, td {
+    text-align: left;
+    padding: 12px !important;
+  }
+  .align{
+    display:grid;
+    justify-content: right;
+    margin-right:2%;
+  }
+
+  .btnCreate{
+    background-color: green;
+    width: 150px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    margin: 5px;
+    
+  }
+
+  .btnEdit{
+    background-color: rgb(0, 162, 141);
+    width: 100px;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    margin: 5px;
+    
+  }
+
+  .btnInspect{
+
+    background-color: rgba(17, 17, 118, 0.876);
+    width: 100px;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    margin: 5px;
+  }
+
+  .btnDelete{
+    background-color: rgb(207, 7, 7);
+    width: 100px;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    margin: 5px;
+    
+  }

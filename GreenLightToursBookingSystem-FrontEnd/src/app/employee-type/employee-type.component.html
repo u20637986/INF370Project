@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+ tr:nth-child(even) {
+  background: lightgreen;
+ }
+</style>
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+ Employee Type
+  <span class="example-spacer"></span>
+
+</mat-toolbar>
+<br>
+<div style="margin-left: 20px;margin-top: 5%;">
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col-6" style="size: 0.2%;"></th>
+          <th scope="col-6"></th>
+
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employeeType of employeeTypes">
+         <td>{{employeeType.name}}</td>
+          <td>{{employeeType.description}}</td>
+          <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/employee-type', employeeType.employeeTypeID]" >Edit</button></td>
+        <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteEmployeeType(employeeType.employeeTypeID)" >Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-employee-type">Add</button>
+
+<router-outlet></router-outlet>

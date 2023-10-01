@@ -1,0 +1,40 @@
+<style>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style>
+ <mat-toolbar class=" text-white" style="background-color: #004e04" >
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+     <mat-icon>arrow_back</mat-icon>
+   </button>
+   <span class="example-spacer"></span>
+  Trip Type
+   <span class="example-spacer"></span>
+
+ </mat-toolbar>
+ <br>
+ <div style="margin-left: 20px;margin-top: 5%;">
+ <table class="table table-striped">
+   <thead>
+       <tr>
+           <th scope="col">Name</th>
+           <th scope="col">Description</th>
+           <th scope="col-6" style="size: 0.2%;"></th>
+           <th scope="col-6"></th>
+
+       </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let tripType of tripTypes">
+          <td>{{tripType.name}}</td>
+           <td>{{tripType.description}}</td>
+           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/trip-type', tripType.tripTypeID]" >Edit</button></td>
+         <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteTripType(tripType.tripTypeID)" >Delete</button></td>
+     </tr>
+   </tbody>
+ </table>
+ </div>
+ <button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-trip-type">Add</button>
+
+ <router-outlet></router-outlet>
+

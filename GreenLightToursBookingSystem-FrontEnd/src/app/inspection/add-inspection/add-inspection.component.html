@@ -1,0 +1,145 @@
+<form [formGroup]="inspectForm" (ngSubmit)="addInspection()" style="text-align: center;">
+  <br>
+  <h2 class="form-heading">Add Inspection</h2>
+
+  &nbsp;
+
+  <mat-form-field appearance="outline" style="width: 50%;">
+    <mat-label for="registrationNumber" style="color: green;">Registration Number</mat-label>
+    <input matInput type="text" id="name" formControlName="registrationNumber" #message>
+  </mat-form-field>
+  
+  &nbsp; 
+
+  <div class="radio-group">
+    Check In/Out
+    <h3 style="color: green;">
+      <input id="in" type="radio" formControlName="checkInOut" value="Check-in" required>
+      Check-in
+    </h3>
+    <h3 style="color: green;">
+      <input id="out" type="radio" formControlName="checkInOut" value="Check-out" required>
+      Check-out
+    </h3>
+  </div>   
+
+  &nbsp;
+
+<div class="checklist">
+<h3>Exterior</h3>
+<div >
+  <label>
+    <input type="checkbox" value="Paint" formControlName="result" (change)="updateStatus()"> Paint
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Windows" formControlName="result" (change)="updateStatus()"> Windows
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Mirrors" formControlName="result" (change)="updateStatus()"> Mirrors
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Tyres" formControlName="result" (change)="updateStatus()"> Tyres
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Wipers" formControlName="result" (change)="updateStatus()"> Wipers
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="License" formControlName="result" (change)="updateStatus()"> License Plate
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Lights" formControlName="result" (change)="updateStatus()"> Lights
+  </label>
+</div>
+&nbsp;
+<h3>Interior</h3>
+<div>
+  <label>
+    <input type="checkbox" value="Dashboard" formControlName="result" (change)="updateStatus()"> Dashboard
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Seats" formControlName="result" (change)="updateStatus()"> Seats
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Controls" formControlName="result" (change)="updateStatus()"> Controls and gauges
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Aircon" formControlName="result" (change)="updateStatus()"> Heat and air-conditioning
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Entertainment" formControlName="result" (change)="updateStatus()"> Entertainment System
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Pedals" formControlName="result" (change)="updateStatus()"> Pedals and Mats
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" value="Emergency" formControlName="result" (change)="updateStatus()"> Emergency Kit
+  </label>
+</div>
+</div>
+<div>
+  <p>Status: {{ status }}</p>
+</div>
+
+
+&nbsp;
+
+<mat-form-field appearance="fill" style="width: 50%;">
+  <mat-label>Status</mat-label>
+  <mat-select formControlName="vehicleStatusID" required>
+    <mat-option *ngFor="let car of vehicleStat" [value]="car.vehicleStatusID">
+      {{car.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+&nbsp;
+
+
+
+
+&nbsp;
+
+<div class="form-group">
+  <button type="submit" class="btn btn-success" [disabled]="inspectForm.invalid">Submit</button>
+  &nbsp;
+  <button type="reset" class="btn btn-info mr-1">Clear</button>
+</div>
+
+
+</form>
+
+<!--<div>
+  <label>Checkbox Group:</label>
+  <div *ngFor="let checkbox of checkboxes">
+    <input type="checkbox" [(ngModel)]="checkbox.checked" (change)="updateStatus()">
+    {{ checkbox.label }}
+  </div>
+</div>
+<div>
+  <p>Status: {{ status }}</p>
+</div>-->
+

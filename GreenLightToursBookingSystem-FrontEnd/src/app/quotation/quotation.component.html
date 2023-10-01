@@ -1,0 +1,64 @@
+<style>
+    tr:nth-child(even) {
+     background: lightgreen;
+    }
+   </style>
+   <mat-toolbar class=" text-white" style="background-color: #004e04" >
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+       <mat-icon >arrow_back</mat-icon>
+     </button>
+     <span class="example-spacer"></span>
+    Quotation
+     <span class="example-spacer"></span>
+  
+ </mat-toolbar>
+<div *ngFor=" let quotation of quotations" >
+ <H1><b>Green light Tours</b></H1>
+
+ <h2>Travel more, worry Less</h2>
+
+ <h3><b>Address:</b></h3>
+ <p>Mat Ave, Pretoriouspark <br>    
+    Pretoria, 0042 <br>
+    South Africa
+ </p> 
+ <h3 ><b>Date :</b></h3>
+ <p>{{quotation.date}}</p>
+ <h3><b>Phone N.o :</b></h3>
+ <p>068 259 2302</p>
+
+ <h3><b>Quotation For:</b></h3>
+ <p>The rental of an item </p>
+<div style="margin-left: 20px;margin-top: 5%;">
+<table class="table table-striped">
+  <thead>
+      <tr>
+        <th scope="col" >Item</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col-6" style="size: 0.2%;"></th>
+          <th scope="col-6"></th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr >
+        <td>{{quotation.name}}</td>
+         <td>{{quotation.quantity}}</td>
+          <td>{{quotation.description}}</td>
+          <td>{{quotation.amount}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+<br>
+<p>If you have any question regarding this quotation please contact Mr Twala at 068 259 2302</p>
+
+</div>
+
+<button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-quotation">Add</button>
+
+<router-outlet></router-outlet>
+

@@ -1,0 +1,30 @@
+.logo-image{
+    width: 700px;
+    height: 500px;
+   display: flex;
+    margin-left: 100px;
+  }
+
+  span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .content
+  {
+    margin-left: 100px;
+  }
+  .trailerImg {
+    max-width: 80px; /* Adjust the maximum width as needed */
+    max-height: 80px; /* Adjust the maximum height as needed */
+    /* Add other CSS properties as needed for positioning or responsiveness */
+  }
+
+  .statusAvailable {
+    color: green;
+  }
+
+  .statusUnavailable {
+    color: red;
+  }

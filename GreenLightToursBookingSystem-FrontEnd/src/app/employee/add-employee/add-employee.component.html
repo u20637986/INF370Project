@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Add Employee</h2>
+<form (ngSubmit)="AddEmployee()" [formGroup]="EmployeeForm">
+
+  <div class="form-group" >
+  <label for="employeename" class="form-label"> Employee Name:</label>
+  <input type="text" class="form-control" id="name" name="employeename" formControlName="name" [(ngModel)]="employee.name" ><br>
+  </div>
+  <div class="form-group">
+  <label for="surname" class="form-label">Surname:</label>
+  <input type="text-area" class="form-control" id="surname" name="surname"formControlName="name" [(ngModel)]="employee.surname"><br>
+  </div>
+  <div class="form-group">
+    <label for="email" class="form-label">Email:</label>
+    <input type="text-area" class="form-control" id="email" name="email"formControlName="name" [(ngModel)]="employee.email"><br>
+    </div>
+    <div class="form-group">
+      <label for="cellNumber" class="form-label">Cell Number:</label>
+      <input type="text-area" class="form-control" id="cellNumber" name="cellNumber"formControlName="name" [(ngModel)]="employee.cellNumber"><br>
+      </div>
+      <div class="form-group">
+        <label for="iDnumber" class="form-label">ID Number:</label>
+        <input type="text-area" class="form-control" id="iDnumber" name="iDnumber"formControlName="name" [(ngModel)]="employee.iDnumber"><br>
+        </div>
+  <div class="form-group">
+
+    <button type="submit" [disabled]="!EmployeeForm.valid"  class="btn btn-primary mr-1" >Add</button>
+    &nbsp;
+    &nbsp;
+    <button type="reset" class="btn btn-info mr-1">Clear</button>
+  </div>
+
+
+</form>
+</div>
+
+

@@ -1,0 +1,43 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+   Manage Discounts
+    <span class="example-spacer"></span>
+</mat-toolbar>
+
+<!-- <h3 style="align-items: center;"> Manage discounts </h3> &nbsp; -->
+&nbsp; <button type="submit"class="btn btn-primary" routerLink="/add-discount"> Add new discount</button> 
+<table class="table table-hover">
+  <thead>
+      <tr>
+          <th>
+              Amount Off
+          </th>
+          <th>
+              Expiry Date
+          </th>
+         
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let discount of Discount">
+          <td>
+              {{discount.amount }}
+          </td>
+          <td>
+              {{discount.date }}
+          </td>
+          
+          <td>
+
+              <button class="btn btn-info" (click)="EditDiscount(discount.discountID)">Edit </button> &nbsp;
+              <button class="btn btn-danger" style="margin-left: 2px;" (click)="DeleteDiscount(discount.discountID)">Delete</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+  
+

@@ -1,0 +1,78 @@
+.myicon1
+{
+
+    width:100%;
+    text-align: left;
+    display:flex;
+
+}
+
+.myicon2
+{
+
+    width:100%;
+    text-align: center;
+    display:flex;
+    margin-left:30%
+
+}
+
+.myicon3
+{
+
+    width:100%;
+    text-align: right;
+    display:flex;
+    margin-left: 40%;
+
+}
+.example-spacer {
+  flex:auto;
+}
+
+.right{
+  //display: inline-block;
+// width: 100%;
+text-align: right;
+//vertical-align: bottom;
+//flex:auto;
+}
+
+.img-fluid {
+  max-width: 68px !important;
+  margin-right: 10px !important;
+  flex:auto;
+}
+
+.logo-image{
+  width: 700px;
+  height: 500px;
+
+}
+
+mat-toolbar {
+  background: #004a9f;
+  color: white;
+}
+
+mat-sidenav {
+  //margin: 16px;
+  width: 200px;
+  border-right: none;
+  background: #004e04;
+  color: white;
+  border-radius: 2px;
+  padding: 16px;
+  text-align: center;
+}
+mat-sidenav-container {
+  height: calc(100vh);
+  background:white;
+  color:black;
+
+}
+
+.content
+{
+  margin-left: 100px;
+}

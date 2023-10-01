@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Add Employee Type</h2>
+<form (ngSubmit)="AddEmployeeType()" [formGroup]="EmployeeTypeForm">
+
+  <div class="form-group" >
+  <label for="employeetypename" class="form-label"> Employee Type Name:</label>
+  <input type="text" class="form-control" id="name" name="employeetypename" formControlName="name" [(ngModel)]="employeeType.name" ><br>
+  </div>
+  <div class="form-group">
+  <label for="description" class="form-label">Description:</label>
+  <input type="text-area" class="form-control" id="description" name="description"formControlName="name" [(ngModel)]="employeeType.description"><br>
+  </div>
+
+  <div class="form-group">
+
+    <button type="submit" [disabled]="!EmployeeTypeForm.valid"  class="btn btn-primary mr-1" >Add</button>
+    &nbsp;
+    &nbsp;
+    <button type="reset" class="btn btn-info mr-1">Clear</button>
+  </div>
+
+
+</form>
+</div>
+

@@ -1,0 +1,78 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon (click)="GoBack('/booking-controller')">arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+   Shuttle Booking 
+    <span class="example-spacer"></span>
+  
+  </mat-toolbar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-2"> 
+            <br>
+            <div class="mb-3">
+                <label class="form-label">Pick-Up and Drop-of Locations :</label> &nbsp; 
+                <select class="dropdown" id="locationDropdown" [(ngModel)]="LocationName" (change)="filterTimeSlots($event)">
+                    <option disabled selected value="">Select an option</option>
+                    <option *ngFor="let location of Locations" [value]="location.locationID" >{{ location.city }}</option>
+                  </select>
+            </div> 
+                <div class="mb-3">
+                    <label class="form-label">Date of Depature :</label> &nbsp;
+                    <select class="dropdown" [(ngModel)]="DepatureDate" (change)="filterByDate($event)" >
+                        <option disabled selected value="">Select an option</option>
+                        <option *ngFor="let timeSlot of filteredTimeSlots" [value]="timeSlot.departureDate" >{{ timeSlot.departureDate }}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Time of Depature :</label> &nbsp;
+                    <select class="dropdown" [(ngModel)]="DepartureTime">
+                        <option disabled selected value="">Select an option</option>
+                        <option *ngFor="let timeSlot of filteredByDate" [value]="timeSlot.timeslotID" >{{ timeSlot.departureTime }}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Who are you booking for : </label> &nbsp;
+                    <select class="dropdown" [(ngModel)]="BookingTypeName">
+                        <option disabled selected value="">Select an option</option>
+                        <option *ngFor="let bookingtype of bookingtyps" [value]="bookingtype.bookingTypeID" >{{ bookingtype.name }}</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">What is the size of your lagauge :</label> &nbsp;
+                    <select class="dropdown" [(ngModel)]="luggageSize">
+                        <option disabled selected value="">Select an option</option>
+                        <option *ngFor="let luggage of Luggage" [value]="luggage" >{{ luggage }}</option>
+                      </select>
+                </div>
+                <p style="text-align: center;"><button style="display: inline-block;" class="btn btn-primary m-3" (click)="AddPassenger()" >Add Passenger</button></p>
+            <div *ngFor="let person of Passengers; let i = index">
+            <div>
+                <div class="mb-3">
+                    <label class="form-label">Passenger Name :</label>
+                    <input type="email" class="form-control" placeholder="Enter Name" name="name" [(ngModel)]="person.name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Passenger Surname</label>
+                    <input type="email" class="form-control" placeholder="Enter Surname" name="surname" [(ngModel)]="person.surname">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Passenger Phone No</label>
+                    <input type="email" class="form-control" placeholder="Enter Telephone Number" name="phoneNumber" [(ngModel)]="person.phoneNumber">
+                </div>
+                <button style="display: inline-block;" class="btn btn-danger m-3" (click)="RemovePassenger(i)">Remove Passenger</button>
+            </div>
+            </div>
+            
+            <p style="text-align: right;"><button style="float: right;" class="btn btn-primary m-3" (click)="SaveBookingDetails()">Proceed to Payment</button></p>
+            
+            
+        </div>
+
+    </div>
+
+</div> 
+

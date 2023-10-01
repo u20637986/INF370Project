@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>Add Booking Type</h2>
+<form (ngSubmit)="AddBookingType()" [formGroup]="BookingTypeForm">
+
+  <div class="form-group" >
+  <label for="BookingTypeName" class="form-label"> Booking Type Name:</label>
+  <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="bookingType.name" ><br>
+  </div>
+  <div class="form-group">
+  <label for="description" class="form-label">Description:</label>
+  <input type="text-area" class="form-control" id="description" name="description"formControlName="name" [(ngModel)]="bookingType.description"><br>
+  </div>
+
+  <div class="form-group">
+
+    <button type="submit" [disabled]="!BookingTypeForm.valid"  class="btn btn-primary mr-1" >Add</button>
+    &nbsp;
+    &nbsp;
+    <button type="reset" class="btn btn-info mr-1">Clear</button>
+  </div>
+
+
+</form>
+</div>

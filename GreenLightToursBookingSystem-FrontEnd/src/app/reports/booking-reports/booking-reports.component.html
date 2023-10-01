@@ -1,0 +1,81 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" *ngIf="showToolbar">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+   Shuttle Booking Revenue per location report
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+
+      <div class="container mt-5">
+
+      <div>
+        <div style="text-align: center; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/img/logoa.png" alt="logo" style="max-width: 100px; max-height: 100px;">
+          <h2 style="margin-left: 10px;">Green Light Tours </h2>
+      </div>
+       <br>
+          <h2 class="text-center"> <b>Revenue Generated per Location by Shuttle Bookings</b> </h2>
+
+          <h4> <b>Generated on: &nbsp;{{generatedDate | date}}</b></h4>
+          
+          <table class="table table-bordered table-success" *ngFor="let r of report">
+            
+            <tr> <b>{{r.city}}</b></tr>
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th> Date of booking </th>
+                      <th> Booking Price</th>
+                      <th></th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let booking of r.bookings">
+                    <td></td>
+                        <td >
+                            {{booking.date | date}}
+                        </td>
+                        <td>
+                            R {{booking.totalPrice}}.00
+                        </td>
+                        <td></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><strong>Location Sub-total :</strong></td>
+                    <td><strong> R {{r.subTotal}} .00</strong></td>
+                  </tr>
+                 
+                </tbody>
+          </table>
+
+          <div class="container mt-5">
+            <p class="d-inline"><b>Grand-Total :</b></p>
+            <p class="d-inline">
+                <b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    R {{grandTotRefined}}. 00</b>
+            </p>
+        </div> <br>
+        <button class="btn btn-primary m-3" (click)="print()" *ngIf="showButton">Print Report</button>
+        <!-- <app-print-button></app-print-button> -->
+
+      </div>
+      </div>
+      
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        function printPage() {
+            window.print();
+        }
+    </script> -->
+
+  

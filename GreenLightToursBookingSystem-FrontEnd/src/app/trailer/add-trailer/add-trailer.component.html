@@ -1,0 +1,223 @@
+<mat-toolbar class="text-white" style="background-color: #004e04">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    [routerLink]="['/trailer']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  Add Trailer
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<br />
+
+<h5 class="error-text" *ngIf="errorMessage != ''">{{ errorMessage }}</h5>
+<br />
+<div class="row">
+  <form
+    [formGroup]="trailerForm"
+    class="form-horizontal"
+    *ngIf="trailerStatuses.length > 0"
+  >
+    <div class="form-group">
+      <label class="col-sm-1" for="size">Size:</label>
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          id="size"
+          placeholder="Enter size"
+          formControlName="size"
+        />
+        <div
+          *ngIf="
+            trailerForm.get('size')?.invalid &&
+            (trailerForm.get('size')?.dirty || trailerForm.get('size')?.touched)
+          "
+        >
+          <div class="text-danger">Size is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="registrationNumber"
+        >Registration Number:</label
+      >
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          id="registrationNumber"
+          placeholder="Enter registration number"
+          formControlName="registrationNumber"
+        />
+        <div
+          *ngIf="
+            trailerForm.get('registrationNumber')?.invalid &&
+            (trailerForm.get('registrationNumber')?.dirty ||
+              trailerForm.get('registrationNumber')?.touched)
+          "
+        >
+          <div class="text-danger">Registration Number is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="trailerType">Trailer Type:</label>
+      <div class="col-sm-6">
+        <select
+          class="form-control"
+          id="trailerType"
+          formControlName="trailerTypeID"
+        >
+          <option value="">Select Trailer Type</option>
+          <option
+            *ngFor="let type of trailerTypes"
+            [value]="type.trailerTypeID"
+          >
+            {{ type.name }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            trailerForm.get('trailerType')?.invalid &&
+            (trailerForm.get('trailerType')?.dirty ||
+              trailerForm.get('trailerType')?.touched)
+          "
+        >
+          <div class="text-danger">Trailer Type is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="floorBase">Floor Base:</label>
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          id="floorBase"
+          placeholder="Enter floor Base"
+          formControlName="floorBase"
+        />
+        <div
+          *ngIf="
+            trailerForm.get('floorBase')?.invalid &&
+            (trailerForm.get('floorBase')?.dirty ||
+              trailerForm.get('floorBase')?.touched)
+          "
+        >
+          <div class="text-danger">Floor Base is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="panels">Panels:</label>
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          id="panels"
+          placeholder="Enter panels"
+          formControlName="panels"
+        />
+        <div
+          *ngIf="
+            trailerForm.get('panels')?.invalid &&
+            (trailerForm.get('panels')?.dirty ||
+              trailerForm.get('panels')?.touched)
+          "
+        >
+          <div class="text-danger">Panels is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="trailerStatus">Trailer Status:</label>
+      <div class="col-sm-6">
+        <select
+          class="form-control"
+          id="trailerStatus"
+          formControlName="trailerStatusID"
+        >
+          <option value="">Select Status</option>
+          <option
+            *ngFor="let status of trailerStatuses"
+            [value]="status.trailerStatusID"
+          >
+            {{ status.name }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            trailerForm.get('trailerStatus')?.invalid &&
+            (trailerForm.get('trailerStatus')?.dirty ||
+              trailerForm.get('trailerStatus')?.touched)
+          "
+        >
+          <div class="text-danger">Trailer Status is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-1" for="trailerRentalPrice">Rental Price:</label>
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          id="trailerRentalPrice"
+          placeholder="Enter rental price"
+          formControlName="trailerRentalPrice"
+        />
+        <div
+          *ngIf="
+            trailerForm.get('trailerRentalPrice')?.invalid &&
+            (trailerForm.get('trailerRentalPrice')?.dirty ||
+              trailerForm.get('trailerRentalPrice')?.touched)
+          "
+        >
+          <div class="text-danger">Rental Price is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-6">
+        <label for="file-upload" class="custom-file-upload">
+          Add Trailer Image
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="image/png, image/gif, image/jpeg"
+          class="form-control"
+          (change)="selectFile($event)"
+        />
+        <img
+          alt="Trailer attachment"
+          [src]="imageUrl"
+          class="trailer-image"
+          *ngIf="imageUrl != ''"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-6">
+        <button
+          style="margin-right: 1em"
+          type="submit"
+          class="btn btn-primary"
+          (click)="onSubmit()"
+        >
+          Submit
+        </button>
+        <button type="button" class="btn btn-warning" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

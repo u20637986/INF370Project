@@ -1,0 +1,45 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+ tr:nth-child(even) {
+  background: lightgreen;
+ }
+</style>
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+     Vehicle Inspection Report
+  <span class="example-spacer"></span>
+
+</mat-toolbar>
+<br>
+<div style="margin-left: 20px;margin-top: 5%;">
+<table class="table table-striped"  id="reportContent" style="margin-top: 5%;">
+    <thead>
+      <tr>
+        <th>Registration Number</th>
+        <th>Last Inspection</th>
+        <th>Inspection Status</th>
+        <th>Next Inspection</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reportsData">
+        <td>{{ item.registrationNumber }}</td>
+        <td>{{ item.date  | date}}</td>
+        <td>{{ item.status }}</td>
+        <td>{{ item.nextDate | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+<button mat-stroked-button style="background-color:#004e04; margin-left:50%; color: white;" (click)="downloadReport()">Download</button>
+
+

@@ -1,0 +1,73 @@
+<style>
+    tr:nth-child(even) {
+     background: lightgreen;
+    }
+   </style>
+   <mat-toolbar class=" text-white" style="background-color: #004e04" >
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="return()">
+       <mat-icon>arrow_back</mat-icon>
+     </button>
+     <span class="example-spacer"></span>
+    Add refund recipient
+     <span class="example-spacer"></span>
+  
+   </mat-toolbar>
+
+<div class="container">
+
+  
+  <form (ngSubmit)="AddRefund()" [formGroup]="RefundForm">
+  
+    <div class="form-group" >
+    <label for="refundname" class="form-label"> Refund recipient name:</label>
+    <input type="text" class="form-control" id="name" name="refundname" formControlName="name" placeholder="John Smith" [(ngModel)]="refund.name" ><br>
+    <div class="error-message">{{ getErrorMessage('name') }}</div>  
+  </div>
+
+    <div class="form-group">
+    <label for="amount" class="form-label">Amount:</label>
+    <input type="text-area" class="form-control" id="amount" name="amount" formControlName="amount" placeholder="8000 " [(ngModel)]="refund.amount"><br>
+    <div class="error-message">{{ getErrorMessage('amount') }}</div>  
+  </div>
+
+    <!-- Modify the date input element for the "date" field -->
+<div class="form-group">
+  <label for="date" class="form-label">Date:</label>
+  <input type="date" class="form-control" id="date" name="date" formControlName="date" placeholder="2023-12-12 / (YYY/MM/DD)"
+         [(ngModel)]="refund.date" [max]="getTodayDate()">
+  <br>
+  <div class="error-message">{{ getErrorMessage('date') }}</div>
+</div>
+
+      
+    <div class="form-group">
+  
+      <button type="submit" [disabled]="!RefundForm.valid"  class="btn btn-primary mr-1" (click)="openModal()" >Add</button>
+      &nbsp;
+      &nbsp;
+      <button type="reset" class="btn btn-info mr-1">Clear</button>
+    </div>
+  
+  
+  </form>
+
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+         <div class="modal-dialog" role="document">
+               <div class="modal-content ">
+                     <div class="modal-header ">
+                           <h4 class="modal-title "><b>Refund recipient</b></h4>
+                           <button type="button" class="close" aria-label="Close" (click)="return()"><span aria-hidden="true">&times;</span></button>
+                         </div>
+                <div class="modal-body">
+                           <p>Refund recipient has been added successfully</p>
+                         </div>
+                     <div class="modal-footer">
+                      <button type="button" class="btn btn-primary mr-1" (click)="return()" >Ok</button>
+                         </div>
+            </div>
+             </div>
+ </div>
+  </div>
+
+  
+

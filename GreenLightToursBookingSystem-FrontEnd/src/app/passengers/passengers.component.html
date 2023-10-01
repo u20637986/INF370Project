@@ -1,0 +1,79 @@
+<div >
+
+    <style>
+      /*tr:nth-child(even) {
+       background: lightgreen;
+      }*/
+     </style>
+     <mat-toolbar class=" text-white" style="background-color: #004e04" >
+       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+         <mat-icon>arrow_back</mat-icon>
+       </button>
+       <span class="example-spacer"></span>
+         <h2 style="color:white">View Passengers</h2>
+       <span class="example-spacer"></span>
+
+     </mat-toolbar>
+<div style="min-width: 150px; max-width: 500px; width: 100%; margin-left: 25%;margin-top:5%">
+    <mat-form-field style="margin-left:20%; color:green;width:500px;" >
+      <mat-label style="color:green">Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Type name or surname or phoneNo" #input style="color:green;width: 300px;">
+    </mat-form-field>
+    <br>
+    <br>
+
+    <mat-table mat-table [dataSource]="passengerDataSource" style="margin-left: 20%;width: 100%; height:300px;" >
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef style="background-color:green; color:white">Name</th>
+        <td mat-cell *matCellDef="let passenger">{{ passenger.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="surname">
+        <th mat-header-cell *matHeaderCellDef style="background-color:green; color:white;">Surname</th>
+        <td mat-cell *matCellDef="let passenger">{{ passenger.surname }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef style="background-color:green; color:white;">Cellphone Number</th>
+        <td mat-cell *matCellDef="let passenger">{{ passenger.phoneNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef style="background-color:green; color:white">Update</th>
+        <td  mat-cell *matCellDef="let passenger">
+
+          <div class="example-flex-container">
+
+              <button mat-icon-button style="color:orange;" [routerLink]="['/passenger', passenger.passengerID]">
+                <mat-icon  >edit</mat-icon>
+              </button>
+
+            </div>
+          </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef style="background-color:green;color:white" >Delete</th>
+        <td  mat-cell *matCellDef="let passenger">
+
+        <div class="example-flex-container" >
+
+            <button mat-icon-button color="warn" (click)="RemovePassenger(passenger.passengerID)">
+              <mat-icon  >delete</mat-icon>
+            </button>
+
+          </div>
+        </td>
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    </mat-table>
+
+
+  </div>
+  </div>
+
+

@@ -1,0 +1,29 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+ Services 
+  <span class="example-spacer"></span>
+
+</mat-toolbar>
+ <div class="card-container">
+  
+  <div class="card">
+    <img src="./assets/img/shuttleb.jpg" style="width:420px; height: 150px;" alt="Card 1">
+    <button type="submit" [routerLink]="'/shuttle-booking'">Make shuttle booking</button>
+  </div>
+
+  <div class="card">
+    <img src="./assets/img/rental.jpeg" style="width:420px; height: 150px;" alt="Card 2">
+    <button type="submit" [routerLink]="'/rentalProducts'">Make Rental Application </button>
+  </div>
+  <div class="card">
+    <img src="./assets/img/travelp.jpeg" style="width:420px; height: 150px;" alt="Card 3">
+    <button type="submit" [routerLink]="'/travelpackage-booking'">Make Travel Package Booking</button>
+  </div>
+</div>
+
+ <router-outlet></router-outlet>
+
+ 

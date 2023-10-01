@@ -1,0 +1,36 @@
+// .no-print {
+//   display: none;
+// }
+.card-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .logo-image{
+    width: 700px;
+    height: 500px;
+   display: flex;
+    margin-left: 100px;
+  }
+  
+  span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .content
+  {
+    margin-left: 100px;
+  }  

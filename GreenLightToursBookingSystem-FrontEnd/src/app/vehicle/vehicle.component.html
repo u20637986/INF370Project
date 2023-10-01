@@ -1,0 +1,38 @@
+<div class="container p-3">
+    <!--<input class="form-control" type="text" placeholder="Filter" [(ngModel)]="searchString" style="border-radius: 0;">
+    &nbsp;-->
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+            <th>Name </th> 
+            <th>Registration </th> 
+            <th>Type </th>
+            <th>Status </th>
+            <th> Price </th>
+            <th>Image </th>  
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let car of vehicle">
+                <td>{{car.vehicleName}}</td>
+                <td>{{car.registrationNumber}}</td>
+                <td>{{car.vehicleType}}</td>
+                <td>{{car.vehicleStatus}}</td>
+                <td>R{{car.vehiclePrice}}</td>
+                <img [src]="car.image" alt="Vehicle Image" width="100px">
+                
+                <td>
+                    <button type="button" class="btn btn-warning" [routerLink]="['/edit-vehicle', car.vehicleID]">Edit</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" (click)="DeleteVehicle(car.vehicleID)">Delete</button>
+                  </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" [routerLink]="['/add-vehicle']">Add Vehicle</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary" [routerLink]="['/inspection']">Inspection</button>
+ 
+</div>

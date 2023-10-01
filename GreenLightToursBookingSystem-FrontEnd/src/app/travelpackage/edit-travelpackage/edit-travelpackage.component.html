@@ -1,0 +1,49 @@
+<!--<style>
+    tr:nth-child(even) {
+     background: lightgreen;
+    }
+   </style>
+   <mat-toolbar class=" text-white" style="background-color: #004e04" >
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="cancel()">
+       <mat-icon >arrow_back</mat-icon>
+     </button>
+     <span class="example-spacer"></span>
+     Update travel package
+     <span class="example-spacer"></span>
+  
+   </mat-toolbar>
+
+
+   <div class="container">
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="TravelPackageForm">
+  
+    <div class="form-group" >
+    <label for="travelPackageName"class="form-label"> Location:</label>
+    <input type="text" class="form-control" id="name" name="travelPackageName" formControlName="name" [(ngModel)]="travelPackage.name" ><br>
+    </div>
+
+    <div class="form-group">
+    <label for="description" class="form-label">Description:</label>
+    <input type="text-area" class="form-control" id="description" name="description"formControlName="description" [(ngModel)]="travelPackage.description"><br>
+    </div>
+
+    <div class="form-group">
+        <label for="price" class="form-label">Cost:</label>
+        <input type="text-area" class="form-control" id="price" name="price"formControlName="price" [(ngModel)]="travelPackage.price"><br>
+        </div>
+
+        <div class="form-group">
+            <label for="date" class="form-label">Date:</label>
+            <input type="text-area" class="form-control" id="date" name="date" formControlName="date" [(ngModel)]="travelPackage.date"><br>
+            </div>
+    <div class="form-group">
+  
+      <button type="submit" [disabled]="!TravelPackageForm.valid"  class="btn btn-primary mr-1" >Update</button>
+      &nbsp;
+      &nbsp;
+      <button type="reset" class="btn btn-info mr-1">Clear</button>
+    </div>
+  
+  </form>
+  </div>-->

@@ -1,0 +1,61 @@
+<form [formGroup]="vehicleForm" (ngSubmit)="addVehicle()" class="container p-3 col-md-8">
+    <h1>Add Vehicle</h1>
+
+    <mat-form-field appearance="fill">
+        <mat-label for="vehicleName">Vehicle Name</mat-label>
+        <input matInput type="text" id="name" formControlName="vehicleName">
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label for="registrationNumber">Registration Number</mat-label>
+        <input matInput type="text" id="name" formControlName="registrationNumber">
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label for="price">Price</mat-label>
+        <input matInput type="text" id="name" formControlName="vehiclePriceID">
+    </mat-form-field>
+
+
+    &nbsp;
+<br>
+    <mat-form-field appearance="fill">
+        <div class="form-group" >
+        <mat-select placeholder="Select Type" formControlName="vehicleTypeID" >
+            <mat-option *ngFor="let v of vType" [value]="v.vehicleTypeID">
+                {{v.name}}
+            </mat-option>
+        </mat-select>
+    </div>
+    </mat-form-field>
+    &nbsp;
+<br>
+<mat-form-field appearance="fill">
+    <div class="form-group">
+        <mat-select placeholder="Select Status" formControlName="vehicleStatusID">
+            <mat-option *ngFor="let v of vStatus" [value]="v.vehicleStatusID">
+                {{v.name}}
+            </mat-option>
+        </mat-select>
+    </div>
+</mat-form-field>
+
+    <br>
+
+
+    <div>
+    <input type="file" (change)="handleImageUpload($event)" formControlName="image">
+    <img *ngIf="imageBase64" [src]="imageBase64" alt="Uploaded Image" width="100px">
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" [disabled]="vehicleForm.invalid">Submit</button>
+        &nbsp;
+        <button type="reset" class="btn btn-info mr-1">Clear</button>
+      </div>
+
+</form>
+

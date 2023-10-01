@@ -1,0 +1,50 @@
+<style>
+    tr:nth-child(even) {
+     background: lightgreen;
+    }
+   </style>
+   <mat-toolbar class=" text-white" style="background-color: #004e04" >
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="cancel()">
+       <mat-icon >arrow_back</mat-icon>
+     </button>
+     <span class="example-spacer"></span>
+    Add quotation
+     <span class="example-spacer"></span>
+    </mat-toolbar>
+ 
+     <div class="container">
+        <form (ngSubmit)="AddQuotation()" [formGroup]="QuotationForm">
+        
+          <div class="form-group" >
+          <label for="Item" class="form-label"> Item:</label>
+          <input type="text" class="form-control" id="name" name="item" formControlName="name" [(ngModel)]="quotation.name" ><br>
+          </div>
+
+          <div class="form-group">
+          <label for="description" class="form-label">Description:</label>
+          <input type="text-area" class="form-control" id="description" name="description" formControlName="name" [(ngModel)]="quotation.description"><br>
+          </div>
+          <div class="form-group">
+          <label for="date" class="form-label">Date: </label>
+          <input type="text-area" class="form-control" id="date" name="date" formControlName="name" [(ngModel)]="quotation.date"><br>
+          </div>
+              
+          <div class="form-group">
+          <label for="amount" class="form-label">Amount:</label>
+          <input type="text-area" class="form-control" id="amount" name="amount" formControlName="name" [(ngModel)]="quotation.amount"><br>
+          </div>  
+                
+          <div class="form-group">
+          <label for="quatity" class="form-label">Quantity:</label>
+          <input type="text-area" class="form-control" id="quantity" name="quantity" FormControlName="name" [(ngModel)]="quotation.quantity"><br>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" [disabled]="!QuotationForm.valid"  class="btn btn-primary mr-1" >Add</button>
+            &nbsp;
+            &nbsp;
+            <button type="reset" class="btn btn-info mr-1">Clear</button>
+          </div>
+        
+        </form>
+        </div>

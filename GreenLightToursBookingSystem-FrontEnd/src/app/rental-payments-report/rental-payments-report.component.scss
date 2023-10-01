@@ -1,0 +1,37 @@
+span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .content
+  {
+    margin-left: 100px;
+  }
+  .row
+  {
+    margin-left:2%
+  }
+
+  .btnGenerate{
+
+    background-color: rgba(17, 17, 118, 0.876);
+    width: 100px;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    margin: 5px;
+  }
+
+  mat-toolbar{
+   position:sticky;
+   top:0;
+   z-index: 1000;
+  }
+
+//   html, body{
+//     overflow-y: visible;
+//   }

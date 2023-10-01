@@ -1,0 +1,50 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+   Available Bookings 
+    <span class="example-spacer"></span>
+  
+  </mat-toolbar>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Booking Number
+            </th>
+            <th>
+                Date Booking Made
+            </th>
+            <th>
+                Booking Total
+            </th>
+            <th>
+                Booking Status
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let b of booking">
+            <td>
+                {{b.bookingID}}
+            </td>
+            <td>
+                {{b.date }}
+            </td>
+            <td>
+                R {{b.totalPrice }}.00
+            </td>
+            <td>
+                {{BookingStatus[b.bookingStatusID-1] }}
+            </td>
+            <td>
+                <!-- <button class="btn btn-info" (click)="EditBooking(b.bookingID)"> Edit</button> -->
+                <button class="btn btn-danger" style="margin-left: 2px;" (click)="CancelBooking(b.bookingID)">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

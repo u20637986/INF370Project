@@ -1,0 +1,29 @@
+<button class="btn btn-primary" (click)="AddIn()">Add Inspection</button>
+&nbsp;
+
+<div class="container p-3">
+    <!--<input class="form-control" type="text" placeholder="Filter" [(ngModel)]="searchString" style="border-radius: 0;">
+    &nbsp;-->
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+            <th>Registration </th> 
+            <th>Check In/Out </th>
+            <th>Status </th>
+            <th>Result </th>
+            <th>Date</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let car of inspect">
+                <td>{{car.registrationNumber}}</td>
+                <td>{{car.checkInOut}}</td>
+                <td>{{car.vehicleStatus}}</td>
+                <td>{{car.result}}</td>
+                <td>{{car.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

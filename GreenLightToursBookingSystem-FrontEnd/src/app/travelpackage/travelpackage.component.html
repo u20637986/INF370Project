@@ -1,0 +1,83 @@
+<style>
+    tr:nth-child(even) {
+     background: lightgreen;
+    }
+   </style>
+   <mat-toolbar class=" text-white" style="background-color: #004e04" >
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+       <mat-icon>arrow_back</mat-icon>
+     </button>
+     <span class="example-spacer"></span>
+    Travel package
+     <span class="example-spacer"></span>
+  
+   </mat-toolbar>
+
+   <br>
+    <h3 style="text-align: center;"><b>At Green Light Tours we want you to experience a trip in and outside the country. We have 
+        various choices for travel packages and have partnered with different organizations to
+        be able to bring you the best offers to fully enjoy your experience.</b></h3>
+        <br>
+       
+        <img src="../../assets/img/sunset.jpg" width = "400px" height="300px" >
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <img src="../../assets/img/hotel.jpg" width = "400px" height="300px" >
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <img src="../../assets/img/braai.jpg" width = "400px" height="300px" >
+
+        <br>
+        <br>
+
+<h4>Check our travel packages deals below :</h4>
+
+<div class="card mb-3" style="max-width: 540px;" *ngFor=" let travelPackage of travelPackages">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="../../assets/img/beach.jpg" width = "180px" height="180px" >
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Location : {{travelPackage.name}} </h5>
+          <p class="card-text">Date : {{travelPackage.date}}</p>
+          <p class="card-text">Package : {{travelPackage.description}}</p>
+          <p class="card-text">Cost : {{travelPackage.price}}</p>
+          <button type="button" class="btn btn-primary" routerLink="/edit">Update</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger" (click)="DeleteTravelPackage(travelPackage.travelPackageID)"   >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success" routerLink="/add">Add</button>
+  
+ <!-- <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" *ngFor=" let travelPackage of travelPackages">
+  (click)="openModal()"
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Delete travel package</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+           <div class="modal-body">
+                      <p>Are you sure you want to delete travel package?</p>
+                    </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" (click)="DeleteTravelPackage(travelPackage.travelPackageID)" >Yes</button>
+                  <button type="button" class="btn btn-default" (click)="onCloseHandled()" >No</button>
+                    </div>
+       </div>
+        </div>
+</div>-->
+
+   <router-outlet></router-outlet>

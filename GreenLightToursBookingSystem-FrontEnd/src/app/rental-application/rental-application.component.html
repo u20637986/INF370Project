@@ -1,0 +1,104 @@
+<mat-toolbar class=" text-white" style="background-color: #004e04" >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+         <mat-icon>arrow_back</mat-icon>
+       </button>
+       <span class="example-spacer"></span>
+         <h2 style="color:white">Create Rental Application</h2>
+       <span class="example-spacer"></span>
+
+     </mat-toolbar>
+
+
+
+
+<mat-stepper [linear]="true" #stepper>
+  <form  #rentalForm="ngForm">
+    <!-- Rental Details Step -->
+    <mat-step label="Rental Details">
+      <!-- Rental details input fields -->
+
+      <div>
+        <h2>Rental Application Details</h2>
+        <div>
+          <p><strong>Trailer ID:</strong> {{ selectedTrailerID }}</p>
+          <p><strong>Trailer Size:</strong> {{ selectedTrailerSize }}</p>
+          <p><strong>Registration Number:</strong> {{ selectedTrailerRegistrationNumber }}</p>
+          <p><strong>Price:</strong> {{selectedTrailerRentalPrice}}</p>
+
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td>
+            <div>
+              <label for="startDate">Collection Date:</label>
+              <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" required>
+            </div>
+          </td>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <td >
+            <div >
+              <label for="endDate">Return Date:</label>
+              <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" required>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <br>
+      <div style="margin-left: 70%">
+
+        <button  mat-button matStepperNext>Proceed</button>
+      </div>
+
+    </mat-step>
+
+    <!-- Upload Files Step -->
+    <mat-step label="Upload Files">
+
+      <div style="margin-top: 5%; margin-left: 20%;">
+
+
+          <label for="files">ID Copy:</label>
+          <input type="file" style="margin-left: 15%;" id="file1" name="file1" (change)="onFileSelected($event)"  required>
+         <br>
+         <br>
+          <label for="files">Bank Confirmation Letter:</label>
+          <input type="file" style="margin-left:2%;" id="file2" name="file2" (change)="onFileSelected($event)"  required>
+           <br>
+           <br>
+          <label for="files">Drivers License:</label>
+          <input type="file" style="margin-left:10%;" id="file3" name="file3" (change)="onFileSelected($event)"  required>
+          <br>
+          <br>
+      </div>
+      <br>
+      <br>
+      <div style="margin-left: 70%">
+        <button mat-button matStepperPrevious>Previous</button>
+        <button mat-button matStepperNext>Proceed</button>
+      </div>
+    </mat-step>
+
+    <!-- Final Step -->
+    <mat-step label="Done">
+
+      <p>Please note that you will be charged as follows:</p>
+      <div style =" margin-left:10%">
+     <p> <strong> R {{selectedTrailerRentalPrice}}/ day</strong>    from collection date to return date and <strong style="color:red">R5000</strong> refundable deposit </p>
+
+      <p> You are expected to pay the full rental amount on or before the collection date.
+
+
+      </p>
+      </div>
+      <button style="margin-left: 70%" mat-button matStepperPrevious>Previous</button>
+
+      <button mat-stroked-button style="background-color:rgb(79, 192, 79); margin-left:35%; margin-top:20%" class="btn-block" (click)="createRentalApplication()" >Create Rental Application</button>
+    </mat-step>
+  </form>
+</mat-stepper>
+
+
+

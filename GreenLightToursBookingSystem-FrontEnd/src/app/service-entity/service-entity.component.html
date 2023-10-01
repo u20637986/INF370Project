@@ -1,0 +1,38 @@
+<style>
+  tr:nth-child(even) {
+   background: lightgreen;
+  }
+ </style>
+ <mat-toolbar class=" text-white" style="background-color: #004e04" >
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+     <mat-icon>arrow_back</mat-icon>
+   </button>
+   <span class="example-spacer"></span>
+  Service
+   <span class="example-spacer"></span>
+
+ </mat-toolbar>
+ <br>
+ <div style="margin-left: 20px;margin-top: 5%;">
+ <table class="table table-striped">
+   <thead>
+       <tr>
+           <th scope="col">Name</th>
+           <th scope="col-6" style="size: 0.2%;"></th>
+           <th scope="col-6"></th>
+
+       </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let service of services">
+          <td>{{service.name}}</td>
+           <td><button type="button" class="btn btn-warning mr-1" [routerLink]="['/service-entity', service.serviceID]" >Edit</button></td>
+         <td><button type="button" class="btn btn-danger mr-1"(click)="DeleteService(service.serviceID)" >Delete</button></td>
+     </tr>
+   </tbody>
+ </table>
+ </div>
+ <button class="btn btn-success mr-1" style="margin-left: 90%;" routerLink="/add-service-entity">Add</button>
+
+ <router-outlet></router-outlet>
+
