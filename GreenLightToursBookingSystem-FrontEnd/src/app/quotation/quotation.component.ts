@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../service/GLBSdataservice';
 import { Quotation } from '../shared/Quotation';
 import jsPDF from 'jspdf';
-import html2Canvas from 'html2Canvas';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-quotation',
@@ -63,7 +63,7 @@ export class QuotationComponent implements OnInit  {
 
   
     if (content) {
-      html2Canvas(content).then(canvas => {
+      html2canvas(content).then(canvas => {
         const contentDataURL = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
         const width = pdf.internal.pageSize.getWidth();
