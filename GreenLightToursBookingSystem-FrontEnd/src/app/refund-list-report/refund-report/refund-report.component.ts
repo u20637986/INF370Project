@@ -35,7 +35,7 @@ export class RefundReportComponent {
     const content = document.getElementById(containerId);
   
     if (content) {
-      html2Canvas(content).then(canvas => {
+      html2canvas(content).then(canvas => {
         const contentDataURL = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
         const width = pdf.internal.pageSize.getWidth();
