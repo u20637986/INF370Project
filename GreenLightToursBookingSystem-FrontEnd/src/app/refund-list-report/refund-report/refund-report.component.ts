@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
 import { Refund } from 'src/app/shared/Refund';
 import jsPDF from 'jspdf';
-import html2Canvas from 'html2Canvas';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-refund-report',
