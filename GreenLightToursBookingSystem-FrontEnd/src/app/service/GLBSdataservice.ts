@@ -21,7 +21,7 @@ import { BookingPrice } from '../shared/bookingPrice';
 import { Booking } from '../shared/Bookings';
 import { Passenger } from '../shared/passenger';
 import { VehiclePrice } from '../shared/vehiclePrice';
-import { TravelPackage } from '../shared/TravelPackage';
+import { TravelPackage } from '../shared/travelPackage';
 import { Schedule } from '../shared/schedule';
 import { EmailModel } from '../shared/emailModel';
 import { VMrefund } from '../shared/VMrefund';

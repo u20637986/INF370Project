@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
-import { TravelPackage } from 'src/app/shared/TravelPackage';
+import { TravelPackage } from 'src/app/shared/travelPackage';
 import { Passenger } from 'src/app/shared/passenger';
 import { BookingType } from 'src/app/shared/bookingtype';
 import { VMtravelPackage } from 'src/app/shared/VMtravelpackage';

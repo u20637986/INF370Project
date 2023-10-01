@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/GLBSdataservice';
-import { TravelPackage } from 'src/app/shared/TravelPackage';
+import { TravelPackage } from 'src/app/shared/travelPackage';
 import { Observable, ReplaySubject } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 

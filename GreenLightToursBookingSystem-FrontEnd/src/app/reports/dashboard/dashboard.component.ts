@@ -5,7 +5,7 @@ import { DataService } from 'src/app/service/GLBSdataservice';
 //import {RentalDataService} from 'src/app/service/rentalDataService';
 import { SharedNavService } from 'src/app/service/shared-nav.service';
 import { Booking } from 'src/app/shared/Bookings';
-import { TravelPackage } from 'src/app/shared/TravelPackage';
+import { TravelPackage } from 'src/app/shared/travelPackage';
 import { ServiceEntity } from 'src/app/shared/serviceentity';
 @Component({
   selector: 'app-dashboard',

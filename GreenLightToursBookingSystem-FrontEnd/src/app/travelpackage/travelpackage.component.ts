@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TravelPackage } from '../shared/TravelPackage';
+import { TravelPackage } from '../shared/travelPackage';
 import { DataService } from '../service/GLBSdataservice';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

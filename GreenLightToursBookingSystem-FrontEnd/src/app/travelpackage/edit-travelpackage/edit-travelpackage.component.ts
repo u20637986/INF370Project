@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
 import { DataService } from 'src/app/service/GLBSdataservice';
-import { TravelPackage } from 'src/app/shared/TravelPackage';
+import { TravelPackage } from 'src/app/shared/travelPackage';
 import { OnInit } from '@angular/core';
 import { TravelPackageStatus } from 'src/app/shared/travelPackageStatus';
 
